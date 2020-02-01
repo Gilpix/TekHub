@@ -27,7 +27,7 @@
 
 
             android:layout_weight="8"
-            android:background="#001111"
+            android:background="@color/main_red"
 
             android:gravity="bottom"
 
@@ -39,13 +39,14 @@
                 android:id="@+id/email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
+                android:layout_marginBottom="9dp"
                 android:background="@xml/text_view_button"
                 android:hint="@string/prompt_email"
                 android:inputType="textEmailAddress"
 
                 android:maxLines="1"
-                android:padding="10dp"
+                android:padding="8dp"
+
 
 
                 android:requiresFadingEdge="horizontal|vertical"
@@ -66,7 +67,7 @@
 
                 android:imeOptions="actionUnspecified"
                 android:maxLines="1"
-                android:padding="10dp"
+                android:padding="8dp"
                 android:singleLine="true"
                 android:textAlignment="center"
 
@@ -109,6 +110,7 @@
                 android:shadowRadius="1"
                 android:text="Forget Password ?"
                 android:textAlignment="center"
+                android:onClick="resetPassword"
 
 
                 android:textColor="#FFFFFF"
@@ -121,9 +123,10 @@
         <LinearLayout
             android:id="@+id/signUp_area"
             android:layout_width="match_parent"
-            android:layout_height="180dp"
+            android:layout_height="150dp"
             android:layout_gravity="center"
             android:layout_weight="2"
+            android:background="#F0EFEF"
 
             android:gravity="center"
             android:orientation="vertical">
@@ -141,6 +144,7 @@
                 android:textColor="#E53935"
                 android:textSize="24sp"
                 android:textStyle="bold"
+                android:layout_marginBottom="8dp"
 
                 app:fontFamily="@font/carter_one" />
 
@@ -153,6 +157,7 @@
 
                 android:layout_marginTop="8dp"
                 android:background="@xml/circular_button_red"
+                android:onClick="signUp"
 
 
                 android:shadowColor="#161515"

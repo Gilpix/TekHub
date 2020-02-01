@@ -1,0 +1,20 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <dimen name="text_view_padding">9dp</dimen>
+
+
+    <dimen name="menu_radiobutton_width">20dp</dimen>
+    <dimen name="menu_radiobutton_height">20dp</dimen>
+
+
+    <dimen name="menu_radiobutton_padding">3dp</dimen>
+    <dimen name="menu_radiobutton_top_padding">7dp</dimen>
+    <dimen name="menu_radiobutton_bottom_padding">7dp</dimen>
+    <dimen name="menu_radiobutton_left_padding">7dp</dimen>
+    <dimen name="menu_radiobutton_right_padding">7dp</dimen>
+
+
+</resources>
