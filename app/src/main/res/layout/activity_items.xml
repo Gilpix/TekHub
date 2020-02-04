@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.kulartist.tekhub.Items">
+
+
+    <LinearLayout
+        android:id="@+id/dynamicContent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:background="@color/white"
+        android:orientation="vertical"></LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/bottonNavBar"
+        android:layout_width="match_parent"
+        android:layout_height="62dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/main_red"
+        android:elevation="10dp"
+        android:foregroundGravity="bottom"
+        android:orientation="horizontal"
+        android:paddingTop="3dp"
+
+        app:layout_constraintBottom_toTopOf="@+id/dynamicContent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <RadioGroup
+            android:id="@+id/radioGroup1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:baselineAligned="false"
+            android:background="@color/main_red"
+            android:layout_marginTop="3dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/settings"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:button="@null"
+                android:checked="false"
+                android:drawableTop="@drawable/settings_out"
+                android:gravity="center"
+                android:padding="@dimen/menu_radiobutton_padding"
+                android:text="Setting"
+                android:textColor="@color/white"
+                android:textSize="12sp" />
+
+            <RadioButton
+                android:id="@+id/orderlist"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:button="@null"
+                android:checked="false"
+                android:drawableTop="@drawable/orderlist_out"
+                android:gravity="center"
+                android:padding="@dimen/menu_radiobutton_padding"
+                android:text="Orders"
+                android:textColor="@color/white"
+                android:textSize="12sp" />
+
+            <RadioButton
+                android:id="@+id/itemlist"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:button="@null"
+                android:checked="false"
+                android:drawableTop="@drawable/home_out"
+                android:gravity="center"
+                android:padding="1dp"
+                android:text="Items"
+                android:textColor="@color/white"
+                android:textSize="12sp" />
+
+            <RadioButton
+                android:id="@+id/waiting_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:button="@null"
+                android:checked="false"
+                android:drawableTop="@drawable/waitinglist_out"
+                android:gravity="center"
+                android:padding="@dimen/menu_radiobutton_padding"
+                android:text="Waiting"
+                android:textColor="@color/white"
+                android:textSize="12sp" />
+
+            <RadioButton
+                android:id="@+id/my_profile"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:button="@null"
+                android:checked="false"
+                android:drawableTop="@drawable/profilr_out"
+                android:gravity="center"
+                android:padding="@dimen/menu_radiobutton_padding"
+                android:text="Profile"
+                android:textColor="@color/white"
+                android:textSize="12sp" />
+
+
+        </RadioGroup>
+    </LinearLayout>
+
+</RelativeLayout>

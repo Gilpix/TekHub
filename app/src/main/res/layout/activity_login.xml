@@ -84,6 +84,7 @@
                 android:layout_marginTop="26dp"
                 android:background="@xml/mybutton"
                 android:text="@string/action_sign_in"
+                android:onClick="signIn"
                 android:textColor="@color/button_text_color_white"
 
                 android:textSize="18sp"
@@ -96,25 +97,25 @@
                 android:layout_height="wrap_content"
 
 
-                android:layout_gravity="end"
+                android:layout_gravity="right|end"
                 android:layout_marginTop="35dp"
 
                 android:layout_marginBottom="25dp"
                 android:gravity="center_vertical"
 
+                android:onClick="resetPassword"
                 android:shadowColor="@color/white"
                 android:shadowDx="2"
+
+
                 android:shadowDy="2"
-
-
                 android:shadowRadius="1"
                 android:text="Forget Password ?"
                 android:textAlignment="center"
-                android:onClick="resetPassword"
 
 
                 android:textColor="#FFFFFF"
-                android:textSize="24sp"
+                android:textSize="22sp"
                 android:textStyle="normal"
                 app:fontFamily="@font/carter_one" />
 
@@ -135,6 +136,7 @@
                 android:id="@+id/or2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
                 android:shadowColor="#161515"
                 android:shadowDx="2"
                 android:shadowDy="2"
@@ -142,9 +144,8 @@
                 android:text="NOT A MEMBER YET?"
                 android:textAlignment="center"
                 android:textColor="#E53935"
-                android:textSize="24sp"
+                android:textSize="18sp"
                 android:textStyle="bold"
-                android:layout_marginBottom="8dp"
 
                 app:fontFamily="@font/carter_one" />
 
