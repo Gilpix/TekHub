@@ -11,11 +11,11 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="305dp">
+        android:layout_height="260dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="250dp"
+            android:layout_height="200dp"
             android:orientation="vertical">
 
             <ImageView
@@ -100,7 +100,7 @@
             android:layout_height="80dp"
             android:layout_centerHorizontal="true"
             android:layout_marginLeft="10dp"
-            android:layout_marginTop="205dp"
+            android:layout_marginTop="160dp"
             android:layout_marginRight="10dp"
             android:elevation="7dp"
             app:cardBackgroundColor="@color/white"
@@ -409,7 +409,8 @@
         <Button
             android:layout_width="150dp"
             android:layout_height="50dp"
-            android:layout_centerInParent="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
             android:background="@xml/circular_button_red"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"

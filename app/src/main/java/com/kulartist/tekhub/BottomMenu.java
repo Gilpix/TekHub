@@ -1,17 +1,13 @@
 package com.kulartist.tekhub;
 
-import android.app.ActionBar;
 import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.TextView;
 
 import com.kulartist.tekhubandroid.LoginActivity;
 import com.kulartist.tekhubandroid.R;
@@ -20,7 +16,7 @@ import com.kulartist.tekhubandroid.RegistrationActivity;
 import androidx.appcompat.app.AppCompatActivity;
 
 
-public class Items extends AppCompatActivity {
+public class BottomMenu extends AppCompatActivity {
 
 
     RadioGroup radioGroup1;
@@ -29,7 +25,7 @@ public class Items extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_items);
+        setContentView(R.layout.activity_bottom_menu);
 
 
         radioGroup1=(RadioGroup)findViewById(R.id.radioGroup1);
@@ -46,7 +42,7 @@ public class Items extends AppCompatActivity {
                     case R.id.my_profile:
                         Log.i("matching", "matching inside1 matching" +  checkedId);
 
-                        in=new Intent(getBaseContext(), LoginActivity.class);
+                        in=new Intent(getBaseContext(), Student.class);
                         startActivity(in);
                         overridePendingTransition(0, 0);
                         break;
@@ -61,7 +57,7 @@ public class Items extends AppCompatActivity {
                     case R.id.itemlist:
                         Log.i("matching", "matching inside1 rate" + checkedId);
 
-                        in = new Intent(getBaseContext(), LoginActivity.class);//buddies
+                        in = new Intent(getBaseContext(), ItemList.class);//buddies
                         startActivity(in);
                         overridePendingTransition(0, 0);
                         break;
@@ -84,19 +80,7 @@ public class Items extends AppCompatActivity {
         });
     }
 
-//    public void setActionBarTitle(String title) {
-//        getSupportActionBar().setHomeButtonEnabled(true);
-//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-//        TextView textView = new TextView(this);
-//        textView.setText(title);
-//        textView.setTextSize(20);
-//        textView.setTypeface(null, Typeface.BOLD);
-//        textView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
-//        textView.setGravity(Gravity.CENTER);
-//        textView.setTextColor(getResources().getColor(R.color.white));
-//        getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
-//        getSupportActionBar().setCustomView(textView);
-//    }
+
 
 
 

@@ -6,7 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-import com.kulartist.tekhub.Items;
+import com.kulartist.tekhub.ItemList;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -33,7 +33,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void signIn(View view) {
-        Intent i =new Intent(LoginActivity.this, Items.class);
+        Intent i =new Intent(LoginActivity.this, ItemList.class);
         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(i);
     }

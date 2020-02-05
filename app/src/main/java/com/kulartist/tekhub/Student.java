@@ -16,10 +16,8 @@ import android.widget.Toast;
 
 import com.kulartist.tekhubandroid.R;
 
-import androidx.appcompat.app.AppCompatActivity;
 
-
-public class Student extends AppCompatActivity {
+public class Student extends BottomMenu {
     TextView std_name, std_id;
     EditText email, phone, gender, age;
     TextView edit_save;
@@ -32,10 +30,10 @@ public class Student extends AppCompatActivity {
         //setContentView(R.layout.activity_student);
 
 
-//        getLayout(R.layout.activity_my_profile);
-//        getMenuIcon(R.drawable.profile,R.id.my_profile);
-//        setActionBarTitle("My Profile");
-//
+        getLayout(R.layout.activity_student);
+        getMenuIcon(R.drawable.profile,R.id.my_profile);
+       // setActionBarTitle("My Profile");
+
 
 
         std_name = findViewById(R.id.student_name);

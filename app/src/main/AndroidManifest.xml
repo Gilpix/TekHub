@@ -9,8 +9,9 @@
         android:roundIcon="@drawable/tehublogo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.kulartist.tekhub.Student"></activity>
-        <activity android:name="com.kulartist.tekhub.Items" />
+        <activity android:name="com.kulartist.tekhub.ItemList"></activity>
+        <activity android:name="com.kulartist.tekhub.Student" />
+        <activity android:name="com.kulartist.tekhub.BottomMenu" />
         <activity android:name=".ResetPassword" />
         <activity
             android:name=".SplashScreen"
