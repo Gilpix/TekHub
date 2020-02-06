@@ -1,0 +1,450 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+
+    android:layout_height="match_parent"
+    tools:context="com.kulartist.tekhub.Item"
+    android:orientation="vertical">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+
+        android:layout_height="match_parent"
+        android:paddingBottom="30dp"
+
+        android:orientation="vertical">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="345dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/back"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_horizontal"
+
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/red_texture" />
+
+                <ImageView
+                    android:id="@+id/item_images"
+                    android:layout_width="wrap_content"
+                    android:layout_margin="70dp"
+
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:background="@drawable/tehublogo"
+                    android:fontFamily="@font/carter_one"
+                    android:inputType="textMultiLine"
+                    android:scaleY="1.2"
+                    android:text="Kamaldeep Singh"
+                    android:textAlignment="center"
+                    android:textColor="#fff"
+                    android:textSize="25sp"
+                    android:textStyle="bold" />
+
+
+            </RelativeLayout>
+
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="wrap_content"
+                android:layout_height="80dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="260dp"
+                android:layout_marginRight="10dp"
+                android:elevation="7dp"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="8dp">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:weightSum="3">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:layout_marginLeft="10dp"
+                        android:gravity="center"
+
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Ratings"
+                            android:maxLines="1"
+                            android:textStyle="bold"
+                            android:textColor="@color/student_profile_text_color"
+                            android:textSize="16sp" />
+
+                        <TextView
+                            android:id="@+id/student_id"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="-3dp"
+                            android:paddingTop="8dp"
+                            android:maxLines="1"
+                            android:text="4.5/5"
+                            android:textColor="@color/student_profile_text_color"
+                            android:textSize="14sp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Condition"
+                            android:maxLines="1"
+                            android:textStyle="bold"
+                            android:textColor="@color/student_profile_text_color"
+                            android:textSize="16sp" />
+
+                        <TextView
+                            android:id="@+id/item_condition"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="-3dp"
+                            android:paddingTop="8dp"
+                            android:text="New"
+                            android:textColor="@color/student_profile_text_color"
+                            android:textSize="14sp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:layout_marginRight="10dp"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Availability"
+                            android:textStyle="bold"
+                            android:textColor="@color/student_profile_text_color"
+                            android:textSize="16sp" />
+
+                        <TextView
+                            android:id="@+id/item_availability"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="-3dp"
+                            android:paddingTop="8dp"
+                            android:text="Available"
+                            android:textColor="@color/student_profile_text_color"
+                            android:textSize="14sp" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+        </RelativeLayout>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/item_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:elevation="4dp"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="3dp"
+            app:cardElevation="4dp">
+
+            <LinearLayout
+                android:id="@+id/item_name_lin_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="#fff"
+                android:gravity="center"
+
+                android:orientation="vertical"
+                android:padding="5dp">
+
+
+
+                <TextView
+                    android:id="@+id/item_name_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".9"
+                    android:autoSizeTextType="uniform"
+                    android:inputType="textMultiLine"
+                    android:maxLines="3"
+                    android:fontFamily="@font/carter_one"
+
+                    android:text="Apple MacBook Pro MGXA2LL/A 15-inch Laptop with Retina Display"
+
+                    android:textColor="@color/student_profile_text_color"
+
+
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/item_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="1dp"
+            android:layout_marginRight="5dp"
+            android:elevation="4dp"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="3dp"
+            app:cardElevation="4dp">
+
+            <LinearLayout
+                android:id="@+id/item_description_lin_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="10dp"
+                android:padding="5dp"
+                android:layout_marginRight="10dp"
+                android:background="#fff"
+
+                android:gravity="center"
+                android:orientation="vertical">
+
+
+                <TextView
+                    android:id="@+id/item_desc_label"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+
+                    android:text="Description :"
+                    android:textStyle="italic|bold"
+
+
+                    android:textColor="@color/student_profile_text_color"
+
+
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:id="@+id/item_name_text34"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:inputType="textMultiLine"
+
+
+                    android:text="Retina Display The 15‑inch model has over 5 million pixels so you can retouch your photos or edit a home movie in HD and experience an astounding level of clarity. Text is razor sharp, too, so even everyday things like browsing the web and revising a document are better than ever. It's a display worthy of world's most advanced notebook. Intel Core i7 Fourth-generation Intel Core i7 processors help you power through the most complicated technical computing tasks. Integrated Iris Pro Graphics and advanced NVIDIA graphics give you tons of pixel-driving horsepower. State-of-the-art I/O like Thunderbolt 2 gives you high-performance expansion unprecedented in a notebook."
+
+                    android:textColor="@color/student_profile_text_color"
+
+
+                    android:textSize="12sp" />
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/item_buttons"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginRight="5dp"
+            android:elevation="4dp"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="3dp"
+            app:cardElevation="4dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/borrow_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@color/main_red"
+                        android:text="Borrow item"
+                        android:textStyle="bold"
+                        android:textColor="@color/white"
+                        android:textSize="18sp" />
+
+                </LinearLayout>
+
+            </RelativeLayout>
+        </androidx.cardview.widget.CardView>
+
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/item_waiting_button_card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginRight="5dp"
+            android:elevation="4dp"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="3dp"
+            app:cardElevation="4dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:id="@+id/waiting_realative"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/waiting_button"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="Add To waiting list"
+
+                        android:background="@color/main_red"
+                        android:textStyle="bold"
+                        android:textColor="@color/white"
+                        android:textSize="18sp" />
+                </LinearLayout>
+
+            </RelativeLayout>
+        </androidx.cardview.widget.CardView>
+
+
+
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/item_review_card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginBottom="1dp"
+
+            android:elevation="4dp"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="3dp"
+            app:cardElevation="4dp">
+
+            <LinearLayout
+                android:id="@+id/item_review_lin_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="10dp"
+                android:padding="5dp"
+                android:layout_marginRight="10dp"
+                android:background="#fff"
+
+                android:gravity="center"
+                android:orientation="vertical">
+
+
+                <TextView
+                    android:id="@+id/item_review_label"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_marginBottom="5dp"
+                    android:textStyle="bold"
+
+
+                    android:text="Customer Feedback"
+
+                    android:textColor="#DD2C00"
+
+
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/item_review_by"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+
+                    android:text="by Kuldeep Singh - 4/5"
+                    android:textStyle="bold|italic"
+
+                    android:textColor="@color/student_profile_text_color"
+
+
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:id="@+id/cust_feedback"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:inputType="textMultiLine"
+
+
+                    android:text="very good product"
+
+                    android:textColor="@color/student_profile_text_color"
+
+
+                    android:textSize="12sp" />
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+
+    </LinearLayout>
+</ScrollView>

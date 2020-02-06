@@ -63,7 +63,7 @@ public class BottomMenu extends AppCompatActivity {
                         break;
                     case R.id.orderlist:
                         Log.i("matching", "matching inside1 listing" + checkedId);
-                        in = new Intent(getBaseContext(), LoginActivity.class);//Restaurant
+                        in = new Intent(getBaseContext(), Item.class);//Restaurant
                         startActivity(in);
                         overridePendingTransition(0, 0);
                         break;
