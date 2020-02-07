@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.kulartist.tekhubandroid.LoginActivity;
 import com.kulartist.tekhubandroid.R;
 
 
@@ -161,4 +162,10 @@ public class Student extends BottomMenu {
     }
 
 
+    public void logOut(View view) {
+        Intent i = new Intent(Student.this, LoginActivity.class);
+
+        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(i);
+    }
 }

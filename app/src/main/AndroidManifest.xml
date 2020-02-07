@@ -9,7 +9,11 @@
         android:roundIcon="@drawable/tehublogo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.kulartist.tekhub.Item"></activity>
+        <meta-data
+            android:name="com.google.android.actions"
+            android:resource="@anim/fab_close" />
+
+        <activity android:name="com.kulartist.tekhub.Item" />
         <activity android:name="com.kulartist.tekhub.ItemList" />
         <activity android:name="com.kulartist.tekhub.Student" />
         <activity android:name="com.kulartist.tekhub.BottomMenu" />
