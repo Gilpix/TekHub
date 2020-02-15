@@ -232,26 +232,28 @@
 
     <Button
         android:id="@+id/btn_signup"
-        style="?android:textAppearanceSmall"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="20dp"
 
-        android:background="@xml/circular_button_red"
 
         android:gravity="center"
         android:layout_marginRight="20dp"
         android:layout_marginLeft="20dp"
+
+        android:background="@xml/mybutton"
+        style="?android:textAppearanceSmall"
+        android:textColor="@color/button_text_color_white"
+        android:textSize="18sp"
+        android:textStyle="bold"
 
 
         android:onClick="SignUpResult"
         android:text="Sign up"
 
 
-        android:textColor="@color/white"
-        android:textSize="20sp"
-        android:textStyle="bold" />
+         />
 
     <TextView
         android:id="@+id/sign_in_text"
