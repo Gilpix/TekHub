@@ -36,17 +36,16 @@
 
 
             <EditText
-                android:id="@+id/email"
+                android:id="@+id/usrid"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="9dp"
                 android:background="@xml/text_view_button"
-                android:hint="@string/prompt_email"
-                android:inputType="textEmailAddress"
+                android:hint="userid"
+                android:inputType="number"
 
                 android:maxLines="1"
                 android:padding="8dp"
-
 
 
                 android:requiresFadingEdge="horizontal|vertical"
