@@ -2,99 +2,137 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:paddingBottom="50dp"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="70dp">
+
+
+
+
+
+    <TextView
+        android:id="@+id/filter_available_fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_above="@id/textview_mail"
+        android:layout_marginEnd="24dp"
+        android:layout_marginRight="24dp"
+        android:layout_marginBottom="38dp"
+        android:onClick="filterByAvailablity"
+        android:background="@color/range_date_color"
+        android:padding="6dp"
+        android:text="Filter By Availablity"
+        android:textColor="@color/white"
+        android:visibility="invisible" />
+
+
+
+
+
 
     <TextView
         android:id="@+id/textview_share"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginBottom="140dp"
-        android:layout_marginEnd="24dp"
-        android:padding="8dp"
-        android:text="Filter By Ratings"
-        android:onClick="filterByRatings"
-        android:textColor="@color/main_red"
-        android:visibility="invisible"
         android:layout_alignParentRight="true"
-        android:layout_marginRight="24dp" />
+        android:layout_above="@id/textview_mail"
+        android:layout_marginEnd="24dp"
+        android:layout_marginRight="24dp"
+        android:layout_marginBottom="4dp"
+        android:onClick="filterByRatings"
+        android:background="@color/range_date_color"
+        android:padding="6dp"
+        android:text="Filter By Ratings"
+        android:textColor="@color/white"
+        android:visibility="invisible" />
 
-<!--    <com.google.android.material.floatingactionbutton.FloatingActionButton-->
-<!--        android:id="@+id/fab2"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_alignParentBottom="true"-->
-<!--        android:layout_alignParentEnd="true"-->
-<!--        android:layout_marginBottom="176dp"-->
-<!--        android:layout_marginEnd="24dp"-->
-<!--        android:background="?android:attr/selectableItemBackground"-->
-<!--        android:clickable="true"-->
-<!--        android:elevation="16dp"-->
-<!--        android:focusable="true"-->
-<!--        android:visibility="invisible"-->
-<!--        app:backgroundTint="#ffffff"-->
-<!--        app:pressedTranslationZ="12dp"-->
-<!--        app:srcCompat="@drawable/settings"-->
-<!--        android:layout_alignParentRight="true"-->
-<!--        android:layout_marginRight="24dp" />-->
+    <!--    <com.google.android.material.floatingactionbutton.FloatingActionButton-->
+    <!--        android:id="@+id/fab2"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_alignParentBottom="true"-->
+    <!--        android:layout_alignParentEnd="true"-->
+    <!--        android:layout_marginBottom="176dp"-->
+    <!--        android:layout_marginEnd="24dp"-->
+    <!--        android:background="?android:attr/selectableItemBackground"-->
+    <!--        android:clickable="true"-->
+    <!--        android:elevation="16dp"-->
+    <!--        android:focusable="true"-->
+    <!--        android:visibility="invisible"-->
+    <!--        app:backgroundTint="#ffffff"-->
+    <!--        app:pressedTranslationZ="12dp"-->
+    <!--        app:srcCompat="@drawable/settings"-->
+    <!--        android:layout_alignParentRight="true"-->
+    <!--        android:layout_marginRight="24dp" />-->
 
     <TextView
         android:id="@+id/textview_mail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_above="@id/fab"
         android:layout_alignParentEnd="true"
-        android:layout_marginBottom="100dp"
-        android:layout_marginEnd="24dp"
-        android:onClick="filterByNewestItemsAdded"
-        android:padding="8dp"
-
-        android:text="Newest Items Added"
-        android:textColor="@color/main_red"
-        android:visibility="invisible"
         android:layout_alignParentRight="true"
-        android:layout_marginRight="24dp" />
+        android:layout_marginRight="24dp"
+        android:layout_marginBottom="5dp"
+        android:background="@color/range_date_color"
+
+        android:onClick="filterByNewestItemsAdded"
+        android:padding="6dp"
+        android:text="Filter By Date"
+        android:textColor="@color/white"
+        android:visibility="invisible" />
 
 
-<!--    <com.google.android.material.floatingactionbutton.FloatingActionButton-->
-<!--        android:id="@+id/fab1"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_alignParentBottom="true"-->
-<!--        android:layout_alignParentEnd="true"-->
-<!--        android:layout_marginBottom="106dp"-->
-<!--        android:layout_marginEnd="24dp"-->
-<!--        android:background="?android:attr/selectableItemBackground"-->
-<!--        android:clickable="true"-->
-<!--        android:elevation="16dp"-->
-<!--        android:focusable="true"-->
-<!--        android:visibility="invisible"-->
-<!--        app:backgroundTint="#ffffff"-->
-<!--        app:pressedTranslationZ="12dp"-->
-<!--        app:srcCompat="@drawable/settings"-->
-<!--        android:layout_alignParentRight="true"-->
-<!--        android:layout_marginRight="24dp" />-->
+<!--        <com.google.android.material.floatingactionbutton.FloatingActionButton-->
+<!--            android:id="@+id/fab1"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_alignParentBottom="true"-->
+<!--            android:layout_alignParentEnd="true"-->
+<!--            android:layout_marginBottom="106dp"-->
+<!--            android:layout_marginEnd="24dp"-->
+<!--            android:background="?android:attr/selectableItemBackground"-->
+<!--            android:clickable="true"-->
+<!--            android:elevation="16dp"-->
+<!--            android:focusable="true"-->
+<!--            android:visibility="invisible"-->
+<!--            app:backgroundTint="#ffffff"-->
+<!--            app:pressedTranslationZ="12dp"-->
+<!--            app:srcCompat="@drawable/settings"-->
+<!--            android:layout_alignParentRight="true"-->
+<!--            android:layout_marginRight="24dp" />-->
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginBottom="32dp"
-        android:layout_marginEnd="24dp"
+        android:layout_alignParentRight="true"
+        android:layout_above="@id/textView"
+
+        android:layout_marginRight="24dp"
+
+
+        android:layout_marginBottom="10dp"
         android:background="?android:attr/selectableItemBackground"
         android:clickable="true"
         android:elevation="16dp"
-        android:onClick="fliterOptions"
+
         android:focusable="true"
+        android:onClick="fliterOptions"
         android:visibility="visible"
         app:backgroundTint="#ffffff"
         app:pressedTranslationZ="12dp"
-        app:srcCompat="@drawable/filter"
+        app:srcCompat="@drawable/filter" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:layout_marginRight="24dp" />
+        android:layout_alignParentBottom="true"
+        android:textSize="4sp" />
 
 </RelativeLayout>
