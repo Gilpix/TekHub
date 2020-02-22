@@ -9,6 +9,8 @@
         android:roundIcon="@drawable/tehublogo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name="com.kulartist.tekhub.AboutUs"></activity>
+
         <meta-data
             android:name="com.google.android.actions"
             android:resource="@anim/fab_close" />
