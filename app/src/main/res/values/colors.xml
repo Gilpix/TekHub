@@ -16,6 +16,7 @@
 
 
     <color name="student_profile_text_color">#464444</color>
+    <color name="range_date_color">#464444</color>
 
 
     <color name="editText_Hint">#E7E4E4</color>
