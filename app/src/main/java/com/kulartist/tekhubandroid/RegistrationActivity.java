@@ -17,6 +17,8 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import static com.kulartist.tekhubandroid.LoginActivity.currentIP;
+
 public class RegistrationActivity extends AppCompatActivity {
 
     EditText  stdid,stdname,  stdemail,  stdpassword,  stdmobno,stdage;
@@ -70,6 +72,7 @@ public class RegistrationActivity extends AppCompatActivity {
 
 
             new SignUpUser(id,name, email, password, mobno,age,gender).execute();
+
         }
         else
             Toast.makeText(RegistrationActivity.this,"Please Enter all fields",Toast.LENGTH_SHORT).show();
@@ -104,7 +107,7 @@ public class RegistrationActivity extends AppCompatActivity {
 
             try {
 
-                url = new URL("http://192.168.0.102:8080/TekHubWebCalls/webcall/user/registerUser&"+id+"&"+name+"&"+email+"&"+password+"&"+mobno+"&"+age+"&"+gender);
+                url = new URL("http://"+currentIP+":8080/TekHubWebCalls/webcall/user/registerUser&"+id+"&"+name+"&"+email+"&"+password+"&"+mobno+"&"+age+"&"+gender);
                 // url = new URL("http://192.168.2.250:8080/OnlineQuiz/mad312group2/quizuser/registerUser&"+mailAdd+"&"+firstName+"&"+lastName+"&"+passwrd);
 
                 HttpURLConnection client = null;
@@ -136,6 +139,7 @@ public class RegistrationActivity extends AppCompatActivity {
             Toast.makeText(RegistrationActivity.this,"Profile Saved",Toast.LENGTH_SHORT).show();
             EditText fname,lname,pass,email;
            // LoginActivity.currentUser=mailAdd;
+            LoginActivity.currentUser=stdid.getText().toString();
             Intent i = new Intent(RegistrationActivity.this, ItemList.class);
 
             startActivity(i);

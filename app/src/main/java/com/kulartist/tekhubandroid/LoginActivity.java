@@ -3,10 +3,14 @@ package com.kulartist.tekhubandroid;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.kulartist.tekhub.ItemList;
@@ -26,12 +30,15 @@ public class LoginActivity extends AppCompatActivity {
     EditText usrID,password;
 
     private String userEmail,userPass;
+    public static String currentUser, currentIP;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        currentIP="192.168.0.102";
 
         usrID=findViewById(R.id.usrid);
         password=findViewById(R.id.password);
@@ -88,7 +95,7 @@ public class LoginActivity extends AppCompatActivity {
 
             try {
 
-                url = new URL("http://192.168.0.102:8080/TekHubWebCalls/webcall/user/userLogin&"+usrId+"&"+passwrd);
+                url = new URL("http://"+currentIP+":8080/TekHubWebCalls/webcall/user/userLogin&"+usrId+"&"+passwrd);
                 // url = new URL("http://192.168.2.250:8080/OnlineQuiz/mad312group2/quizuser/userLogin&"+mailAdd+"&"+passwrd);
 
                 HttpURLConnection client = null;
@@ -137,18 +144,129 @@ public class LoginActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(Void result){
+            String message="";
 
-            if(userStatus.equals("ok")&&usrActive.equals("1")) {
-                Toast.makeText(LoginActivity.this,"Login Successful - " +usrActive+userStatus,Toast.LENGTH_SHORT).show();
+            if(userStatus.equals("ok")) {
+
+                if(usrActive.equals("1")) {
+                    currentUser = usrId;
+                    new userIdSingleLoggedIn(usrId).execute();
+                }
+                else
+                    Toast.makeText(LoginActivity.this,"User Already Logged in other device ",Toast.LENGTH_SHORT).show();
+
+            }
+            else
+                Toast.makeText(LoginActivity.this,"Wrong Credentials - " +userStatus,Toast.LENGTH_SHORT).show();
+            super.onPostExecute(result);
+        }
+    }
+
+
+
+
+
+
+
+
+
+    private class userIdSingleLoggedIn extends AsyncTask<Void, Void, Void> {
+
+
+        String usrId, userStatus;
+
+        public userIdSingleLoggedIn(String id) {
+
+            usrId=id;
+        }
+
+        @Override
+        protected Void doInBackground(Void... params){
+
+            URL url = null;
+
+            try {
+
+                url = new URL("http://"+currentIP+":8080/TekHubWebCalls/webcall/user/userIdAlreadyLoggedIn&"+usrId);
+                // url = new URL("http://192.168.2.250:8080/OnlineQuiz/mad312group2/quizuser/userLogin&"+mailAdd+"&"+passwrd);
+
+                HttpURLConnection client = null;
+
+                client = (HttpURLConnection) url.openConnection();
+
+                client.setRequestMethod("GET");
+
+                int responseCode = client.getResponseCode();
+
+
+                System.out.println("\n Sending 'GET' request to URL : " + url);
+
+                System.out.println("Response Code : " + responseCode);
+                InputStreamReader myInput= new InputStreamReader(client.getInputStream());
+
+                BufferedReader in = new BufferedReader(myInput);
+                String inputLine;
+                StringBuffer response = new StringBuffer();
+
+                while ((inputLine = in.readLine()) != null) {
+                    response.append(inputLine);
+                }
+                in.close();
+
+                //print result
+                System.out.println(response.toString());
+
+                JSONObject obj =new JSONObject(response.toString());
+                userStatus=""+obj.getString("Status");
+                //usrActive=""+obj.getString("userActive");
+
+
+            }
+            catch (MalformedURLException e) {
+                e.printStackTrace();
+            }
+            catch (IOException e) {
+                e.printStackTrace();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            return null;
+
+        }
+
+        @Override
+        protected void onPostExecute(Void result){
+
+            if(userStatus.equals("ok")) {
+                Toast.makeText(LoginActivity.this,"Login Successful - " +userStatus,Toast.LENGTH_SHORT).show();
 
                 Intent i = new Intent(LoginActivity.this, ItemList.class);
-                //currentUser=userEmail;
+                //currentUser=usrId;
                 startActivity(i);
             }
             else
                 Toast.makeText(LoginActivity.this,"Wrong Credentials - " +userStatus,Toast.LENGTH_SHORT).show();
             super.onPostExecute(result);
         }
+    }
+
+
+    public void setActionBarTitle(String title) {
+        getSupportActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        TextView textView = new TextView(this);
+        textView.setText(title);
+        textView.setTextSize(20);
+        textView.setTypeface(null, Typeface.BOLD);
+        textView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+        textView.setGravity(Gravity.LEFT);
+        textView.setTextColor(getResources().getColor(R.color.white));
+        getSupportActionBar().setDisplayOptions(androidx.appcompat.app.ActionBar.DISPLAY_SHOW_CUSTOM);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setCustomView(textView);
+
+
     }
 
 
