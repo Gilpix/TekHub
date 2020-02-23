@@ -9,9 +9,7 @@ import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
-import com.kulartist.tekhubandroid.LoginActivity;
 import com.kulartist.tekhubandroid.R;
-import com.kulartist.tekhubandroid.RegistrationActivity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -49,7 +47,7 @@ public class BottomMenu extends AppCompatActivity {
                     case R.id.waiting_list:
                         Log.i("matching", "matching inside1 watchlistAdapter" + checkedId);
 
-                        in = new Intent(getBaseContext(), RegistrationActivity.class);
+                        in = new Intent(getBaseContext(), WaitingList.class);
                         startActivity(in);
                         overridePendingTransition(0, 0);
 
@@ -63,14 +61,14 @@ public class BottomMenu extends AppCompatActivity {
                         break;
                     case R.id.orderlist:
                         Log.i("matching", "matching inside1 listing" + checkedId);
-                        in = new Intent(getBaseContext(), Item.class);//Restaurant
+                        in = new Intent(getBaseContext(), OrderList.class);//Restaurant
                         startActivity(in);
                         overridePendingTransition(0, 0);
                         break;
-                    case R.id.settings:
+                    case R.id.aboutUs:
                         Log.i("matching", "matching inside1 deals" + checkedId);
-                        in = new Intent(getBaseContext(), LoginActivity.class);//settings
-                        startActivity(in);
+                       in = new Intent(getBaseContext(), AboutUs.class);
+                       startActivity(in);
                         overridePendingTransition(0, 0);
                         break;
                     default:

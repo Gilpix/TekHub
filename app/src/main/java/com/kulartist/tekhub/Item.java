@@ -50,7 +50,7 @@ public class Item extends AppCompatActivity {
 
     TextView itmCond,itmAvail,itmName,itmDesc,borrowTimes;
     JSONObject itemObject;
-    String itemJsonString,itemId;
+    String itemJsonString,itemId,itemAvailableDate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -108,8 +108,10 @@ public class Item extends AppCompatActivity {
 
             if(itemObject.getString("isAvailable").equals("1"))
             itmAvail.setText("Yes");
-            else
+            else {
                 itmAvail.setText("No");
+                itemAvailableDate=itemObject.getString("availableDate");
+            }
 
             itmDesc.setText(itemObject.getString("itemDesc"));
             itmName.setText(itemObject.getString("itemname"));
@@ -134,6 +136,14 @@ public class Item extends AppCompatActivity {
     public boolean onSupportNavigateUp(){
         finish();
         return true;
+    }
+
+
+    public void checkAvailableDate(View view) {
+        Toast.makeText(this,"Available On : "+itemAvailableDate,Toast.LENGTH_LONG).show();
+
+
+
     }
 
 
@@ -208,10 +218,6 @@ public class Item extends AppCompatActivity {
 
 
     }
-
-
-
-
 
 
 

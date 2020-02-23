@@ -25,13 +25,14 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import static com.kulartist.tekhubandroid.LoginActivity.currentIP;
 
 
 public class ItemList extends BottomMenu {
 
     private FloatingActionButton fab_main, fab1_mail, fab2_share;
     private Animation fab_open, fab_close, fab_clock, fab_anticlock;
-    TextView textview_mail, textview_share,filter_available_fab;
+    TextView filter_newest_fab, filter_popularity_fab,filter_available_fab;
 
     Boolean isOpen = false;
     ProgressDialog progressDialog;
@@ -74,15 +75,13 @@ public class ItemList extends BottomMenu {
 
 
         fab_main = findViewById(R.id.fab);
-//        fab1_mail = findViewById(R.id.fab1);
-//        fab2_share = findViewById(R.id.fab2);
         fab_close = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fab_close);
         fab_open = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fab_open);
         fab_clock = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fab_rotate_clock);
         fab_anticlock = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fab_rotate_anticlock);
 
-        textview_mail = (TextView) findViewById(R.id.textview_mail);
-        textview_share = (TextView) findViewById(R.id.textview_share);
+        filter_newest_fab = (TextView) findViewById(R.id.filter_newest_fab);
+        filter_popularity_fab = (TextView) findViewById(R.id.filter_popularity_fab);
         filter_available_fab=findViewById(R.id.filter_available_fab);
 
 
@@ -132,8 +131,8 @@ public class ItemList extends BottomMenu {
         new getItemListByAvailablity().execute();
     }
 
-    public void filterByRatings(View view) {
-        Toast.makeText(getApplicationContext(), "filterByRatings", Toast.LENGTH_SHORT).show();
+    public void filterByPopularity(View view) {
+        Toast.makeText(getApplicationContext(), "filterByPopularity", Toast.LENGTH_SHORT).show();
         new GetItemListByPopularity().execute();
 
     }
@@ -147,35 +146,30 @@ public class ItemList extends BottomMenu {
     public void fliterOptions(View view) {
         if (isOpen) {
 
-            textview_mail.setVisibility(View.INVISIBLE);
+            filter_newest_fab.setVisibility(View.INVISIBLE);
             filter_available_fab.setVisibility(View.INVISIBLE);
-            textview_share.setVisibility(View.INVISIBLE);
-            textview_share.startAnimation(fab_close);
+            filter_popularity_fab.setVisibility(View.INVISIBLE);
+            filter_popularity_fab.startAnimation(fab_close);
             filter_available_fab.startAnimation(fab_close);
-            textview_mail.startAnimation(fab_close);
+            filter_newest_fab.startAnimation(fab_close);
             fab_main.startAnimation(fab_anticlock);
-            textview_share.setClickable(false);
+            filter_popularity_fab.setClickable(false);
             filter_available_fab.setClickable(false);
-            textview_mail.setClickable(false);
+            filter_newest_fab.setClickable(false);
             isOpen = false;
         } else {
-            textview_mail.setVisibility(View.VISIBLE);
+            filter_newest_fab.setVisibility(View.VISIBLE);
             filter_available_fab.setVisibility(View.VISIBLE);
-            textview_share.setVisibility(View.VISIBLE);
-            textview_share.startAnimation(fab_open);
+            filter_popularity_fab.setVisibility(View.VISIBLE);
+            filter_popularity_fab.startAnimation(fab_open);
             filter_available_fab.startAnimation(fab_open);
-            textview_mail.startAnimation(fab_open);
+            filter_newest_fab.startAnimation(fab_open);
             fab_main.startAnimation(fab_clock);
-            textview_share.setClickable(true);
+            filter_popularity_fab.setClickable(true);
             filter_available_fab.setClickable(true);
-            textview_mail.setClickable(true);
+            filter_newest_fab.setClickable(true);
             isOpen = true;
         }
-    }
-
-    public void checkItemDetails(View view) {
-        Intent in = new Intent(getBaseContext(), Item.class);//Restaurant
-        startActivity(in);
     }
 
 
@@ -230,6 +224,7 @@ public class ItemList extends BottomMenu {
                     //in.putExtra("ITEMID",itemName[position]);
                     try {
                         System.out.println("^^^^^^^^^^^^^^@@@@@^^^^^^^ "+mainArray.getJSONObject(position).toString());
+                        in.putExtra("ItemId",mainArray.getJSONObject(position).getString("itemId"));
                         in.putExtra("ItemDetailsObject",mainArray.getJSONObject(position).toString());
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -275,7 +270,7 @@ public class ItemList extends BottomMenu {
 
             try {
 
-                url = new URL("http://192.168.0.102:8080/TekHubWebCalls/webcall/item/getItemList");
+                url = new URL("http://"+currentIP+":8080/TekHubWebCalls/webcall/item/getItemList");
                 // url = new URL("http://192.168.2.250:8080/OnlineQuiz/mad312group2/quizuser/userLogin&"+mailAdd+"&"+passwrd);
 
                 HttpURLConnection client = null;
@@ -367,7 +362,7 @@ public class ItemList extends BottomMenu {
 
             try {
 
-                url = new URL("http://192.168.0.102:8080/TekHubWebCalls/webcall/item/getItemListByPopularity");
+                url = new URL("http://"+currentIP+":8080/TekHubWebCalls/webcall/item/getItemListByPopularity");
                 // url = new URL("http://192.168.2.250:8080/OnlineQuiz/mad312group2/quizuser/userLogin&"+mailAdd+"&"+passwrd);
 
                 HttpURLConnection client = null;
@@ -460,7 +455,7 @@ public class ItemList extends BottomMenu {
 
             try {
 
-                url = new URL("http://192.168.0.102:8080/TekHubWebCalls/webcall/item/getItemListByNewestItem");
+                url = new URL("http://"+currentIP+":8080/TekHubWebCalls/webcall/item/getItemListByNewestItem");
                 // url = new URL("http://192.168.2.250:8080/OnlineQuiz/mad312group2/quizuser/userLogin&"+mailAdd+"&"+passwrd);
 
                 HttpURLConnection client = null;
@@ -554,7 +549,7 @@ public class ItemList extends BottomMenu {
 
             try {
 
-                url = new URL("http://192.168.0.102:8080/TekHubWebCalls/webcall/item/getItemListByAvailablity");
+                url = new URL("http://"+currentIP+":8080/TekHubWebCalls/webcall/item/getItemListByAvailablity");
                 // url = new URL("http://192.168.2.250:8080/OnlineQuiz/mad312group2/quizuser/userLogin&"+mailAdd+"&"+passwrd);
 
                 HttpURLConnection client = null;
@@ -648,7 +643,7 @@ public class ItemList extends BottomMenu {
 
             try {
 
-                url = new URL("http://192.168.0.102:8080/TekHubWebCalls/webcall/item/getItemListBySearch&"+searchKey);
+                url = new URL("http://"+currentIP+":8080/TekHubWebCalls/webcall/item/getItemListBySearch&"+searchKey);
                 // url = new URL("http://192.168.2.250:8080/OnlineQuiz/mad312group2/quizuser/userLogin&"+mailAdd+"&"+passwrd);
 
                 HttpURLConnection client = null;

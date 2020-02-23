@@ -21,7 +21,7 @@ public class AboutUs extends BottomMenu {
         //setContentView(R.layout.activity_about_us);
 
         getLayout(R.layout.activity_about_us);
-        getMenuIcon(R.drawable.settings,R.id.settings);
+        getMenuIcon(R.drawable.aboutus,R.id.aboutUs);
 
 
 

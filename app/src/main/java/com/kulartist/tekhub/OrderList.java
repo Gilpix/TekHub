@@ -63,7 +63,7 @@ public class OrderList extends BottomMenu {
 
 
         getLayout(R.layout.activity_order_list);
-        getMenuIcon(R.drawable.waitinglist,R.id.waiting_list);
+        getMenuIcon(R.drawable.orderlist,R.id.orderlist);
         // setActionBarTitle("My Profile");
 
 
