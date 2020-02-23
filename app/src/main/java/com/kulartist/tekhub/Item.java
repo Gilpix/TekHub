@@ -12,11 +12,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.kulartist.tekhubandroid.LoginActivity;
 import com.kulartist.tekhubandroid.R;
@@ -135,6 +137,17 @@ public class Item extends AppCompatActivity {
     }
 
 
+
+    public void addToWaitingList(View view) {
+
+       new AddToWaitingList(LoginActivity.currentUser,itemId).execute();
+
+
+
+    }
+
+
+
     public void borrowSelectedItem(View view) {
         Intent in = new Intent(getBaseContext(), Order.class);
         in.putExtra("ItemId",itemId);
@@ -195,6 +208,10 @@ public class Item extends AppCompatActivity {
 
 
     }
+
+
+
+
 
 
 
@@ -308,6 +325,86 @@ public class Item extends AppCompatActivity {
         listView.setLayoutParams(params);
         listView.requestLayout();
     }
+
+
+
+
+
+
+
+
+    private class AddToWaitingList extends AsyncTask<Void, Void, Void> {
+
+        String userId,itemId;
+        java.sql.Date pickupDate,  returnDate;
+
+
+        public AddToWaitingList(String userId, String itemId) {
+            this.userId=userId;
+            this.itemId=itemId;
+
+        }
+
+        @Override
+        protected void onPreExecute() {
+
+
+            progressDialog.setMessage("Loading...");
+            progressDialog.show();
+
+            super.onPreExecute();
+        }
+
+
+        @Override
+        protected Void doInBackground(Void... params){
+
+            URL url = null;
+
+            try {
+
+                url = new URL("http://"+currentIP+":8080/TekHubWebCalls/webcall/WaitingItem/addWaitingItem&"+userId+"&"+itemId);
+                // url = new URL("http://192.168.2.250:8080/OnlineQuiz/mad312group2/quizuser/registerUser&"+mailAdd+"&"+firstName+"&"+lastName+"&"+passwrd);
+
+                HttpURLConnection client = null;
+
+                client = (HttpURLConnection) url.openConnection();
+
+                client.setRequestMethod("GET");
+
+                int responseCode = client.getResponseCode();
+
+
+                System.out.println("\n Sending 'GET' request to URL : " + url);
+
+                System.out.println("Response Code : " + responseCode);
+
+
+            }
+            catch (MalformedURLException e) {
+                e.printStackTrace();
+            }
+            catch (IOException e) {
+                e.printStackTrace();
+            }
+            return null;
+
+        }
+
+        @Override
+        protected void onPostExecute(Void result){
+            Toast.makeText(Item.this,"Added to waiting item",Toast.LENGTH_SHORT).show();
+            EditText fname,lname,pass,email;
+            // LoginActivity.currentUser=mailAdd;
+
+            progressDialog.hide();
+            super.onPostExecute(result);
+
+        }
+    }
+
+
+
 
 
 
