@@ -43,16 +43,16 @@
             android:orientation="horizontal">
 
             <RadioButton
-                android:id="@+id/settings"
+                android:id="@+id/aboutUs"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:button="@null"
                 android:checked="false"
-                android:drawableTop="@drawable/settings_out"
+                android:drawableTop="@drawable/aboutusout"
                 android:gravity="center"
                 android:padding="@dimen/menu_radiobutton_padding"
-                android:text="Setting"
+                android:text="AboutUs"
                 android:textColor="@color/white"
                 android:textSize="12sp" />
 

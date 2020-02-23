@@ -2,22 +2,35 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.kulartist.tekhubandroid">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/tehublogo"
         android:label="@string/app_name"
         android:roundIcon="@drawable/tehublogo"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name="com.kulartist.tekhub.AboutUs"></activity>
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true">
+        <activity android:name="com.kulartist.tekhub.WaitingListAdapter"></activity>
+        <activity android:name="com.kulartist.tekhub.WaitingList" />
 
         <meta-data
             android:name="com.google.android.actions"
             android:resource="@anim/fab_close" />
 
         <activity android:name="com.kulartist.tekhub.Item" />
-        <activity android:name="com.kulartist.tekhub.ItemList" />
-        <activity android:name="com.kulartist.tekhub.Student" />
+        <activity android:name="com.kulartist.tekhub.AboutUs" />
+        <activity android:name="com.kulartist.tekhub.Order" />
+        <activity android:name="com.kulartist.tekhub.OrderList" />
+        <activity android:name="com.kulartist.tekhub.OrderDetails" />
+        <activity android:name="com.kulartist.tekhub.Feedback" />
+        <activity
+            android:name="com.kulartist.tekhub.ItemList"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name="com.kulartist.tekhub.Student"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity android:name="com.kulartist.tekhub.BottomMenu" />
         <activity android:name=".ResetPassword" />
         <activity

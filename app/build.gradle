@@ -43,4 +43,8 @@ dependencies {
     implementation 'com.google.android.material:material:1.0.0'
 
 
+    implementation 'com.archit.calendar:awesome-calendar:1.1.5'
+    implementation 'com.google.android.material:material:1.2.0-alpha03'
+
+
 }

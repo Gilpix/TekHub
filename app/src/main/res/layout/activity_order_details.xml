@@ -60,7 +60,7 @@
                     android:layout_margin="5dp"
                     android:layout_weight=".9"
 
-                    android:inputType="textEmailAddress"
+                    android:inputType="textMultiLine|text"
 
                     android:text="kulsinggh@gmail.com"
 

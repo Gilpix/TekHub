@@ -15,7 +15,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_above="@id/textview_mail"
+        android:layout_above="@id/filter_newest_fab"
         android:layout_marginEnd="24dp"
         android:layout_marginRight="24dp"
         android:layout_marginBottom="38dp"
@@ -32,19 +32,19 @@
 
 
     <TextView
-        android:id="@+id/textview_share"
+        android:id="@+id/filter_popularity_fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_above="@id/textview_mail"
+        android:layout_above="@id/filter_newest_fab"
         android:layout_marginEnd="24dp"
         android:layout_marginRight="24dp"
         android:layout_marginBottom="4dp"
-        android:onClick="filterByRatings"
+        android:onClick="filterByPopularity"
         android:background="@color/range_date_color"
         android:padding="6dp"
-        android:text="Filter By Ratings"
+        android:text="Filter By Popularity"
         android:textColor="@color/white"
         android:visibility="invisible" />
 
@@ -68,7 +68,7 @@
     <!--        android:layout_marginRight="24dp" />-->
 
     <TextView
-        android:id="@+id/textview_mail"
+        android:id="@+id/filter_newest_fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@id/fab"
