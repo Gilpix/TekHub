@@ -9,7 +9,13 @@
         android:roundIcon="@drawable/tehublogo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.kulartist.tekhub.AboutUs"></activity>
+        <activity android:name="com.kulartist.tekhubadmin.ResolveIssue"></activity>
+        <activity android:name="com.kulartist.tekhubadmin.UpdateItems" />
+        <activity android:name="com.kulartist.tekhubadmin.AddItems" />
+        <activity android:name="com.kulartist.tekhubadmin.StudentList" />
+        <activity android:name="com.kulartist.tekhubadmin.ItemList" />
+        <activity android:name="com.kulartist.tekhubadmin.Dashboard" />
+        <activity android:name="com.kulartist.tekhub.AboutUs" />
 
         <meta-data
             android:name="com.google.android.actions"
