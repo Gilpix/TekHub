@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.kulartist.tekhub.ItemList;
+import com.kulartist.tekhubadmin.Dashboard;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -38,7 +39,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        currentIP="192.168.0.102";
+        currentIP="192.168.1.182";
 
         usrID=findViewById(R.id.usrid);
         password=findViewById(R.id.password);
@@ -238,11 +239,22 @@ public class LoginActivity extends AppCompatActivity {
         protected void onPostExecute(Void result){
 
             if(userStatus.equals("ok")) {
-                Toast.makeText(LoginActivity.this,"Login Successful - " +userStatus,Toast.LENGTH_SHORT).show();
 
-                Intent i = new Intent(LoginActivity.this, ItemList.class);
-                //currentUser=usrId;
-                startActivity(i);
+                if(usrId.equals("1234")){
+                    Toast.makeText(LoginActivity.this,"Login Successful - " +userStatus,Toast.LENGTH_SHORT).show();
+
+                    Intent i = new Intent(LoginActivity.this, Dashboard.class);
+                    //currentUser=usrId;
+                    startActivity(i);
+                }
+                else{
+                    Toast.makeText(LoginActivity.this,"Login Successful - " +userStatus,Toast.LENGTH_SHORT).show();
+
+                    Intent i = new Intent(LoginActivity.this, ItemList.class);
+                    //currentUser=usrId;
+                    startActivity(i);
+                }
+
             }
             else
                 Toast.makeText(LoginActivity.this,"Wrong Credentials - " +userStatus,Toast.LENGTH_SHORT).show();
