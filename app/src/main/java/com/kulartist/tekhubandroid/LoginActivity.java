@@ -2,12 +2,15 @@ package com.kulartist.tekhubandroid;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -38,7 +41,8 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        currentIP="192.168.0.102";
+       currentIP="192.168.0.102";
+        //currentIP="172.20.10.5";
 
         usrID=findViewById(R.id.usrid);
         password=findViewById(R.id.password);
@@ -60,6 +64,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void signIn(View view) {
+        hideKeyboardwithoutPopulate(LoginActivity.this);
         if(!usrID.getText().toString().isEmpty() && !password.getText().toString().isEmpty())
         {
 
@@ -73,6 +78,22 @@ public class LoginActivity extends AppCompatActivity {
             Toast.makeText(LoginActivity.this,"Please Enter all fields",Toast.LENGTH_SHORT).show();
     }
 
+
+
+
+    public static void hideKeyboardwithoutPopulate(Activity activity) {
+        try {
+            InputMethodManager inputMethodManager =
+                    (InputMethodManager) activity.getSystemService(
+                            Activity.INPUT_METHOD_SERVICE);
+            inputMethodManager.hideSoftInputFromWindow(
+                    activity.getCurrentFocus().getWindowToken(), 0);
+        }
+        catch (Exception e)
+        {
+
+        }
+    }
 
 
 
@@ -260,7 +281,7 @@ public class LoginActivity extends AppCompatActivity {
         textView.setTextSize(20);
         textView.setTypeface(null, Typeface.BOLD);
         textView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
-        textView.setGravity(Gravity.LEFT);
+        textView.setGravity(Gravity.CENTER_HORIZONTAL);
         textView.setTextColor(getResources().getColor(R.color.white));
         getSupportActionBar().setDisplayOptions(androidx.appcompat.app.ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
