@@ -1,35 +1,24 @@
 package com.kulartist.tekhub;
 
-
-
-
-
 import android.content.Context;
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
-
 import com.kulartist.tekhubandroid.R;
 
 
 public class feedbackListAdapter extends BaseAdapter {
     Context context;
     String itemNames[],itemAvable[],feedMsg[];
-
     LayoutInflater inflter;
-
-
-
 
     public feedbackListAdapter(Context applicationContext, String[] categoryList,String[] itemAvable,String[] feedMsg) {
         this.context = context;
         this.itemNames = categoryList;
         this.itemAvable=itemAvable;
         this.feedMsg=feedMsg;
-
         inflter = (LayoutInflater.from(applicationContext));
     }
 
@@ -58,8 +47,6 @@ public class feedbackListAdapter extends BaseAdapter {
         userName.setText("by "+itemNames[i]);
         itemRating.setText(itemAvable[i]+"/5");
         itemMsg.setText(""+feedMsg[i]);
-
-
 
         return view;
     }

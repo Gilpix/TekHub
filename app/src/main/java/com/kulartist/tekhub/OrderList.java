@@ -1,19 +1,16 @@
 package com.kulartist.tekhub;
 
-
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.SearchView;
 import android.widget.TextView;
-import android.widget.Toast;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.kulartist.tekhubandroid.LoginActivity;
 import com.kulartist.tekhubandroid.R;
 import org.json.JSONArray;
@@ -25,98 +22,70 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-
 import static com.kulartist.tekhubandroid.LoginActivity.currentIP;
 
 
 public class OrderList extends BottomMenu {
 
-
-
     ProgressDialog progressDialog;
-
-
-
-
-
     TextView itmName;
-
-
-
-
-
     ListView   itemListView;;
     JSONArray itemListArray= new JSONArray();
-    JSONObject itemListObject=new JSONObject();
-
-
-
-
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
-
-
         getLayout(R.layout.activity_order_list);
         getMenuIcon(R.drawable.orderlist,R.id.orderlist);
-        // setActionBarTitle("My Profile");
-
-
-
-        LoginActivity loginActivity=new LoginActivity();
-        //loginActivity.setActionBarTitle("Borrowed Items");
+        setActionBarTitle("Order List");
 
         itmName=findViewById(R.id.item_name);
-
-
         progressDialog=new ProgressDialog(this);
 
-        new GetOrderList().execute();
 
-
-
-
-
-
-
-
-
-
-
-
-
+        if(DatabaseObjects.orderList.toString().equals("[]") || DatabaseObjects.orderList.toString().equals("")) {
+            new GetOrderList().execute();
+        }
+        else
+        {
+            try {
+                getRecyclerData(DatabaseObjects.orderList);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
 
     }
 
 
+    public void setActionBarTitle(String title) {
+        getSupportActionBar().setHomeButtonEnabled(false);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
 
-
-
-
-
+        TextView textView = new TextView(this);
+        textView.setText(title);
+        textView.setTextSize(20);
+        textView.setTypeface(null, Typeface.BOLD);
+        textView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+        textView.setGravity(Gravity.CENTER_HORIZONTAL);
+        textView.setTextColor(getResources().getColor(R.color.white));
+        getSupportActionBar().setDisplayOptions(androidx.appcompat.app.ActionBar.DISPLAY_SHOW_CUSTOM);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+        getSupportActionBar().setCustomView(textView);
+    }
 
 
     public void getRecyclerData(final JSONArray mainArray) throws JSONException {
 
         final String[] orderId=new String[mainArray.length()];
         final String[] itemID=new String[mainArray.length()];
-
         final String[] itemName=new String[mainArray.length()];
         final String[] itemDesc=new String[mainArray.length()];
         final String[] itemCondition=new String[mainArray.length()];
-
-
         final String[] orderDate=new String[mainArray.length()];
         final String[] pickupDate=new String[mainArray.length()];
         final String[] returnDate=new String[mainArray.length()];
-
-
-
 
 
         for(int j=0;j<mainArray.length();j++)
@@ -125,16 +94,13 @@ public class OrderList extends BottomMenu {
             a=mainArray.getJSONObject(j);
             orderId[j]=a.getString("orderId");
             itemID[j]=a.getString("itemId");
-
             itemName[j]=a.getString("itemname");
             itemDesc[j]=a.getString("itemDesc");
             itemCondition[j]=a.getString("itemCondition");
-
             orderDate[j]=a.getString("orderDate");
             pickupDate[j]=a.getString("pickupDate");
             returnDate[j]=a.getString("returnDate");
         }
-
 
         itemListView = (ListView)findViewById(R.id.simpleListView);
         OrderListAdapter customAdapter = new OrderListAdapter(getApplicationContext(), itemName,returnDate);
@@ -147,18 +113,12 @@ public class OrderList extends BottomMenu {
                 {
                     Intent in = new Intent(OrderList.this, OrderDetails.class);
                     try {
-                        System.out.println(itemID[position]+"^^^^^^^^^^^^^^@@@@@^^^^^^^ "+mainArray.getJSONObject(position).toString());
                         in.putExtra("itemId",itemID[position]);
                         in.putExtra("OrderDetailsObject",mainArray.getJSONObject(position).toString());
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-
-                    //in.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_NEW_TASK);
-
                     startActivity(in);
-                    //finish();
-
                 }
 
             }
@@ -169,45 +129,30 @@ public class OrderList extends BottomMenu {
     }
 
 
-
-
     private class GetOrderList extends AsyncTask<Void, Void, Void> {
 
         String userStatus;
 
-
         @Override
         protected void onPreExecute() {
-
-
             progressDialog.setMessage("Loading...");
             progressDialog.show();
-
             super.onPreExecute();
         }
-
 
         @Override
         protected Void doInBackground(Void... params){
 
             URL url = null;
-
             try {
-
                 url = new URL("http://"+currentIP+":8080/TekHubWebCalls/webcall/borrow/getOrderList&"+ LoginActivity.currentUser);
-                // url = new URL("http://192.168.2.250:8080/OnlineQuiz/mad312group2/quizuser/userLogin&"+mailAdd+"&"+passwrd);
 
                 HttpURLConnection client = null;
-
                 client = (HttpURLConnection) url.openConnection();
-
                 client.setRequestMethod("GET");
 
                 int responseCode = client.getResponseCode();
-
-
                 System.out.println("\n Sending 'GET' request to URL : " + url);
-
                 System.out.println("Response Code : " + responseCode);
                 InputStreamReader myInput= new InputStreamReader(client.getInputStream());
 
@@ -215,21 +160,15 @@ public class OrderList extends BottomMenu {
                 String inputLine;
                 StringBuffer response = new StringBuffer();
 
-
-
                 while ((inputLine = in.readLine()) != null) {
                     response.append(inputLine);
                 }
                 in.close();
 
-                //print result
-                System.out.println(response.toString());
-
                 JSONObject obj =new JSONObject(response.toString());
                 userStatus=""+obj.getString("Status");
                 itemListArray=obj.getJSONArray("OrderList");
-
-
+                DatabaseObjects.orderList=obj.getJSONArray("OrderList");
             }
             catch (MalformedURLException e) {
                 e.printStackTrace();
@@ -251,26 +190,10 @@ public class OrderList extends BottomMenu {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-
-
-            //Toast.makeText(ScoreCard.this,"Login Successful - " +userStatus,Toast.LENGTH_SHORT).show();
             progressDialog.hide();
             super.onPostExecute(result);
         }
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 }

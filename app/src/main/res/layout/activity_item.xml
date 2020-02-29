@@ -98,13 +98,13 @@
                             android:textSize="16sp" />
 
                         <TextView
-                            android:id="@+id/student_id"
+                            android:id="@+id/avg_rating"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="-3dp"
-                            android:paddingTop="8dp"
                             android:maxLines="1"
-                            android:text="4.5/5"
+                            android:paddingTop="8dp"
+                            android:text="_ _ _"
                             android:textColor="@color/student_profile_text_color"
                             android:textSize="14sp" />
 

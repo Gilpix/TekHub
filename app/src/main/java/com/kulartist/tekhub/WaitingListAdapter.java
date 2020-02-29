@@ -1,17 +1,11 @@
 package com.kulartist.tekhub;
 
-
-
-
-
 import android.content.Context;
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
-
 import com.kulartist.tekhubandroid.R;
 
 
@@ -51,14 +45,7 @@ import com.kulartist.tekhubandroid.R;
             TextView avable = (TextView) view.findViewById(R.id.item_avaibl);
 
             name.setText("NAME : "+itemNames[i]);
-            if(itemAvable[i].equals("1")) {
-                avable.setTextColor(Color.parseColor("#FF00C853"));
-                avable.setText("Available");
-            }
-            else {
-                avable.setTextColor(Color.parseColor("#DD0F2D"));
-                avable.setText("Not Available");
-            }
+            avable.setText("Available On : "+itemAvable[i]);
 
             return view;
         }

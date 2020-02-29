@@ -1,31 +1,29 @@
 package com.kulartist.tekhub;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
-import com.kulartist.tekhub.Feedback;
 import com.kulartist.tekhubandroid.R;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
 public class OrderDetails extends AppCompatActivity {
 
-    String itemJsonString,itemId;
     TextView itmCond,orderDate,itmName,pickupDate,returnDate;
     JSONObject orderObject;
+    String itemJsonString,itemId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_details);
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        setActionBarTitle("Order Details");
 
         itmName=findViewById(R.id.order_name_text);
         itmCond=findViewById(R.id.order_condition_text);
@@ -34,14 +32,9 @@ public class OrderDetails extends AppCompatActivity {
         returnDate=findViewById(R.id.return_date_text);
 
 
-
-
         Intent i=getIntent();
-
         itemId=i.getStringExtra("itemId");
         itemJsonString=i.getStringExtra("OrderDetailsObject");
-
-
         try {
             orderObject=new JSONObject(itemJsonString);
 
@@ -50,25 +43,36 @@ public class OrderDetails extends AppCompatActivity {
             orderDate.setText(orderObject.getString("orderDate"));
             pickupDate.setText(orderObject.getString("pickupDate"));
             returnDate.setText(orderObject.getString("returnDate"));
-
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
-
-
-
     }
 
 
+    public void setActionBarTitle(String title) {
+        getSupportActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        TextView textView = new TextView(this);
+        textView.setText(title);
+        textView.setTextSize(20);
+        textView.setTypeface(null, Typeface.BOLD);
+        textView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+        textView.setGravity(Gravity.LEFT);
+        textView.setTextColor(getResources().getColor(R.color.white));
+        getSupportActionBar().setDisplayOptions(androidx.appcompat.app.ActionBar.DISPLAY_SHOW_CUSTOM);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setCustomView(textView);
+    }
 
 
     public void provideFeedback(View view) {
         Intent i = new Intent(this.getApplicationContext(), Feedback.class);
         i.putExtra("itemId",itemId);
         startActivity(i);
-
     }
+
 
     @Override
     public boolean onSupportNavigateUp(){

@@ -2,10 +2,12 @@ package com.kulartist.tekhubandroid;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Toast;
@@ -35,14 +37,13 @@ public class RegistrationActivity extends AppCompatActivity {
         stdpassword =findViewById(R.id.signup_input_password);
         stdmobno =findViewById(R.id.signup_input_phone);
         stdage =findViewById(R.id.signup_input_age);
-
         rMale =findViewById(R.id.male_radio_btn);
         rFemale =findViewById(R.id.female_radio_btn);
-
 
     }
 
     public void signInAlreadyAccount(View view) {
+        hideKeyboardwithoutPopulate(RegistrationActivity.this);
         Intent i =new Intent(RegistrationActivity.this, LoginActivity.class);
         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(i);
@@ -50,6 +51,7 @@ public class RegistrationActivity extends AppCompatActivity {
     }
 
     public void SignUpResult(View view) {
+        hideKeyboardwithoutPopulate(RegistrationActivity.this);
         String id,name,  email,  password,  mobno,age,gender="";
 
         if(!stdid.getText().toString().isEmpty() && !stdname.getText().toString().isEmpty() &&
@@ -61,15 +63,12 @@ public class RegistrationActivity extends AppCompatActivity {
             else if(rFemale.isChecked())
                 gender="female";
 
-
-
             id=stdid.getText().toString();
             name=stdname.getText().toString();
             email=stdemail.getText().toString();
             password=stdpassword.getText().toString();
             mobno=stdmobno.getText().toString();
             age=stdage.getText().toString();
-
 
             new SignUpUser(id,name, email, password, mobno,age,gender).execute();
 
@@ -80,10 +79,19 @@ public class RegistrationActivity extends AppCompatActivity {
         }
 
 
+    public static void hideKeyboardwithoutPopulate(Activity activity) {
+        try {
+            InputMethodManager inputMethodManager =
+                    (InputMethodManager) activity.getSystemService(
+                            Activity.INPUT_METHOD_SERVICE);
+            inputMethodManager.hideSoftInputFromWindow(
+                    activity.getCurrentFocus().getWindowToken(), 0);
+        }
+        catch (Exception e)
+        {
 
-
-
-
+        }
+    }
 
 
     private class SignUpUser extends AsyncTask<Void, Void, Void> {
@@ -108,19 +116,13 @@ public class RegistrationActivity extends AppCompatActivity {
             try {
 
                 url = new URL("http://"+currentIP+":8080/TekHubWebCalls/webcall/user/registerUser&"+id+"&"+name+"&"+email+"&"+password+"&"+mobno+"&"+age+"&"+gender);
-                // url = new URL("http://192.168.2.250:8080/OnlineQuiz/mad312group2/quizuser/registerUser&"+mailAdd+"&"+firstName+"&"+lastName+"&"+passwrd);
 
                 HttpURLConnection client = null;
-
                 client = (HttpURLConnection) url.openConnection();
-
                 client.setRequestMethod("GET");
 
                 int responseCode = client.getResponseCode();
-
-
                 System.out.println("\n Sending 'GET' request to URL : " + url);
-
                 System.out.println("Response Code : " + responseCode);
 
             }
@@ -137,18 +139,13 @@ public class RegistrationActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(Void result){
             Toast.makeText(RegistrationActivity.this,"Profile Saved",Toast.LENGTH_SHORT).show();
-            EditText fname,lname,pass,email;
-           // LoginActivity.currentUser=mailAdd;
             LoginActivity.currentUser=stdid.getText().toString();
             Intent i = new Intent(RegistrationActivity.this, ItemList.class);
-
             startActivity(i);
 
             super.onPostExecute(result);
         }
     }
-
-
 
 
 }

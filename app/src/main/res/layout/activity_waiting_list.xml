@@ -4,26 +4,27 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.kulartist.tekhub.WaitingList">
+    tools:context="com.kulartist.tekhub.OrderList">
+
 
     <ListView
         android:id="@+id/simpleListView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:paddingBottom="63dp"
+
         android:layout_weight="1"
 
         android:divider="#D6D4D4"
-
         android:dividerHeight="2dp"
+
+
         android:elevation="2dp"
-
-
         android:footerDividersEnabled="false"
         android:padding="5dp"
-        android:paddingTop="20dp"
 
-        android:paddingBottom="63dp"
+        android:paddingTop="20dp"
 
         android:scrollbars="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -32,4 +33,5 @@
         app:layout_constraintTop_toTopOf="parent">
 
     </ListView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

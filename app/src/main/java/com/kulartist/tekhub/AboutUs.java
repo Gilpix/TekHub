@@ -3,12 +3,15 @@ package com.kulartist.tekhub;
 
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.Switch;
-
+import android.widget.TextView;
 import com.kulartist.tekhubandroid.R;
 
 public class AboutUs extends BottomMenu {
@@ -18,26 +21,30 @@ public class AboutUs extends BottomMenu {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.activity_about_us);
 
         getLayout(R.layout.activity_about_us);
         getMenuIcon(R.drawable.aboutus,R.id.aboutUs);
-
-
-
-
-
-
-
+        setActionBarTitle("About US");
 
     }
 
 
+    public void setActionBarTitle(String title) {
+        getSupportActionBar().setHomeButtonEnabled(false);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
 
+        TextView textView = new TextView(this);
+        textView.setText(title);
+        textView.setTextSize(20);
+        textView.setTypeface(null, Typeface.BOLD);
+        textView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+        textView.setGravity(Gravity.CENTER_HORIZONTAL);
+        textView.setTextColor(getResources().getColor(R.color.white));
+        getSupportActionBar().setDisplayOptions(androidx.appcompat.app.ActionBar.DISPLAY_SHOW_CUSTOM);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+        getSupportActionBar().setCustomView(textView);
 
-
-
-
+    }
 
 
     public void rateUs(View view) {
@@ -66,7 +73,6 @@ public class AboutUs extends BottomMenu {
         }
         else
         {
-            //noinspection deprecation
             flags |= Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET;
         }
         intent.addFlags(flags);
@@ -75,7 +81,6 @@ public class AboutUs extends BottomMenu {
 
 
     public void shareUs(View view) {
-
         Intent shareIntent =   new Intent(android.content.Intent.ACTION_SEND);
         shareIntent.setType("text/plain");
         shareIntent.putExtra(Intent.EXTRA_SUBJECT,"Install This Application");
@@ -85,20 +90,5 @@ public class AboutUs extends BottomMenu {
 
     }
 
-
-
-    public void changeNotifications(View view) {
-
-
-        String setNotifications;
-        if(notification .isChecked())
-            setNotifications="1";
-        else
-            setNotifications="0";
-
-
-
-
-    }
 
 }
