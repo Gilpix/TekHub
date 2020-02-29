@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.kulartist.tekhubadmin.AddItems">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/email_login_form"
+            android:layout_width="match_parent"
+            android:layout_height="602dp"
+
+            android:layout_weight="6"
+            android:background="@color/main_red"
+
+
+            android:orientation="vertical"
+            android:padding="25dp">
+
+            <EditText
+                android:id="@+id/addItemItemName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:layout_marginBottom="9dp"
+                android:background="@xml/text_view_button"
+                android:hint="Item Name"
+
+                android:maxLines="1"
+                android:padding="8dp"
+
+
+                android:requiresFadingEdge="horizontal|vertical"
+                android:singleLine="true"
+                android:textAlignment="center"
+                android:textColor="#FFFFFF"
+                android:textColorHint="#FFFFFF"
+                android:textSize="24sp" />
+
+
+            <EditText
+                android:id="@+id/addItemItemDesc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@xml/text_view_button"
+                android:hint="Item Description"
+                android:padding="8dp"
+                android:singleLine="true"
+                android:textAlignment="center"
+
+                android:textColor="#FFFFFF"
+                android:textColorHint="#FFFFFF"
+                android:textSize="24sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:padding="8dp"
+                android:text="Availability:"
+                android:textColor="#FFFFFF"
+                android:textSize="24sp" />
+
+            <RadioGroup
+                android:id="@+id/addItemRadioGroup1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="2dp">
+
+
+                <RadioButton
+                    android:id="@+id/addItemsAvailable"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:text="Available"
+                    android:textColor="#FFFFFF"
+                    android:textSize="24sp" />
+
+                <RadioButton
+                    android:id="@+id/addItemsNotAvailable"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Not Available"
+                    android:textColor="#FFFFFF"
+                    android:textSize="24sp" />
+            </RadioGroup>
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:text="Item Condiotion:"
+                android:textColor="#FFFFFF"
+                android:textSize="24sp" />
+
+            <RadioGroup
+                android:id="@+id/addItemRadioGroup2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="2dp">
+
+
+                <RadioButton
+                    android:id="@+id/addITemsNew"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:text="New"
+                    android:textColor="#FFFFFF"
+                    android:textSize="24sp" />
+
+                <RadioButton
+                    android:id="@+id/addItemsOld"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Used"
+                    android:textColor="#FFFFFF"
+                    android:textSize="24sp" />
+            </RadioGroup>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:padding="8dp"
+                android:text="Choose Image:"
+                android:textColor="#FFFFFF"
+                android:textSize="24sp" />
+
+
+        </LinearLayout>
+
+
+
+        <LinearLayout
+            android:id="@+id/signUp_area"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_gravity="center"
+            android:layout_weight="2"
+            android:background="#F0EFEF"
+
+            android:gravity="center"
+            android:orientation="vertical">
+
+
+
+            <Button
+                android:id="@+id/addItemsButton"
+                android:layout_width="155dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="8dp"
+                android:background="@xml/circular_button_red"
+                android:shadowColor="#161515"
+                android:shadowDx="2"
+                android:shadowDy="2"
+                android:shadowRadius="1"
+                android:text="Add"
+                android:textAllCaps="true"
+                android:textColor="@color/button_text_color_white"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+
+
+</LinearLayout>

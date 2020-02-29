@@ -10,6 +10,8 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.Toast;
 import com.kulartist.tekhub.ItemList;
+import com.kulartist.tekhubadmin.Dashboard;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.io.BufferedReader;
@@ -31,6 +33,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        currentIP="192.168.1.182";
        currentIP="192.168.0.102";
         //currentIP="172.20.10.5";
 
@@ -207,6 +210,22 @@ public class LoginActivity extends AppCompatActivity {
         protected void onPostExecute(Void result){
 
             if(userStatus.equals("ok")) {
+
+                if(usrId.equals("1234")){
+                    Toast.makeText(LoginActivity.this,"Login Successful - " +userStatus,Toast.LENGTH_SHORT).show();
+
+                    Intent i = new Intent(LoginActivity.this, Dashboard.class);
+                    //currentUser=usrId;
+                    startActivity(i);
+                }
+                else{
+                    Toast.makeText(LoginActivity.this,"Login Successful - " +userStatus,Toast.LENGTH_SHORT).show();
+
+                    Intent i = new Intent(LoginActivity.this, ItemList.class);
+                    //currentUser=usrId;
+                    startActivity(i);
+                }
+
                 Toast.makeText(LoginActivity.this,"Login Successful - " +userStatus,Toast.LENGTH_SHORT).show();
                 Intent i = new Intent(LoginActivity.this, ItemList.class);
                 startActivity(i);
