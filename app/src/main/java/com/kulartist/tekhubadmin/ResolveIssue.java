@@ -8,6 +8,7 @@ import com.kulartist.tekhubandroid.R;
 
 public class ResolveIssue extends AppCompatActivity {
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

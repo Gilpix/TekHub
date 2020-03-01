@@ -15,10 +15,7 @@
         <activity android:name="com.kulartist.tekhub.WaitingListAdapter"></activity>
         <activity android:name="com.kulartist.tekhub.WaitingList" />
         <activity android:name="com.kulartist.tekhubadmin.ResolveIssue"></activity>
-        <activity android:name="com.kulartist.tekhubadmin.UpdateItems" />
-        <activity android:name="com.kulartist.tekhubadmin.AddItems" />
         <activity android:name="com.kulartist.tekhubadmin.StudentList" />
-        <activity android:name="com.kulartist.tekhubadmin.ItemList" />
         <activity android:name="com.kulartist.tekhubadmin.Dashboard" />
         <activity android:name="com.kulartist.tekhub.AboutUs" />
         <meta-data

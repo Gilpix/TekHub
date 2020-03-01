@@ -5,27 +5,77 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+
     tools:context="com.kulartist.tekhubadmin.Dashboard">
+<ImageView
+    android:layout_marginTop="20dp"
+    android:layout_gravity="center"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:src="@drawable/tehublogo"/>
+
+    <TextView
+        android:id="@+id/welcome_admin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:fontFamily="@font/carter_one"
+        android:text="Welcome Admin"
+        android:textAlignment="center"
+        android:textColor="#797777"
+        android:textSize="18sp" />
 
     <Button
         android:id="@+id/manageItems"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Manage Items">
-    </Button>
+        android:layout_height="60dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="60dp"
+        android:layout_marginBottom="30dp"
+        android:gravity="center"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:background="@xml/mybutton"
+        style="?android:textAppearanceSmall"
+        android:textColor="@color/button_text_color_white"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:text="Manage Items"
+        />
 
     <Button
         android:id="@+id/manageStudents"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Manage Students">
-    </Button>
+        android:layout_height="60dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="30dp"
+        android:gravity="center"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:background="@xml/mybutton"
+        style="?android:textAppearanceSmall"
+        android:textColor="@color/button_text_color_white"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:text="Manage Students"
+        />
 
     <Button
         android:id="@+id/resolveIssue"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Resolve Issue">
-    </Button>
+        android:layout_height="60dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="40dp"
+        android:gravity="center"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:background="@xml/mybutton"
+        style="?android:textAppearanceSmall"
+        android:textColor="@color/button_text_color_white"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:text="Resolve Issue"
+        />
+
 
 </LinearLayout>
