@@ -29,11 +29,11 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
-import static com.kulartist.tekhubandroid.LoginActivity.currentIP;
+import static com.kulartist.tekhubandroid.SplashScreen.currentIP;
 
 public class Order extends AppCompatActivity {
     Calendar startCalendar,endCalender;
-    EditText pickDate,returnDate;
+    TextView pickDate,returnDate;
     DatePickerDialog.OnDateSetListener startDate,endDate;
     ProgressDialog progressDialog;
     String itemID,borrowNum;
@@ -48,8 +48,8 @@ public class Order extends AppCompatActivity {
         startCalendar = Calendar.getInstance();
         endCalender = Calendar.getInstance();
 
-        pickDate= (EditText) findViewById(R.id.pickup_date);
-        returnDate= (EditText) findViewById(R.id.return_date);
+        pickDate= (TextView) findViewById(R.id.pickup_date);
+        returnDate= (TextView) findViewById(R.id.return_date);
 
         Intent i=getIntent();
         itemID=i.getStringExtra("ItemId");
@@ -169,8 +169,9 @@ public class Order extends AppCompatActivity {
 
 
     public void cancelItem(View view) {
-        Intent in = new Intent(getBaseContext(), ItemList.class);//Restaurant
+        Intent in = new Intent(getBaseContext(), ItemList.class);
         startActivity(in);
+        finish();
     }
 
 
