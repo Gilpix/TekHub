@@ -41,7 +41,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="9dp"
                 android:background="@xml/text_view_button"
-                android:hint="userid"
+                android:hint="Userid"
                 android:inputType="number"
 
                 android:maxLines="1"
@@ -64,7 +64,7 @@
                 android:hint="@string/prompt_password"
                 android:imeActionLabel="@string/action_sign_in_short"
 
-                android:imeOptions="actionUnspecified"
+                android:inputType="textPassword"
                 android:maxLines="1"
                 android:padding="8dp"
                 android:singleLine="true"
