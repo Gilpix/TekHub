@@ -27,8 +27,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 
-import static com.kulartist.tekhubandroid.LoginActivity.currentIP;
-
+import static com.kulartist.tekhubandroid.SplashScreen.currentIP;
 public class StudentList extends AppCompatActivity {
 
     private  ListView studentList;
@@ -99,7 +98,7 @@ public class StudentList extends AppCompatActivity {
 
             try {
 
-                url = new URL("http://" + currentIP + ":8080/TekHub-WebCalls/webcall/admin/listStudents");
+                url = new URL("http://" + currentIP + ":8080/TekHubWebCalls/webcall/admin/listStudents");
 
                 HttpURLConnection client = null;
 
@@ -227,7 +226,7 @@ public class StudentList extends AppCompatActivity {
             try {
 
 
-                url = new URL("http://" + currentIP + ":8080/TekHub-WebCalls/webcall/admin/deleteStudent&"+studentIdToDelete);
+                url = new URL("http://" + currentIP + ":8080/TekHubWebCalls/webcall/admin/deleteStudent&"+studentIdToDelete);
 
                 HttpURLConnection client = null;
 
@@ -306,7 +305,7 @@ public class StudentList extends AppCompatActivity {
 
             try {
 
-                url = new URL("http://" + currentIP + ":8080/TekHub-WebCalls/webcall/admin/searchStudent&"+searchKey);
+                url = new URL("http://" + currentIP + ":8080/TekHubWebCalls/webcall/admin/searchStudent&"+searchKey);
 
                 HttpURLConnection client = null;
 

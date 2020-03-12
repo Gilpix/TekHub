@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "215058077974",
+    "firebase_url": "https://tekhub-android.firebaseio.com",
+    "project_id": "tekhub-android",
+    "storage_bucket": "tekhub-android.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:215058077974:android:9f105ebe6749397c969837",
+        "android_client_info": {
+          "package_name": "com.kulartist.tekhubandroid"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "215058077974-bpevm196ktnhjkun5mvt0sjrimgsgmhd.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.kulartist.tekhubandroid",
+            "certificate_hash": "b9111787ece59bada9141fad002e6ffc59713fe5"
+          }
+        },
+        {
+          "client_id": "215058077974-o238aajlv9hse2knv2l7mqr1am7lqo8t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBAd3FOsZbR4axXkdDnvaYdhA5aJXWmXLk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "215058077974-o238aajlv9hse2knv2l7mqr1am7lqo8t.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

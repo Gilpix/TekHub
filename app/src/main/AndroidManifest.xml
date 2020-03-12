@@ -3,6 +3,9 @@
     package="com.kulartist.tekhubandroid">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_MEDIA_LOCATION"></uses-permission>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"></uses-permission>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"></uses-permission>
 
     <application
         android:allowBackup="true"
@@ -12,12 +15,14 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name="com.kulartist.tekhub.WaitingListAdapter"></activity>
+        <activity android:name="com.kulartist.tekhubadmin.addItem"></activity>
+        <activity android:name="com.kulartist.tekhub.WaitingListAdapter" />
         <activity android:name="com.kulartist.tekhub.WaitingList" />
-        <activity android:name="com.kulartist.tekhubadmin.ResolveIssue"></activity>
+        <activity android:name="com.kulartist.tekhubadmin.ResolveIssue" />
         <activity android:name="com.kulartist.tekhubadmin.StudentList" />
         <activity android:name="com.kulartist.tekhubadmin.Dashboard" />
         <activity android:name="com.kulartist.tekhub.AboutUs" />
+
         <meta-data
             android:name="com.google.android.actions"
             android:resource="@anim/fab_close" />

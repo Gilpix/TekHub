@@ -17,6 +17,7 @@ import com.kulartist.tekhubandroid.R;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import static com.kulartist.tekhubandroid.SplashScreen.currentIP;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -26,7 +27,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 
-import static com.kulartist.tekhubandroid.LoginActivity.currentIP;
+
 
 public class ResolveIssue extends AppCompatActivity {
 
@@ -69,7 +70,7 @@ public class ResolveIssue extends AppCompatActivity {
 
             try {
 
-                url = new URL("http://" + currentIP + ":8080/TekHub-WebCalls/webcall/admin/listIssues");
+                url = new URL("http://" + currentIP + ":8080/TekHubWebCalls/webcall/admin/listIssues");
 
                 HttpURLConnection client = null;
 
@@ -206,7 +207,7 @@ public class ResolveIssue extends AppCompatActivity {
             try {
 
 
-                url = new URL("http://" + currentIP + ":8080/TekHub-WebCalls/webcall/admin/updateFeedback&"+toBeChanged);
+                url = new URL("http://" + currentIP + ":8080/TekHubWebCalls/webcall/admin/updateFeedback&"+toBeChanged);
 
                 HttpURLConnection client = null;
 
