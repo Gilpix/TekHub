@@ -2,7 +2,9 @@ package com.kulartist.tekhub;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
@@ -12,6 +14,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.kulartist.tekhubandroid.LoginActivity;
 import com.kulartist.tekhubandroid.R;
+import com.kulartist.tekhubandroid.RegistrationActivity;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -21,7 +25,8 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import static com.kulartist.tekhubandroid.LoginActivity.currentIP;
+
+import static com.kulartist.tekhubandroid.SplashScreen.currentIP;
 
 
 public class Student extends BottomMenu {
@@ -50,7 +55,9 @@ public class Student extends BottomMenu {
         setProfileDisabled();
 
 
-        if(DatabaseObjects.studentProfile.toString().equals("{}") || DatabaseObjects.studentProfile.toString().equals("")) {
+        if(DatabaseObjects.studentProfile.toString().equals("{}") || DatabaseObjects.studentProfile.toString().equals("")|| DatabaseObjects.studentProfile.toString().isEmpty()) {
+            SharedPreferences sp = getSharedPreferences("saveUser" ,Context.MODE_PRIVATE);
+            LoginActivity.currentUser = sp.getString("userSavedId", "");
             displayUserProfile d = new displayUserProfile();
             d.execute();
         }
@@ -132,13 +139,57 @@ public class Student extends BottomMenu {
         edit_save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String editEmail=email.getText().toString();
+                String  editMobno=phone.getText().toString();
+                String editAge=age.getText().toString();
+                String editGender=gender.getText().toString();
+
+                if(editGender.toLowerCase().equals("male"))
+                    editGender="correct";
+                else if (editGender.toLowerCase().equals("female"))
+                    editGender="correct";
 
                 if (email.isFocusable() == true) {
-                    edit_save.setText("edit");
-                    new editUserProfile().execute();
-                    setProfileDisabled();
-                    Toast.makeText(Student.this, " Profile Saved ", Toast.LENGTH_LONG).show();
-                } else if (email.isFocusable() == false) {
+
+                    if(!email.getText().toString().isEmpty() && !phone.getText().toString().isEmpty() &&
+                            !gender.getText().toString().isEmpty() && !age.getText().toString().isEmpty())
+                    {
+                        if(!editEmail.substring(email.length()-10).equals("@gmail.com"))
+                        {
+                        email.setError("enter valid email");
+                        email.requestFocus();
+                        }
+                        else if(editMobno.length()<9 ||editMobno.length()>11)
+                        {
+                            phone.setError("enter valid phone");
+                            phone.requestFocus();
+                        Toast.makeText(Student.this, "Please Enter Valid Mobile No.", Toast.LENGTH_SHORT).show();
+                        }
+                        else if(Integer.parseInt(editAge)<20 ||Integer.parseInt(editAge)>35)
+                        {
+                            age.setError("enter valid age");
+                            age.requestFocus();
+                        Toast.makeText(Student.this, "Please Enter Valid Age", Toast.LENGTH_SHORT).show();
+                        }
+                        else if(!editGender.equals("correct"))
+                        {
+                            gender.setError("enter male/female");
+                            gender.requestFocus();
+                            Toast.makeText(Student.this, "Please Enter Male or Female", Toast.LENGTH_SHORT).show();
+                        }
+                        else
+                        {
+                            edit_save.setText("edit");
+                            new editUserProfile().execute();
+                            setProfileDisabled();
+                            Toast.makeText(Student.this, " Profile Saved ", Toast.LENGTH_LONG).show();
+                        }
+                    }
+                    else
+                        Toast.makeText(Student.this,"Please Enter all fields",Toast.LENGTH_SHORT).show();
+                }
+
+                else if (email.isFocusable() == false) {
                     edit_save.setText("save");
                     editProfileEnabled();
                 }
@@ -152,9 +203,9 @@ public class Student extends BottomMenu {
     public void onBackPressed() {
         super.onBackPressed();
         hideKeyboardwithoutPopulate(Student.this);
-        Intent i = new Intent(Student.this, Student.class);
-        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+        Intent i = new Intent(Student.this, ItemList.class);
         startActivity(i);
+        finish();
     }
 
 
@@ -174,6 +225,12 @@ public class Student extends BottomMenu {
 
 
     public void logOut(View view) throws JSONException {
+
+//        SharedPreferences sp = getSharedPreferences("saveUser" , Context.MODE_PRIVATE);
+//        SharedPreferences.Editor editor = sp.edit();
+//        editor.putString("userSavedId", "");
+//        editor.commit();
+
         hideKeyboardwithoutPopulate(Student.this);
         DatabaseObjects.studentProfile=new JSONObject("{}");
         DatabaseObjects.itemList = new JSONArray("[]");
@@ -235,6 +292,11 @@ public class Student extends BottomMenu {
 
             if(userStatus.equals("ok"))
             {
+                SharedPreferences sp = getSharedPreferences("saveUser" , Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sp.edit();
+                editor.putString("userSavedId", "");
+                editor.commit();
+
                 Intent i = new Intent(Student.this, LoginActivity.class);
                 i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(i);

@@ -41,7 +41,6 @@ public class BottomMenu extends AppCompatActivity {
                         in = new Intent(getBaseContext(), WaitingList.class);
                         startActivity(in);
                         overridePendingTransition(0, 0);
-
                         break;
                     case R.id.itemlist:
                         in = new Intent(getBaseContext(), ItemList.class);//buddies

@@ -1,7 +1,9 @@
 package com.kulartist.tekhub;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -22,7 +24,8 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import static com.kulartist.tekhubandroid.LoginActivity.currentIP;
+
+import static com.kulartist.tekhubandroid.SplashScreen.currentIP;
 
 
 public class OrderList extends BottomMenu {
@@ -43,8 +46,11 @@ public class OrderList extends BottomMenu {
         itmName=findViewById(R.id.item_name);
         progressDialog=new ProgressDialog(this);
 
+        System.out.println("#########################"+DatabaseObjects.orderList.toString());
 
-        if(DatabaseObjects.orderList.toString().equals("[]") || DatabaseObjects.orderList.toString().equals("")) {
+        if(DatabaseObjects.orderList.toString().equals("[]") || DatabaseObjects.orderList.toString().equals("")|| DatabaseObjects.orderList.toString().isEmpty()) {
+            SharedPreferences sp = getSharedPreferences("saveUser" , Context.MODE_PRIVATE);
+            LoginActivity.currentUser = sp.getString("userSavedId", "");
             new GetOrderList().execute();
         }
         else
@@ -73,6 +79,15 @@ public class OrderList extends BottomMenu {
         getSupportActionBar().setDisplayOptions(androidx.appcompat.app.ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         getSupportActionBar().setCustomView(textView);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent i = new Intent(OrderList.this, ItemList.class);
+       // i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(i);
+        finish();
     }
 
 

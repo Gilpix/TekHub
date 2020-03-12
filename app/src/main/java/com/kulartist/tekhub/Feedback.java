@@ -23,7 +23,8 @@ import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import static com.kulartist.tekhubandroid.LoginActivity.currentIP;
+
+import static com.kulartist.tekhubandroid.SplashScreen.currentIP;
 
 public class Feedback extends AppCompatActivity {
 
