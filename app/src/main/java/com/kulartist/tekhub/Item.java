@@ -1,17 +1,27 @@
 package com.kulartist.tekhub;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.loader.content.CursorLoader;
+
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.util.Base64;
+import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
@@ -30,11 +40,13 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-import static com.kulartist.tekhubandroid.LoginActivity.currentIP;
+import static com.kulartist.tekhubandroid.SplashScreen.currentIP;
+
 
 public class Item extends AppCompatActivity {
 
     TextView availability;
+    ImageView itemImage;
     Button waiting_button,checkAvailButton,borrowButton;
     TextView itmCond,itmAvail,itmName,itmDesc,borrowTimes,avgRating;
     ListView   itemListView;;
@@ -60,6 +72,7 @@ public class Item extends AppCompatActivity {
         waiting_button=findViewById(R.id.waiting_button);
         borrowButton=findViewById(R.id.borrow_button);
         avgRating=findViewById(R.id.avg_rating);
+        itemImage=findViewById(R.id.item_images);
 
         setActionBarTitle("Item Details");
         progressDialog=new ProgressDialog(this);
@@ -94,20 +107,25 @@ public class Item extends AppCompatActivity {
             itmDesc.setText(itemObject.getString("itemDesc"));
             itmName.setText(itemObject.getString("itemname"));
             borrowTimes.setText(itemObject.getString("borrowNum")+" times");
-            if(itemObject.getString("avgRating").isEmpty()||itemObject.getString("avgRating").equals("null"))
-                avgRating.setText(itemObject.getString("_")+"/5");
+            String averageRatings=itemObject.getString("avgRating");
+            if(averageRatings.isEmpty()||averageRatings=="null"|| averageRatings.equals(null))
+                avgRating.setText(("_ _ _"));
+            else if(itemObject.getString("avgRating").length()>4)
+                avgRating.setText(averageRatings.substring(0,3)+"/5");
             else
-            avgRating.setText(itemObject.getString("avgRating")+"/5");
-            if(itemObject.getString("avgRating").length()>3)
-                avgRating.setText(itemObject.getString("avgRating").substring(0,3)+"/5");
+                avgRating.setText(averageRatings+"/5");
+
+
+            System.out.println("##################"+itemObject.getString("avgRating"));
+            byte[] decodedString = Base64.decode(itemObject.getString("itemPic"), Base64.DEFAULT);
+            Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+            itemImage.setImageBitmap(decodedByte);
 
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
-
         new getFeedbackList().execute();
-
     }
 
 
@@ -140,8 +158,8 @@ public class Item extends AppCompatActivity {
     }
 
 
-    public void addToWaitingList(View view) throws JSONException {
-        DatabaseObjects.waitingList=new JSONArray("[]");
+    public void addToWaitingList(View view) {
+
        new AddToWaitingList(LoginActivity.currentUser,itemId).execute();
     }
 
@@ -191,7 +209,6 @@ public class Item extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             progressDialog.setMessage("Loading...");
-            progressDialog.show();
             super.onPreExecute();
         }
 
@@ -203,8 +220,6 @@ public class Item extends AppCompatActivity {
 
             try {
                 url = new URL("http://"+currentIP+":8080/TekHubWebCalls/webcall/feedback/getFeedbackList&"+itemId);
-                // url = new URL("http://192.168.2.250:8080/OnlineQuiz/mad312group2/quizuser/userLogin&"+mailAdd+"&"+passwrd);
-
                 HttpURLConnection client = null;
                 client = (HttpURLConnection) url.openConnection();
                 client.setRequestMethod("GET");
@@ -278,7 +293,7 @@ public class Item extends AppCompatActivity {
 
     private class AddToWaitingList extends AsyncTask<Void, Void, Void> {
 
-        String userId,itemId;
+        String userId,itemId,userStatus;
 
         public AddToWaitingList(String userId, String itemId) {
             this.userId=userId;
@@ -291,7 +306,6 @@ public class Item extends AppCompatActivity {
             progressDialog.show();
             super.onPreExecute();
         }
-
 
         @Override
         protected Void doInBackground(Void... params){
@@ -309,11 +323,26 @@ public class Item extends AppCompatActivity {
                 System.out.println("\n Sending 'GET' request to URL : " + url);
                 System.out.println("Response Code : " + responseCode);
 
+                InputStreamReader myInput= new InputStreamReader(client.getInputStream());
+                BufferedReader in = new BufferedReader(myInput);
+                String inputLine;
+                StringBuffer response = new StringBuffer();
+
+                while ((inputLine = in.readLine()) != null) {
+                    response.append(inputLine);
+                }
+                in.close();
+
+                JSONObject obj =new JSONObject(response.toString());
+                userStatus=""+obj.getString("Status");
+
             }
             catch (MalformedURLException e) {
                 e.printStackTrace();
             }
             catch (IOException e) {
+                e.printStackTrace();
+            } catch (JSONException e) {
                 e.printStackTrace();
             }
             return null;
@@ -322,7 +351,18 @@ public class Item extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(Void result){
-            Toast.makeText(Item.this,"Added to waiting item",Toast.LENGTH_SHORT).show();
+
+            if(userStatus.equals("ok")) {
+                Toast.makeText(Item.this, "Added to waiting item", Toast.LENGTH_SHORT).show();
+                try {
+                    DatabaseObjects.waitingList = new JSONArray("[]");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+            else
+                Toast.makeText(Item.this, "item Already Added to waiting List", Toast.LENGTH_SHORT).show();
+
             progressDialog.hide();
             super.onPostExecute(result);
         }
@@ -330,27 +370,3 @@ public class Item extends AppCompatActivity {
 
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
