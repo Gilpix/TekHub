@@ -5,14 +5,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.Toast;
 
+import com.kulartist.tekhubandroid.LoginActivity;
 import com.kulartist.tekhubandroid.R;
 
 import org.json.JSONArray;
@@ -29,28 +32,28 @@ import java.util.ArrayList;
 
 import static com.kulartist.tekhubandroid.LoginActivity.currentIP;
 
-public class StudentList extends AppCompatActivity {
+public class AdminItems extends AppCompatActivity {
 
-    private  ListView studentList;
-    private ProgressDialog progressDialog;
-    private JSONArray studentListArray;
-    private String userStatus;
+    private ImageView add;
+    private ListView itemListView;
     private SearchView simpleSearchView;
+    private ProgressDialog progressDialog;
+    private JSONArray itemList;
+    private String userStatus;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_student_list);
-
-        studentList=(ListView)findViewById(R.id.studentListListView);
-        simpleSearchView = (SearchView) findViewById(R.id.studentListSearchBar);
+        setContentView(R.layout.activity_admin_items);
 
 
+        add=(ImageView)findViewById(R.id.adminAddItems);
+        itemListView=(ListView)findViewById(R.id.adminItemListVIew);
+        simpleSearchView = (SearchView) findViewById(R.id.itemSearchView);
         progressDialog = new ProgressDialog(this);
 
-        new getStudentList().execute();
-
+        new getItemListForAdmin().execute();
 
         simpleSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -62,7 +65,7 @@ public class StudentList extends AppCompatActivity {
             @Override
             public boolean onQueryTextChange(String newText) {
                 if(newText.equals("")){
-                    new StudentList.getStudentList().execute();                }
+                    new AdminItems.getItemListForAdmin().execute();                }
                 else
                     callSearch(newText);
                 return true;
@@ -70,14 +73,24 @@ public class StudentList extends AppCompatActivity {
 
             public void callSearch(String query) {
                 //Do searching
-                new StudentList.getStudentBySearch().execute();
+                new AdminItems.getItemListBySearch().execute();
             }
 
+        });
+
+
+
+        add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(AdminItems.this,addItem.class);
+                startActivity(i);
+            }
         });
     }
 
 
-    private class getStudentList extends AsyncTask<Void, Void, Void> {
+    private class getItemListForAdmin extends AsyncTask<Void, Void, Void> {
 
         String userStatus;
 
@@ -100,7 +113,7 @@ public class StudentList extends AppCompatActivity {
 
             try {
 
-                url = new URL("http://" + currentIP + ":8080/TekHub-WebCalls/webcall/admin/listStudents");
+                url = new URL("http://" + currentIP + ":8080/TekHub-WebCalls/webcall/admin/getItems");
 
                 HttpURLConnection client = null;
 
@@ -131,7 +144,7 @@ public class StudentList extends AppCompatActivity {
 
                 JSONObject obj = new JSONObject(response.toString());
                 userStatus = "" + obj.getString("Status");
-                studentListArray = obj.getJSONArray("studentList");
+                itemList = obj.getJSONArray("itemLists");
 
 
             } catch (MalformedURLException e) {
@@ -149,73 +162,101 @@ public class StudentList extends AppCompatActivity {
         protected void onPostExecute(Void result) {
             if(userStatus.equals("Ok")){
                 try {
-                    getRecyclerData(studentListArray);
+                    getRecyclerData(itemList);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
                 progressDialog.hide();
             }
             else
-                Toast.makeText(StudentList.this,"Unable to fetch",Toast.LENGTH_LONG).show();
+                Toast.makeText(AdminItems.this,"Unable to fetch",Toast.LENGTH_LONG).show();
             super.onPostExecute(result);
         }
     }
 
     private void getRecyclerData(final JSONArray mainArray) throws JSONException {
-        final ArrayList<String> studentId = new ArrayList<String>(mainArray.length());
-        final ArrayList<String> studentName = new ArrayList<String>(mainArray.length());
-        final ArrayList<String> studentEmail = new ArrayList<String>(mainArray.length());
+        final ArrayList<String> itemId = new ArrayList<String>(mainArray.length());
+        final ArrayList<String> itemName = new ArrayList<String>(mainArray.length());
+        final ArrayList<String> itemDesc = new ArrayList<String>(mainArray.length());
+        final ArrayList<String> isAvailable = new ArrayList<String>(mainArray.length());
+        final ArrayList<String> availableDate = new ArrayList<String>(mainArray.length());
+        final ArrayList<String> itemCondi = new ArrayList<String>(mainArray.length());
+        final ArrayList<String> borrowNum = new ArrayList<String>(mainArray.length());
+        final ArrayList<String> addedDate = new ArrayList<String>(mainArray.length());
 
         for(int j=0;j<mainArray.length();j++)
         {
             JSONObject a =new JSONObject();
             a=mainArray.getJSONObject(j);
-            studentId.add(a.getString("StudentId"));
-            studentName.add(a.getString("Name"));
-            studentEmail.add(a.getString("email"));
+
+            itemId.add(a.getString("ItemId"));
+            itemName.add(a.getString("ItemName"));
+            itemDesc.add(a.getString("ItemDesc"));
+            if (a.getString("isAvailable").equals("0")) isAvailable.add("No");
+            else isAvailable.add("Yes");
+            availableDate.add(a.getString("AvailableDate"));
+            itemCondi.add(a.getString("ItemCondition"));
+            borrowNum.add(a.getString("BorrowNumber"));
+            addedDate.add(a.getString("AddedDate"));
 
         }
 
-        studentList = (ListView)findViewById(R.id.studentListListView);
-        final StudentListAdapter studentListAdapter=new StudentListAdapter(StudentList.this,studentId,studentName,studentEmail);
-        studentList.setAdapter(studentListAdapter);
+        itemListView=(ListView)findViewById(R.id.adminItemListVIew);
+        final ItemListAdapter itemListAdapter=new ItemListAdapter(AdminItems.this,itemId,itemName,itemDesc,isAvailable,availableDate,itemCondi,borrowNum,addedDate);
+        itemListView.setAdapter(itemListAdapter);
 
-        studentList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+        itemListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
 
                 final int which_position=position;
-                new AlertDialog.Builder(StudentList.this).setIcon(R.drawable.ic_delete).
-                        setTitle("Are you sure?").setMessage("Do you want to remove this student").
+                new AlertDialog.Builder(AdminItems.this).setIcon(R.drawable.ic_delete).
+                        setTitle("Are you sure?").setMessage("Do you want to remove this Item").
                         setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                String number=""+studentId.get(which_position);
-                                new StudentList.studentDelete(number).execute();
-                                studentId.remove(which_position);
-                                studentName.remove(which_position);
-                                studentEmail.remove(which_position);
-                                studentListAdapter.notifyDataSetChanged();
-
+                                String number=""+itemId.get(which_position);
+                                new AdminItems.itemDelete(number).execute();
+                                itemId.remove(which_position);
+                                itemName.remove(which_position);
+                                itemDesc.remove(which_position);
+                                isAvailable.remove(which_position);
+                                availableDate.remove(which_position);
+                                itemCondi.remove(which_position);
+                                borrowNum.remove(which_position);
+                                addedDate.remove(which_position);
                             }
                         }).setNegativeButton("No",null).show();
                 return true;
             }
         });
 
+        itemListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                final int which_position=position;
+                Intent i = new Intent(AdminItems.this, AdminEditItems.class);
+                i.putExtra("id",itemId.get(which_position));
+                i.putExtra("name",itemName.get(which_position));
+                i.putExtra("desc",itemDesc.get(which_position));
+                i.putExtra("condition",itemCondi.get(which_position));
+                startActivity(i);
+            }
+        });
+
     }
 
 
-    private class studentDelete extends AsyncTask<Void, Void, Void> {
+    private class itemDelete extends AsyncTask<Void, Void, Void> {
 
-        String studentIdToDelete;
-        public studentDelete(String studentIdToDelete) {
-            this.studentIdToDelete = studentIdToDelete;
+        String itemToBeDeleted;
+        public itemDelete(String studentIdToDelete) {
+            this.itemToBeDeleted = studentIdToDelete;
         }
 
         @Override
         protected void onPreExecute() {
-            System.out.println(studentIdToDelete);
+            System.out.println(itemToBeDeleted);
             super.onPreExecute();
         }
 
@@ -228,7 +269,7 @@ public class StudentList extends AppCompatActivity {
             try {
 
 
-                url = new URL("http://" + currentIP + ":8080/TekHub-WebCalls/webcall/admin/deleteStudent&"+studentIdToDelete);
+                url = new URL("http://" + currentIP + ":8080/TekHub-WebCalls/webcall/admin/deleteItem&"+ itemToBeDeleted);
 
                 HttpURLConnection client = null;
 
@@ -276,17 +317,16 @@ public class StudentList extends AppCompatActivity {
         protected void onPostExecute(Void result) {
 
             if(userStatus.equals("Ok")) {
-                Toast.makeText(StudentList.this,"User Removed from database",Toast.LENGTH_SHORT).show();
+                Toast.makeText(AdminItems.this,"Item Removed from database",Toast.LENGTH_SHORT).show();
             }
             else
-                Toast.makeText(StudentList.this,"Removel failed",Toast.LENGTH_SHORT).show();
+                Toast.makeText(AdminItems.this,"Removel failed",Toast.LENGTH_SHORT).show();
 
             super.onPostExecute(result);
         }
     }
 
-
-    private class getStudentBySearch extends AsyncTask<Void, Void, Void> {
+    private class getItemListBySearch extends AsyncTask<Void, Void, Void> {
         String searchKey=simpleSearchView.getQuery().toString();
 
         @Override
@@ -307,7 +347,7 @@ public class StudentList extends AppCompatActivity {
 
             try {
 
-                url = new URL("http://" + currentIP + ":8080/TekHub-WebCalls/webcall/admin/searchStudent&"+searchKey);
+                url = new URL("http://" + currentIP + ":8080/TekHub-WebCalls/webcall/admin/searchItem&"+searchKey);
 
                 HttpURLConnection client = null;
 
@@ -337,7 +377,7 @@ public class StudentList extends AppCompatActivity {
                 System.out.println(response.toString());
                 JSONObject obj = new JSONObject(response.toString());
                 userStatus = "" + obj.getString("Status");
-                studentListArray = obj.getJSONArray("studentList");
+                itemList = obj.getJSONArray("itemLists");
 
 
             } catch (MalformedURLException e) {
@@ -355,7 +395,7 @@ public class StudentList extends AppCompatActivity {
         protected void onPostExecute(Void result) {
             if(userStatus.equals("Ok")) {
                 try {
-                    getRecyclerData(studentListArray);
+                    getRecyclerData(itemList);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -363,7 +403,7 @@ public class StudentList extends AppCompatActivity {
             }
             else{
                 progressDialog.hide();
-            Toast.makeText(StudentList.this,"Unable to fetch",Toast.LENGTH_LONG).show();
+                Toast.makeText(AdminItems.this,"Unable to fetch",Toast.LENGTH_LONG).show();
             }
 
 

@@ -30,10 +30,10 @@
         android:id="@+id/add_item_desc"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAlignment="center"
         android:ems="10"
+        android:hint="Description"
         android:inputType="textPersonName"
-        android:hint="Description" />
+        android:textAlignment="center" />
 
     <EditText
         android:id="@+id/add_item_cond"

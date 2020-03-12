@@ -188,6 +188,7 @@ public class ResolveIssue extends AppCompatActivity {
 
         String toBeChanged;
         public solveIssue(String studentIdToDelete) {
+
             this.toBeChanged = studentIdToDelete;
         }
 
