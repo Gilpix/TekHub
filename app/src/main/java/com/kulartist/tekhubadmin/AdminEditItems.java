@@ -9,7 +9,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.kulartist.tekhubandroid.R;
@@ -24,13 +23,14 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-import static com.kulartist.tekhubandroid.LoginActivity.currentIP;
+//import static com.kulartist.tekhubandroid.LoginActivity.currentIP;
+import static com.kulartist.tekhubandroid.SplashScreen.currentIP;
 
 public class AdminEditItems extends AppCompatActivity {
 
-    private String id,name,desc,condition,userStatus;
+    private String id,name,desc,condition,userStatus, availabilitys,availibilityFlag;
     private EditText newName,newDesc;
-    private RadioButton fresh,used;
+    private RadioButton fresh,used,available,notAvailable;
     private Button submitButton;
 
     @Override
@@ -43,12 +43,16 @@ public class AdminEditItems extends AppCompatActivity {
         name=intent.getStringExtra("name");
         desc=intent.getStringExtra("desc");
         condition=intent.getStringExtra("condition");
+        availabilitys =intent.getStringExtra("availability");
 
         newName=(EditText)findViewById(R.id.SelectedItemName);
         newDesc=(EditText)findViewById(R.id.SelectedItemDesc);
         submitButton=(Button)findViewById(R.id.updateItemButton);
         fresh=(RadioButton)findViewById(R.id.newRadio);
         used=(RadioButton)findViewById(R.id.usedRadio);
+        available=(RadioButton)findViewById(R.id.itemAvail);
+        notAvailable=(RadioButton)findViewById(R.id.itemNotAvail);
+
 
 
         newName.setText(name);
@@ -61,6 +65,14 @@ public class AdminEditItems extends AppCompatActivity {
         else
             fresh.setChecked(true);
 
+
+        if(availabilitys.equals("Yes"))
+            available.setChecked(true);
+        else if (availabilitys.equals("No"))
+            notAvailable.setChecked(true);
+        else
+            return;
+
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -70,9 +82,19 @@ public class AdminEditItems extends AppCompatActivity {
                     condition="New";
                 else if(used.isChecked())
                     condition="Used";
+                else
+                    return;
 
 
-                new itemUpdate(id,name,desc,condition).execute();
+                if(available.isChecked())
+                    availibilityFlag="1";
+                else if(notAvailable.isChecked())
+                    availibilityFlag="0";
+                else
+                    return;
+
+
+                new itemUpdate(id,name,desc,condition,availibilityFlag).execute();
             }
         });
 
@@ -82,13 +104,14 @@ public class AdminEditItems extends AppCompatActivity {
 
     private class itemUpdate extends AsyncTask<Void, Void, Void> {
 
-        String itemToBeUpdated,name,desc,condition;
-        public itemUpdate(String id,String name,String desc,String condition) {
+        String itemToBeUpdated,name,desc,condition,availability;
+        public itemUpdate(String id,String name,String desc,String condition,String availability) {
 
             this.itemToBeUpdated = id;
             this.name = name;
             this.desc = desc;
             this.condition = condition;
+            this.availability = availability;
         }
 
         @Override
@@ -106,7 +129,8 @@ public class AdminEditItems extends AppCompatActivity {
             try {
 
 
-                url = new URL("http://" + currentIP + ":8080/TekHub-WebCalls/webcall/admin/updateItem&"+ name+"&"+desc+"&"+condition+"&"+itemToBeUpdated);
+                url = new URL("http://" + currentIP + ":8080/TekHub-WebCalls/webcall/admin/updateItem&"+ name+"&"+
+                        desc+"&"+condition+"&"+availability+"&"+itemToBeUpdated);
 
                 HttpURLConnection client = null;
 

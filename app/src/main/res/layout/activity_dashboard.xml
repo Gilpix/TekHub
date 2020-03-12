@@ -62,11 +62,17 @@
 <ImageView
     android:layout_marginTop="20dp"
     android:layout_gravity="center"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+    android:layout_width="150dp"
+    android:layout_height="150dp"
     android:src="@drawable/tehublogo"/>
 
-
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+<LinearLayout
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <Button
         android:id="@+id/manageItems"
@@ -119,6 +125,23 @@
         android:textStyle="bold"
         android:text="Resolve Issue"
         />
-
+    <Button
+        android:id="@+id/orderDetails"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="40dp"
+        android:gravity="center"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:background="@xml/mybutton"
+        style="?android:textAppearanceSmall"
+        android:textColor="@color/button_text_color_white"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:text="Order Details"
+        />
+</LinearLayout>
+    </ScrollView>
 
 </LinearLayout>

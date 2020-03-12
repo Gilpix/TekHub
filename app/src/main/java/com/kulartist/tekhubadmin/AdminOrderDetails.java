@@ -5,17 +5,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.SearchView;
 import android.widget.Toast;
 
-import com.kulartist.tekhubandroid.LoginActivity;
 import com.kulartist.tekhubandroid.R;
 
 import org.json.JSONArray;
@@ -30,72 +27,34 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 
-//import static com.kulartist.tekhubandroid.LoginActivity.currentIP;
 import static com.kulartist.tekhubandroid.SplashScreen.currentIP;
 
-public class Dashboard extends AppCompatActivity {
-
-
-    private Button item,students,issue,adminOrderDetails;
-    private ImageView logout;
+public class AdminOrderDetails extends AppCompatActivity {
+    private ListView orderListView;
     private ProgressDialog progressDialog;
+    private JSONArray orderListArray;
+    //private String userStatus;
+    private SearchView simpleSearchView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_dashboard);
+        setContentView(R.layout.activity_admin_order_details);
 
-        item=(Button)findViewById(R.id.manageItems);
-        students=(Button)findViewById(R.id.manageStudents);
-        issue=(Button)findViewById(R.id.resolveIssue);
-        logout=(ImageView)findViewById(R.id.adminLogout);
-        adminOrderDetails=(Button) findViewById(R.id.orderDetails);
+        orderListView=(ListView)findViewById(R.id.adminOrderDertailsListView);
+        //simpleSearchView = (SearchView) findViewById(R.id.adminOrderSearchBar);
+
+
         progressDialog = new ProgressDialog(this);
 
-        item.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(Dashboard.this,AdminItems.class);
-                startActivity(i);
-            }
-        });
-
-        students.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(Dashboard.this,StudentList.class);
-                startActivity(i);
-            }
-        });
+        new getOrderDetailsForAdmin().execute();
 
 
-        issue.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(Dashboard.this,ResolveIssue.class);
-                startActivity(i);
-            }
-        });
 
-        logout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                new Dashboard.adminLogout().execute();
-
-
-            }
-        });
-
-        adminOrderDetails.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(Dashboard.this,AdminOrderDetails.class);
-                startActivity(i);
-            }
-        });
-        
     }
-    private class adminLogout extends AsyncTask<Void, Void, Void> {
+
+    private class getOrderDetailsForAdmin extends AsyncTask<Void, Void, Void> {
 
         String userStatus;
 
@@ -118,7 +77,7 @@ public class Dashboard extends AppCompatActivity {
 
             try {
 
-                url = new URL("http://" + currentIP + ":8080/TekHub-WebCalls/webcall/admin/logout");
+                url = new URL("http://" + currentIP + ":8080/TekHub-WebCalls/webcall/admin/listOrders");
 
                 HttpURLConnection client = null;
 
@@ -149,6 +108,7 @@ public class Dashboard extends AppCompatActivity {
 
                 JSONObject obj = new JSONObject(response.toString());
                 userStatus = "" + obj.getString("Status");
+                orderListArray = obj.getJSONArray("orderList");
 
 
             } catch (MalformedURLException e) {
@@ -165,17 +125,49 @@ public class Dashboard extends AppCompatActivity {
         @Override
         protected void onPostExecute(Void result) {
             if(userStatus.equals("Ok")){
-                Toast.makeText(Dashboard.this,"You are logged out",Toast.LENGTH_LONG).show();
-                Intent i = new Intent(Dashboard.this, LoginActivity.class);
-                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(i);
-                finish();
+                try {
+                    getRecyclerData(orderListArray);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
                 progressDialog.hide();
             }
             else
-                Toast.makeText(Dashboard.this,"Unable to logout",Toast.LENGTH_LONG).show();
+                Toast.makeText(AdminOrderDetails.this,"Unable to fetch",Toast.LENGTH_LONG).show();
             super.onPostExecute(result);
         }
+    }
+
+    private void getRecyclerData(final JSONArray mainArray) throws JSONException {
+        final ArrayList<String> orderId = new ArrayList<String>(mainArray.length());
+        final ArrayList<String> itemId = new ArrayList<String>(mainArray.length());
+        final ArrayList<String> itemname = new ArrayList<String>(mainArray.length());
+        final ArrayList<String> userId = new ArrayList<String>(mainArray.length());
+        final ArrayList<String> name = new ArrayList<String>(mainArray.length());
+        final ArrayList<String> orderDate = new ArrayList<String>(mainArray.length());
+        final ArrayList<String> pickupDate = new ArrayList<String>(mainArray.length());
+        final ArrayList<String> returnDate = new ArrayList<String>(mainArray.length());
+
+        for(int j=0;j<mainArray.length();j++)
+        {
+            JSONObject a =new JSONObject();
+            a=mainArray.getJSONObject(j);
+            orderId.add(a.getString("orderId"));
+            itemId.add(a.getString("itemId"));
+            itemname.add(a.getString("itemname"));
+            userId.add(a.getString("userId"));
+            name.add(a.getString("name"));
+            orderDate.add(a.getString("orderDate"));
+            pickupDate.add(a.getString("pickupDate"));
+            returnDate.add(a.getString("returnDate"));
+
+        }
+
+        orderListView = (ListView)findViewById(R.id.adminOrderDertailsListView);
+        final AdminOrderDetailsAdapter adminOrderDetailsAdapter=new AdminOrderDetailsAdapter(AdminOrderDetails.this,orderId,itemId,itemname,userId,name,orderDate,pickupDate,returnDate);
+        orderListView.setAdapter(adminOrderDetailsAdapter);
+
+
     }
 
 }
