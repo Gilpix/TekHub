@@ -7,7 +7,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:background="#FFF"
-    tools:context="com.kulartist.tekhubadmin.StudentList">
+    tools:context="com.kulartist.tekhubadmin.AdminItems">
 
 
     <LinearLayout
@@ -30,11 +30,6 @@
                 android:layout_marginBottom="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
-<!--                <ImageView
-                    android:src="@drawable/left_arrow"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:layout_centerVertical="true"  />-->
                 <TextView
                     android:id="@+id/toolbar_title"
                     android:layout_width="wrap_content"
@@ -43,10 +38,27 @@
                     android:layout_centerHorizontal="true"
                     android:layout_centerVertical="true"
                     android:gravity="center"
-                    android:text="Students"
+                    android:text="Items"
                     android:textColor="@android:color/white"
                     android:textSize="20dp"
                     android:textStyle="bold" />
+
+                <ImageView
+                    android:id="@+id/adminAddItems"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+
+                    android:layout_centerVertical="true"
+
+                    android:src="@drawable/ic_add"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="15dp"
+
+
+
+                    />
+
+
             </RelativeLayout>
         </androidx.appcompat.widget.Toolbar>
         <androidx.cardview.widget.CardView
@@ -66,7 +78,7 @@
             app:cardElevation="4dp">
 
             <SearchView
-                android:id="@+id/studentListSearchBar"
+                android:id="@+id/itemSearchView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
@@ -76,7 +88,7 @@
         </androidx.cardview.widget.CardView>
 
         <ListView
-            android:id="@+id/studentListListView"
+            android:id="@+id/adminItemListVIew"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"

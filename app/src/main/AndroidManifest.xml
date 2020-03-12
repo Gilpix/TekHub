@@ -17,6 +17,8 @@
         android:usesCleartextTraffic="true">
         <activity android:name="com.kulartist.tekhubadmin.addItem"></activity>
         <activity android:name="com.kulartist.tekhub.WaitingListAdapter" />
+        <activity android:name="com.kulartist.tekhubadmin.AdminEditItems"></activity>
+        <activity android:name="com.kulartist.tekhubadmin.AdminItems" />
         <activity android:name="com.kulartist.tekhub.WaitingList" />
         <activity android:name="com.kulartist.tekhubadmin.ResolveIssue" />
         <activity android:name="com.kulartist.tekhubadmin.StudentList" />

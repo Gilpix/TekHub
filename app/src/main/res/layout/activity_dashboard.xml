@@ -7,6 +7,58 @@
     android:orientation="vertical"
 
     tools:context="com.kulartist.tekhubadmin.Dashboard">
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimaryDark"
+        app:layout_collapseMode="pin"
+        app:titleTextColor="@android:color/white">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+
+            <TextView
+                android:id="@+id/toolbar_title"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:gravity="center"
+                android:text="Welcome Admin"
+                android:textColor="@android:color/white"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/adminLogout"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+
+                android:layout_centerVertical="true"
+
+                android:background="@xml/circular_button_white"
+                android:src="@drawable/shutdownbig"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="15dp"
+                android:text=""
+                android:textAlignment="center"
+                android:textColor="@color/main_red"
+                android:textScaleX="1.3"
+                android:textSize="26sp"
+                android:textStyle="bold"
+
+
+                />
+
+        </RelativeLayout>
+
+    </androidx.appcompat.widget.Toolbar>
+
 <ImageView
     android:layout_marginTop="20dp"
     android:layout_gravity="center"
@@ -14,16 +66,7 @@
     android:layout_height="wrap_content"
     android:src="@drawable/tehublogo"/>
 
-    <TextView
-        android:id="@+id/welcome_admin"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:fontFamily="@font/carter_one"
-        android:text="Welcome Admin"
-        android:textAlignment="center"
-        android:textColor="#797777"
-        android:textSize="18sp" />
+
 
     <Button
         android:id="@+id/manageItems"
