@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#F1F1F1"
 
 
     android:paddingBottom="30dp"
@@ -12,172 +13,168 @@
     tools:context="com.kulartist.tekhub.Order">
 
 
-    <androidx.cardview.widget.CardView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
-
-
-
-        android:layout_marginLeft="10dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="150dp"
         android:layout_marginRight="10dp"
-        android:layout_above="@+id/confirm_item"
-        android:layout_marginBottom="240dp"
+        android:background="@xml/search_bar_back"
+        android:backgroundTint="#FFFFFF"
+        android:layout_marginLeft="10dp"
 
+        android:layout_marginBottom="10dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="5dp"
+        android:weightSum="4">
 
-
-        android:elevation="3dp"
-        app:cardBackgroundColor="@color/white"
-        app:cardCornerRadius="6dp"
-        app:cardElevation="5dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_gravity="center"
             android:layout_margin="10dp"
             android:gravity="center"
-            android:orientation="vertical"
-            android:padding="5dp"
-            android:weightSum="3">
+            android:orientation="horizontal"
+            android:weightSum="2">
 
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+            <TextView
+                android:id="@+id/item_name_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:gravity="center"
-                android:layout_marginBottom="15dp"
-                android:orientation="horizontal"
-                android:weightSum="2">
-
-                <TextView
-                    android:id="@+id/item_name_label"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-
-                    android:layout_weight="1"
-                    android:ems="25"
-                    android:text="Product Name : "
-
-                    android:textColor="#201F20"
-                    android:textSize="14sp" />
-
-                <TextView
-                    android:id="@+id/buy_item_name"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-
-
-
-                    android:text="Mackbook Pro"
-                    android:textSize="14sp" />
-            </LinearLayout>
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:layout_marginBottom="5dp"
                 android:layout_weight="1"
+                android:ems="25"
                 android:gravity="center"
-                android:orientation="horizontal"
-                android:weightSum="2">
+                android:text="Item Name    : "
+                android:textAllCaps="true"
+                android:textColor="#201F20"
+                android:textSize="14sp"
+                android:textStyle="bold" />
 
-                <TextView
-                    android:id="@+id/item_condition_label"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-
-                    android:layout_weight="1"
-                    android:ems="25"
-                    android:text="Product Condition : "
-
-                    android:textColor="#201F20"
-                    android:textSize="14sp" />
-
-                <TextView
-                    android:id="@+id/buy_item_condition"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-
-
-                    android:text="New"
-                    android:textSize="14sp" />
-            </LinearLayout>
-
-            <LinearLayout
+            <TextView
+                android:id="@+id/buy_item_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/item_start_date"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:ems="10"
-                    android:text="Pickup Date : "
-                    android:textColor="#201F20"
-                    android:textSize="14sp" />
-
-                <EditText
-                    android:id="@+id/pickup_date"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:drawableRight="@drawable/calender"
-                    android:ems="10"
-
-
-                    android:hint="pickup date"
-                    android:inputType="textPersonName"
-                    android:onClick="selectPickupDate"
-
-                    android:paddingRight="10dp"
-                    android:textSize="14sp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/item_end_date"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Return Date : "
-                    android:textColor="#201F20"
-                    android:textSize="14sp" />
-
-                <EditText
-                    android:id="@+id/return_date"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:clickable="false"
-                    android:drawableRight="@drawable/calender"
-                    android:ems="10"
-                    android:hint="return date"
-                    android:inputType="textPersonName"
-                    android:onClick="selectReturnDate"
-                    android:paddingRight="10dp"
-
-                    android:textSize="14sp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-            </LinearLayout>
-
-
+                android:layout_weight="1"
+                android:text="Mackbook Pro"
+                android:textSize="14sp" />
         </LinearLayout>
 
-    </androidx.cardview.widget.CardView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <TextView
+                android:id="@+id/item_condition_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+
+                android:ems="25"
+                android:gravity="center"
+                android:text="Condition    : "
+
+                android:textAllCaps="true"
+                android:textColor="#201F20"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/buy_item_condition"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+
+
+                android:text="New"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:orientation="horizontal">
+
+<!--            <TextView-->
+<!--                android:id="@+id/item_start_date"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_weight="1"-->
+<!--                android:ems="10"-->
+<!--                android:text="Pickup Date : "-->
+<!--                android:textColor="#201F20"-->
+<!--                android:textSize="14sp" />-->
+
+            <TextView
+                android:id="@+id/pickup_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@xml/search_bar_back"
+                android:drawableRight="@drawable/calender"
+                android:textAlignment="center"
+                android:ems="10"
+                android:hint="pickup date"
+                android:inputType="textPersonName"
+                android:onClick="selectPickupDate"
+                android:padding="7dp"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:orientation="horizontal">
+
+<!--            <TextView-->
+<!--                android:id="@+id/item_end_date"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_weight="1"-->
+<!--                -->
+<!--                android:ems="10"-->
+<!--                android:text="Return Date : "-->
+<!--                android:textColor="#201F20"-->
+<!--                android:textSize="14sp" />-->
+
+            <TextView
+                android:id="@+id/return_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@xml/search_bar_back"
+                android:textAlignment="center"
+                android:clickable="false"
+                android:drawableRight="@drawable/calender"
+                android:ems="10"
+
+                android:hint="return date"
+                android:inputType="textPersonName"
+                android:onClick="selectReturnDate"
+                android:padding="7dp"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </LinearLayout>
+
+
+    </LinearLayout>
 
     <Button
         android:id="@+id/confirm_item"

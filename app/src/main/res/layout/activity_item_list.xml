@@ -39,6 +39,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_margin="10dp"
+
             android:background="@xml/search_bar_back"
             android:queryHint="type here" />
     </androidx.cardview.widget.CardView>

@@ -299,9 +299,9 @@
                     android:layout_margin="5dp"
                     android:layout_weight=".9"
 
-                    android:inputType="textEmailAddress"
+                    android:inputType="number|phone"
 
-                    android:text="514-2921-514"
+                    android:text="5142921514"
 
 
                     android:textColor="@color/student_profile_text_color"
@@ -351,7 +351,7 @@
                     android:layout_margin="5dp"
                     android:layout_weight=".9"
 
-                    android:inputType="textEmailAddress"
+                    android:inputType="number"
 
                     android:text="25"
 
