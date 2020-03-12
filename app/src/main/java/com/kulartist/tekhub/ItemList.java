@@ -1,10 +1,15 @@
 package com.kulartist.tekhub;
 
-
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.Typeface;
+import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Process;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -25,7 +30,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-import static com.kulartist.tekhubandroid.LoginActivity.currentIP;
+import static com.kulartist.tekhubandroid.SplashScreen.currentIP;
 
 
 public class ItemList extends BottomMenu {
@@ -61,7 +66,9 @@ public class ItemList extends BottomMenu {
         filter_available_fab=findViewById(R.id.filter_available_fab);
         progressDialog=new ProgressDialog(this);
 
-        if(DatabaseObjects.itemList.toString().equals("[]") || DatabaseObjects.itemList.toString().equals("")) {
+        if(DatabaseObjects.itemList.toString().equals("[]") || DatabaseObjects.itemList.toString().equals("") || DatabaseObjects.itemList.toString().isEmpty())
+        {
+            new UpdateItemAvailability().execute();
             new GetItemList().execute();
         }
         else
@@ -73,55 +80,145 @@ public class ItemList extends BottomMenu {
             }
         }
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+
+            DatabaseObjects db=new DatabaseObjects();
+
+
             @Override
             public boolean onQueryTextSubmit(String query) {
-                callSearch(query);
-                return true;
+                try {
+                    if(db.sortArrayListBySearch(query).equals("[]")){
+                        Toast.makeText(ItemList.this, "No Match found",Toast.LENGTH_LONG).show();
+                    }else{
+                        callSearch(query);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                return false;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                callSearch(newText);
+                try {
+                    db.sortedJsonArrayBySearch=new JSONArray();
+                    getRecyclerData(db.sortArrayListBySearch(newText));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
 
 
                 return true;
             }
 
-            public void callSearch(String query) {
+            public void callSearch(String query) throws JSONException {
                 //Do searching
-                new getItemListBySearch().execute();
+                db.sortedJsonArrayBySearch=new JSONArray();
+                getRecyclerData(db.sortArrayListBySearch(query));
             }
 
         });
 
     }
 
-    public void filterByAvailablity(View view) {
-        Toast.makeText(getApplicationContext(), "filterByAvailablity", Toast.LENGTH_SHORT).show();
-        new getItemListByAvailablity().execute();
+    @Override
+    public void onBackPressed() {
+        Intent i = new Intent();
+        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        alertBoxDisplay();
+        //super.onBackPressed();
     }
 
-    public void filterByPopularity(View view) {
-        Toast.makeText(getApplicationContext(), "filterByPopularity", Toast.LENGTH_SHORT).show();
+    public void alertBoxDisplay()
+    {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Do you really want to exit ?")
+                .setCancelable(false)
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        moveTaskToBack(true);
+                        Process.killProcess(Process.myPid());
+                        System.exit(1);
+                    }
+                })
+                .setNegativeButton("No", null);
+        //Creating dialog box
+        AlertDialog alert = builder.create();
+        //Setting the title manually
+        alert.setTitle("TekHub");
+        //alert.setCustomTitle(textView);
+        alert.getWindow().setBackgroundDrawable(new ColorDrawable(Color.WHITE));
+        alert.setIcon(R.drawable.tehublogo);
+        alert.show();
+        // alert.getButton(AlertDialog.BUTTON_POSITIVE).setBackgroundResource(R.color.white);
+        alert.getButton(AlertDialog.BUTTON_POSITIVE).setTypeface(null, Typeface.BOLD);
+        alert.getButton(AlertDialog.BUTTON_POSITIVE).setPadding(20,20,20,20);
+        alert.getButton(AlertDialog.BUTTON_NEGATIVE).setTypeface(Typeface.DEFAULT, Typeface.BOLD);
+        //alert.getButton(AlertDialog.BUTTON_NEGATIVE).setBackgroundResource((R.drawable.circular_button_white));
 
-        if(DatabaseObjects.itemList.toString().equals("[]") || DatabaseObjects.itemList.toString().equals("")) {
-            new GetItemList().execute();
+    }
+
+    public void filterByAvailablity(View view) throws JSONException {
+        Toast.makeText(getApplicationContext(), "filterByAvailablity", Toast.LENGTH_SHORT).show();
+        DatabaseObjects db=new DatabaseObjects();
+        if(DatabaseObjects.sortedJsonArrayByPopularity.toString().equals("[]") || DatabaseObjects.sortedJsonArrayByPopularity.toString().equals("")) {
+            db.sortArrayListByAvailability();
+            getRecyclerData(DatabaseObjects.sortedJsonArrayByAvailability);
+
         }
         else
         {
             try {
-                getRecyclerData(DatabaseObjects.itemList);
+                getRecyclerData(DatabaseObjects.sortedJsonArrayByAvailability);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
         }
-        new GetItemListByPopularity().execute();
+    }
+
+    public void filterByPopularity(View view) throws JSONException {
+
+        Toast.makeText(getApplicationContext(), "filterByPopularity", Toast.LENGTH_SHORT).show();
+
+        DatabaseObjects db=new DatabaseObjects();
+        if(DatabaseObjects.sortedJsonArrayByPopularity.toString().equals("[]") || DatabaseObjects.sortedJsonArrayByPopularity.toString().equals("")) {
+            db.parseArrayFromJson();
+            db.sortArrayListByPopularity();
+            db.storeSortedArrayInList(DatabaseObjects.sortedJsonArrayByPopularity);
+            getRecyclerData(DatabaseObjects.sortedJsonArrayByPopularity);
+
+        }
+        else
+        {
+            try {
+                getRecyclerData(DatabaseObjects.sortedJsonArrayByPopularity);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+        //new GetItemListByPopularity().execute();
 
     }
 
-    public void filterByNewestItemsAdded(View view) {
+    public void filterByNewestItemsAdded(View view) throws JSONException {
         Toast.makeText(getApplicationContext(), "filterByNewestItemsAdded", Toast.LENGTH_SHORT).show();
-        new getItemListByNewestItem().execute();
+        //new getItemListByNewestItem().execute();
+        DatabaseObjects db=new DatabaseObjects();
+        if(DatabaseObjects.sortedJsonArrayByDate.toString().equals("[]") || DatabaseObjects.sortedJsonArrayByDate.toString().equals("")) {
+            db.parseArrayFromJson();
+            db.sortArrayListByDate();
+            db.storeSortedArrayInList(DatabaseObjects.sortedJsonArrayByDate);
+            getRecyclerData(DatabaseObjects.sortedJsonArrayByDate);
+
+        }
+        else
+        {
+            try {
+                getRecyclerData(DatabaseObjects.sortedJsonArrayByDate);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
 
     }
 
@@ -168,6 +265,7 @@ public class ItemList extends BottomMenu {
         final String[] addedDate=new String[mainArray.length()];
         final String[] avgRating=new String[mainArray.length()];
 
+
         for(int j=0;j<mainArray.length();j++)
         {
             avgRating[j]="0";
@@ -176,7 +274,6 @@ public class ItemList extends BottomMenu {
             itemName[j]=a.getString("itemname");
             itemAvailable[j]=a.getString("isAvailable");
             itemID[j]=a.getString("itemId");
-
             itemDesc[j]=a.getString("itemDesc");
             availableDate[j]=a.getString("availableDate");
             itemCondition[j]=a.getString("itemCondition");
@@ -204,7 +301,7 @@ public class ItemList extends BottomMenu {
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-                    in.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_NEW_TASK);
+                    //in.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(in);
 
                 }
@@ -284,73 +381,7 @@ public class ItemList extends BottomMenu {
     }
 
 
-    private class GetItemListByPopularity extends AsyncTask<Void, Void, Void> {
-
-        String userStatus;
-        @Override
-        protected void onPreExecute() {
-
-
-            progressDialog.setMessage("Loading...");
-            progressDialog.show();
-
-            super.onPreExecute();
-        }
-
-        @Override
-        protected Void doInBackground(Void... params){
-
-            URL url = null;
-            try {
-                url = new URL("http://"+currentIP+":8080/TekHubWebCalls/webcall/item/getItemListByPopularity");
-                HttpURLConnection client = null;
-                client = (HttpURLConnection) url.openConnection();
-                client.setRequestMethod("GET");
-                InputStreamReader myInput= new InputStreamReader(client.getInputStream());
-                BufferedReader in = new BufferedReader(myInput);
-                String inputLine;
-                StringBuffer response = new StringBuffer();
-
-
-                while ((inputLine = in.readLine()) != null) {
-                    response.append(inputLine);
-                }
-                in.close();
-
-                JSONObject obj =new JSONObject(response.toString());
-                userStatus=""+obj.getString("Status");
-                itemListArray=obj.getJSONArray("itemLists");
-
-
-            }
-            catch (MalformedURLException e) {
-                e.printStackTrace();
-            }
-            catch (IOException e) {
-                e.printStackTrace();
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-            return null;
-
-        }
-
-        @Override
-        protected void onPostExecute(Void result){
-
-            try {
-                getRecyclerData(itemListArray);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
-            progressDialog.hide();
-            super.onPostExecute(result);
-        }
-    }
-
-
-    private class getItemListByNewestItem extends AsyncTask<Void, Void, Void> {
+    private class UpdateItemAvailability extends AsyncTask<Void, Void, Void> {
 
         String userStatus;
 
@@ -361,15 +392,21 @@ public class ItemList extends BottomMenu {
             super.onPreExecute();
         }
 
+
         @Override
         protected Void doInBackground(Void... params){
 
             URL url = null;
             try {
-                url = new URL("http://"+currentIP+":8080/TekHubWebCalls/webcall/item/getItemListByNewestItem");
+                url = new URL("http://"+currentIP+":8080/TekHubWebCalls/webcall/item/updateItemAvailability");
+
                 HttpURLConnection client = null;
                 client = (HttpURLConnection) url.openConnection();
                 client.setRequestMethod("GET");
+                int responseCode = client.getResponseCode();
+
+                System.out.println("\n Sending 'GET' request to URL : " + url);
+                System.out.println("Response Code : " + responseCode);
 
                 InputStreamReader myInput= new InputStreamReader(client.getInputStream());
                 BufferedReader in = new BufferedReader(myInput);
@@ -383,8 +420,6 @@ public class ItemList extends BottomMenu {
 
                 JSONObject obj =new JSONObject(response.toString());
                 userStatus=""+obj.getString("Status");
-                itemListArray=obj.getJSONArray("itemLists");
-
 
             }
             catch (MalformedURLException e) {
@@ -413,126 +448,11 @@ public class ItemList extends BottomMenu {
     }
 
 
-    private class getItemListByAvailablity extends AsyncTask<Void, Void, Void> {
-
-        String userStatus;
-        @Override
-        protected void onPreExecute() {
-            progressDialog.setMessage("Loading...");
-            progressDialog.show();
-            super.onPreExecute();
-        }
-
-        @Override
-        protected Void doInBackground(Void... params){
-
-            URL url = null;
-            try {
-                url = new URL("http://"+currentIP+":8080/TekHubWebCalls/webcall/item/getItemListByAvailablity");
-                HttpURLConnection client = null;
-                client = (HttpURLConnection) url.openConnection();
-                client.setRequestMethod("GET");
-
-                InputStreamReader myInput= new InputStreamReader(client.getInputStream());
-                BufferedReader in = new BufferedReader(myInput);
-                String inputLine;
-                StringBuffer response = new StringBuffer();
-
-                while ((inputLine = in.readLine()) != null) {
-                    response.append(inputLine);
-                }
-                in.close();
-                JSONObject obj =new JSONObject(response.toString());
-                userStatus=""+obj.getString("Status");
-                itemListArray=obj.getJSONArray("itemLists");
-
-            }
-            catch (MalformedURLException e) {
-                e.printStackTrace();
-            }
-            catch (IOException e) {
-                e.printStackTrace();
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-            return null;
-
-        }
-
-        @Override
-        protected void onPostExecute(Void result){
-
-            try {
-                getRecyclerData(itemListArray);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
-            progressDialog.hide();
-            super.onPostExecute(result);
-        }
-    }
-
-
-    private class getItemListBySearch extends AsyncTask<Void, Void, Void> {
-
-        String userStatus,searchKey=searchView.getQuery().toString();
-        @Override
-        protected void onPreExecute() {
-            progressDialog.setMessage("Loading...");
-            progressDialog.show();
-            super.onPreExecute();
-        }
-
-        @Override
-        protected Void doInBackground(Void... params){
-
-            URL url = null;
-            try {
-                url = new URL("http://"+currentIP+":8080/TekHubWebCalls/webcall/item/getItemListBySearch&"+searchKey);
-                HttpURLConnection client = null;
-                client = (HttpURLConnection) url.openConnection();
-                client.setRequestMethod("GET");
-
-                InputStreamReader myInput= new InputStreamReader(client.getInputStream());
-                BufferedReader in = new BufferedReader(myInput);
-                String inputLine;
-                StringBuffer response = new StringBuffer();
-
-                while ((inputLine = in.readLine()) != null) {
-                    response.append(inputLine);
-                }
-                in.close();
-
-                JSONObject obj =new JSONObject(response.toString());
-                userStatus=""+obj.getString("Status");
-                itemListArray=obj.getJSONArray("itemLists");
-
-            }
-            catch (MalformedURLException e) {
-                e.printStackTrace();
-            }
-            catch (IOException e) {
-                e.printStackTrace();
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-            return null;
-
-        }
-
-        @Override
-        protected void onPostExecute(Void result){
-
-            try {
-                getRecyclerData(itemListArray);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
-            progressDialog.hide();
-            super.onPostExecute(result);
-        }
+    @Override
+    protected void onStop() {
+        Intent i = new Intent();
+        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        super.onStop();
     }
 
 }
