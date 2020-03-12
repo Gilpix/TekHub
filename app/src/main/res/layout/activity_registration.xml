@@ -25,8 +25,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-
-
+            android:inputType="number"
             android:background="@xml/circ_text_view_button"
             android:backgroundTint="@color/main_red"
             android:elevation="6dp"
@@ -34,10 +33,7 @@
             android:hint="enter student ID"
             android:padding="@dimen/text_view_padding"
             android:paddingLeft="7dp"
-
             android:textAlignment="center"
-
-
             android:textColor="@color/white"
             android:textColorHint="@color/editText_Hint" />
 
@@ -46,8 +42,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-
-
+            android:inputType="textPersonName"
             android:background="@xml/circ_text_view_button"
             android:backgroundTint="@color/main_red"
             android:elevation="6dp"
@@ -56,8 +51,6 @@
             android:padding="@dimen/text_view_padding"
             android:paddingLeft="7dp"
             android:textAlignment="center"
-
-
             android:textColor="@color/white"
             android:textColorHint="@color/editText_Hint" />
 
@@ -71,7 +64,6 @@
             android:id="@+id/signup_input_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
             android:layout_marginTop="10dp"
             android:background="@xml/circ_text_view_button"
             android:backgroundTint="@color/main_red"
@@ -80,8 +72,6 @@
             android:inputType="textEmailAddress"
             android:padding="@dimen/text_view_padding"
             android:paddingLeft="7dp"
-
-
             android:textAlignment="center"
             android:textColor="@color/white"
             android:textColorHint="@color/editText_Hint" />
@@ -100,8 +90,6 @@
             android:inputType="textPassword"
             android:padding="@dimen/text_view_padding"
             android:paddingLeft="7dp"
-
-
             android:textAlignment="center"
             android:textColor="@color/white"
             android:textColorHint="@color/editText_Hint" />
@@ -111,7 +99,6 @@
             android:id="@+id/signup_input_phone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
             android:layout_marginTop="10dp"
             android:background="@xml/circ_text_view_button"
             android:backgroundTint="@color/main_red"
@@ -119,8 +106,6 @@
             android:hint="enter mobile no."
             android:inputType="phone"
             android:padding="@dimen/text_view_padding"
-
-
             android:shadowRadius="1"
             android:textAlignment="center"
             android:textColor="@color/white"

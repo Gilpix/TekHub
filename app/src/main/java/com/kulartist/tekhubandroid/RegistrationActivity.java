@@ -14,12 +14,18 @@ import android.widget.Toast;
 
 import com.kulartist.tekhub.ItemList;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-import static com.kulartist.tekhubandroid.LoginActivity.currentIP;
+import static com.kulartist.tekhubandroid.SplashScreen.currentIP;
+
 
 public class RegistrationActivity extends AppCompatActivity {
 
@@ -40,6 +46,15 @@ public class RegistrationActivity extends AppCompatActivity {
         rMale =findViewById(R.id.male_radio_btn);
         rFemale =findViewById(R.id.female_radio_btn);
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent i=new Intent(RegistrationActivity.this,LoginActivity.class);
+        i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(i);
+        finish();
+        super.onBackPressed();
     }
 
     public void signInAlreadyAccount(View view) {
@@ -70,6 +85,32 @@ public class RegistrationActivity extends AppCompatActivity {
             mobno=stdmobno.getText().toString();
             age=stdage.getText().toString();
 
+            if(id.length()!=7){
+                stdid.setError("enter valid id");
+                stdid.requestFocus();
+                //Toast.makeText(RegistrationActivity.this, "Please Enter Valid UserId", Toast.LENGTH_SHORT).show();
+            }
+            else if(!email.substring(email.length()-10).equals("@gmail.com")){
+                stdemail.setError("enter valid email");
+                stdemail.requestFocus();
+               // Toast.makeText(RegistrationActivity.this, "Please Enter Valid Email", Toast.LENGTH_SHORT).show();
+            }
+            else if(password.length()<5){
+                stdpassword.setError("enter valid password");
+                stdpassword.requestFocus();
+                // Toast.makeText(RegistrationActivity.this, "Please Enter Valid Password", Toast.LENGTH_SHORT).show();
+            }
+            else if(mobno.length()<9 ||mobno.length()>11){
+                stdmobno.setError("enter valid mobile no.");
+                stdmobno.requestFocus();
+               // Toast.makeText(RegistrationActivity.this, "Please Enter Valid Mobile No.", Toast.LENGTH_SHORT).show();
+            }
+            else if(Integer.parseInt(age)<20 ||Integer.parseInt(age)>35){
+                stdage.setError("enter valid age");
+                stdage.requestFocus();
+                //Toast.makeText(RegistrationActivity.this, "Please Enter Valid Age", Toast.LENGTH_SHORT).show();
+            }
+            else
             new SignUpUser(id,name, email, password, mobno,age,gender).execute();
 
         }
@@ -96,7 +137,7 @@ public class RegistrationActivity extends AppCompatActivity {
 
     private class SignUpUser extends AsyncTask<Void, Void, Void> {
 
-        String id,name,  email,  password,  mobno,age,gender;
+        String id,name,  email,  password,  mobno,age,gender,userStatus;
 
         public SignUpUser(String id, String name, String mail, String password,String num, String age,String gender) {
             this.id=id;
@@ -125,11 +166,28 @@ public class RegistrationActivity extends AppCompatActivity {
                 System.out.println("\n Sending 'GET' request to URL : " + url);
                 System.out.println("Response Code : " + responseCode);
 
+                InputStreamReader myInput= new InputStreamReader(client.getInputStream());
+                BufferedReader in = new BufferedReader(myInput);
+                String inputLine;
+                StringBuffer response = new StringBuffer();
+
+                while ((inputLine = in.readLine()) != null) {
+                    response.append(inputLine);
+                }
+                in.close();
+
+                JSONObject obj =new JSONObject(response.toString());
+                userStatus=""+obj.getString("Status");
+
+
+
             }
             catch (MalformedURLException e) {
                 e.printStackTrace();
             }
             catch (IOException e) {
+                e.printStackTrace();
+            } catch (JSONException e) {
                 e.printStackTrace();
             }
             return null;
@@ -138,10 +196,15 @@ public class RegistrationActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(Void result){
-            Toast.makeText(RegistrationActivity.this,"Profile Saved",Toast.LENGTH_SHORT).show();
-            LoginActivity.currentUser=stdid.getText().toString();
-            Intent i = new Intent(RegistrationActivity.this, ItemList.class);
-            startActivity(i);
+            if(userStatus.equals("ok")) {
+                Toast.makeText(RegistrationActivity.this, "Profile Saved", Toast.LENGTH_SHORT).show();
+                LoginActivity.currentUser = stdid.getText().toString();
+                Intent i = new Intent(RegistrationActivity.this, ItemList.class);
+                startActivity(i);
+            }
+            else
+                Toast.makeText(RegistrationActivity.this, "Error - UserId already registered", Toast.LENGTH_SHORT).show();
+
 
             super.onPostExecute(result);
         }
