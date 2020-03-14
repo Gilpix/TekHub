@@ -23,7 +23,7 @@ public class AboutUs extends BottomMenu {
         super.onCreate(savedInstanceState);
 
         getLayout(R.layout.activity_about_us);
-        getMenuIcon(R.drawable.aboutus,R.id.aboutUs);
+        getMenuIcon(R.drawable.aboutinn,R.id.aboutUs);
         setActionBarTitle("About US");
 
     }

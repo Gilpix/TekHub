@@ -39,6 +39,11 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.Calendar;
 
 import static com.kulartist.tekhubandroid.SplashScreen.currentIP;
 
@@ -54,7 +59,7 @@ public class Item extends AppCompatActivity {
     ProgressDialog progressDialog;
     RelativeLayout waitingCardButton;
     JSONObject itemObject;
-    String itemJsonString,itemId,itemAvailableDate,borrowNum="0";
+    String itemJsonString,itemId,itemName,itemAvailableDate,borrowNum="0";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -105,7 +110,8 @@ public class Item extends AppCompatActivity {
             }
 
             itmDesc.setText(itemObject.getString("itemDesc"));
-            itmName.setText(itemObject.getString("itemname"));
+             itmName.setText(itemObject.getString("itemname"));
+            itemName=(itemObject.getString("itemname"));
             borrowTimes.setText(itemObject.getString("borrowNum")+" times");
             String averageRatings=itemObject.getString("avgRating");
             if(averageRatings.isEmpty()||averageRatings=="null"|| averageRatings.equals(null))
@@ -153,8 +159,16 @@ public class Item extends AppCompatActivity {
     }
 
 
-    public void checkAvailableDate(View view) {
-        Toast.makeText(this,"Available On : "+itemAvailableDate,Toast.LENGTH_LONG).show();
+    public void checkAvailableDate(View view) throws ParseException {
+        java.util.Date temp=Date.valueOf(itemAvailableDate);
+        String dt = itemAvailableDate;  // Start date
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Calendar c = Calendar.getInstance();
+        c.setTime(sdf.parse(dt));
+        c.add(Calendar.DATE, 1);  // number of days to add
+        dt = sdf.format(c.getTime());  // dt is now the new date
+
+        Toast.makeText(this,"Available On : "+dt,Toast.LENGTH_LONG).show();
     }
 
 
@@ -167,6 +181,7 @@ public class Item extends AppCompatActivity {
     public void borrowSelectedItem(View view) {
         Intent in = new Intent(getBaseContext(), Order.class);
         in.putExtra("ItemId",itemId);
+        in.putExtra("ItemName",itemName);
         in.putExtra("borrowNum",borrowNum);
         startActivity(in);
     }
