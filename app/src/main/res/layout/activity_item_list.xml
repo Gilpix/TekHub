@@ -17,32 +17,15 @@
     tools:context="com.kulartist.tekhub.ItemList">
 
 
-    <androidx.cardview.widget.CardView
+    <SearchView
+        android:id="@+id/search_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_gravity="center"
-        android:layout_marginStart="2dp"
-        android:layout_marginLeft="2dp"
-        android:layout_marginTop="2dp"
-        android:layout_marginEnd="2dp"
-        android:layout_marginRight="2dp"
-        android:layout_marginBottom="2dp"
-        android:elevation="1dp"
-        app:cardBackgroundColor="@color/white"
-        app:cardCornerRadius="5dp"
-        app:cardElevation="4dp">
+        android:layout_alignParentTop="true"
+        android:layout_margin="8dp"
 
-        <SearchView
-            android:id="@+id/search_bar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_margin="10dp"
-
-            android:background="@xml/search_bar_back"
-            android:queryHint="type here" />
-    </androidx.cardview.widget.CardView>
+        android:background="@xml/search_bar_back"
+        android:queryHint="type here" />
 
     <ListView
         android:id="@+id/simpleListView"

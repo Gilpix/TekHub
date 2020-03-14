@@ -58,24 +58,25 @@
 
             <TextView
                 android:id="@+id/edit_profile_text"
+                style="@android:style/Widget.TextView.PopupMenu"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:onClick="editSaveProfile"
                 android:layout_alignParentRight="true"
-                android:shadowColor="#161515"
+                android:layout_centerVertical="true"
                 android:layout_marginRight="15dp"
+                android:onClick="editSaveProfile"
 
+                android:shadowColor="#ffff"
                 android:shadowDx="2"
                 android:shadowDy="2"
                 android:shadowRadius="1"
+
+
                 android:text="Edit"
-
-
                 android:textAllCaps="true"
                 android:textColor="@color/white"
-                android:textSize="15sp"
 
+                android:textSize="15sp"
                 android:textStyle="bold" />
 
         </RelativeLayout>
@@ -123,10 +124,10 @@
         <androidx.cardview.widget.CardView
             android:id="@+id/std_id_card"
             android:layout_width="300dp"
-            android:layout_height="80dp"
+            android:layout_height="65dp"
             android:layout_centerHorizontal="true"
             android:layout_marginLeft="10dp"
-            android:layout_marginTop="155dp"
+            android:layout_marginTop="165dp"
             android:layout_marginRight="10dp"
             android:elevation="7dp"
             app:cardBackgroundColor="@color/white"
@@ -154,17 +155,17 @@
                         android:textColor="@color/main_red"
                         android:textSize="17sp" />
 
-                    <TextView
-                        android:id="@+id/student_id"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="-3dp"
-                        android:paddingTop="10dp"
-                        android:text="1895270"
-                        android:textColor="@color/student_profile_text_color"
-                        android:textSize="15sp" />
-
                 </LinearLayout>
+
+                <TableRow
+                    android:id="@+id/hr1"
+                    android:layout_width="1.8dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="15dp"
+                    android:background="#B3ABAB"></TableRow>
+
+
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -174,22 +175,15 @@
                     android:orientation="vertical">
 
                     <TextView
+                        android:id="@+id/student_id"
+                        style="@style/Widget.MaterialComponents.MaterialCalendar.DayTextView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/carter_one"
-                        android:text="Status"
+                        android:gravity="center|center_horizontal"
+                        android:text="1895270"
                         android:textColor="@color/main_red"
                         android:textSize="17sp" />
-
-                    <TextView
-                        android:id="@+id/status"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="-3dp"
-                        android:paddingTop="10dp"
-                        android:text="Active"
-                        android:textColor="@color/student_profile_text_color"
-                        android:textSize="15sp" />
 
                 </LinearLayout>
 
@@ -204,7 +198,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/profile_layout"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="7dp"
         android:background="@color/white"
 
         android:orientation="vertical">
@@ -338,11 +332,11 @@
                 <ImageView
                     android:id="@+id/age_icon"
                     android:layout_width="25dp"
-                    android:layout_height="30dp"
+                    android:layout_height="23dp"
                     android:layout_gravity="center_vertical"
                     android:layout_margin="5dp"
 
-                    android:background="@drawable/email_icon_red" />
+                    android:background="@drawable/age" />
 
                 <EditText
                     android:id="@+id/student_age_text"
@@ -394,7 +388,7 @@
                     android:layout_gravity="center_vertical"
                     android:layout_margin="5dp"
 
-                    android:background="@drawable/email_icon_red" />
+                    android:background="@drawable/gender" />
 
                 <EditText
                     android:id="@+id/student_gender_text"

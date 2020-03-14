@@ -18,7 +18,7 @@
     <LinearLayout
         android:id="@+id/bottonNavBar"
         android:layout_width="match_parent"
-        android:layout_height="62dp"
+        android:layout_height="58dp"
         android:layout_alignParentBottom="true"
         android:background="@color/main_red"
         android:elevation="10dp"
@@ -49,7 +49,7 @@
                 android:layout_weight="1"
                 android:button="@null"
                 android:checked="false"
-                android:drawableTop="@drawable/aboutusout"
+                android:drawableTop="@drawable/aboutout"
                 android:gravity="center"
                 android:padding="@dimen/menu_radiobutton_padding"
                 android:text="AboutUs"

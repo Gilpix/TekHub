@@ -15,9 +15,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name="com.kulartist.tekhubadmin.addItem"></activity>
+        <activity android:name="com.kulartist.tekhubadmin.addItem" />
         <activity android:name="com.kulartist.tekhub.WaitingListAdapter" />
-        <activity android:name="com.kulartist.tekhubadmin.AdminEditItems"></activity>
+        <activity android:name="com.kulartist.tekhubadmin.AdminEditItems"  />
         <activity android:name="com.kulartist.tekhubadmin.AdminItems" />
         <activity android:name="com.kulartist.tekhub.WaitingList" />
         <activity android:name="com.kulartist.tekhubadmin.ResolveIssue" />
@@ -28,6 +28,9 @@
         <meta-data
             android:name="com.google.android.actions"
             android:resource="@anim/fab_close" />
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
 
         <activity android:name="com.kulartist.tekhub.Item" />
         <activity android:name="com.kulartist.tekhub.Order" />

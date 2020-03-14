@@ -27,6 +27,28 @@
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:layout_centerVertical="true"  /-->
+            <ImageView
+                android:id="@+id/back4"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+
+                android:layout_alignParentRight="false"
+
+                android:layout_centerVertical="true"
+                android:layout_marginRight="15dp"
+                android:background="@xml/circular_button_white"
+                android:src="@drawable/back_butt_arrow"
+                android:onClick="back_dash"
+                android:text=""
+                android:textAlignment="center"
+                android:textColor="@color/main_red"
+                android:textScaleX="1.3"
+                android:textSize="26sp"
+                android:textStyle="bold"
+
+
+                />
+
             <TextView
                 android:id="@+id/toolbar_title"
                 android:layout_width="wrap_content"

@@ -5,8 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/white"
 
-    tools:context="com.kulartist.tekhubadmin.Dashboard">
+    tools:context="com.kulartist.tekhubadmin.AdminEditItems">
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
@@ -18,6 +19,28 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/back2"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+
+                android:layout_alignParentRight="false"
+
+                android:layout_centerVertical="true"
+                android:layout_marginRight="15dp"
+                android:background="@xml/circular_button_white"
+                android:src="@drawable/back_butt_arrow"
+                android:text=""
+                android:onClick="backToAdminItem"
+                android:textAlignment="center"
+                android:textColor="@color/main_red"
+                android:textScaleX="1.3"
+                android:textSize="26sp"
+                android:textStyle="bold"
+
+
+                />
 
             <TextView
                 android:id="@+id/toolbar_title"
@@ -37,11 +60,11 @@
     </androidx.appcompat.widget.Toolbar>
 
     <ImageView
-        android:layout_marginTop="20dp"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
         android:layout_gravity="center"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/tehublogo"/>
+        android:layout_marginTop="20dp"
+        android:src="@drawable/tehublogo" />
 
 
     <LinearLayout
@@ -49,13 +72,16 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="10dp"
-        android:background="@color/white"
+        android:layout_marginBottom="10dp"
 
-        android:orientation="vertical">
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:paddingTop="10dp"
+        android:paddingBottom="20dp">
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="55dp"
+            android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_gravity="center"
             android:layout_marginLeft="10dp"
@@ -73,7 +99,6 @@
                 android:layout_gravity="center"
                 android:layout_marginLeft="10dp"
                 android:background="#fff"
-
                 android:gravity="center"
                 android:orientation="horizontal">
 
@@ -92,9 +117,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
                     android:layout_weight=".9"
-
-                    android:inputType="textEmailAddress"
-
+                    android:inputType="textMultiLine"
                     android:text="Item Name here"
 
 
@@ -105,7 +128,7 @@
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="55dp"
+            android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_gravity="center"
             android:layout_marginLeft="10dp"
@@ -143,7 +166,7 @@
                     android:layout_margin="5dp"
                     android:layout_weight=".9"
 
-                    android:inputType="textEmailAddress"
+                    android:inputType="textMultiLine"
 
                     android:text="Item Desc here"
 
@@ -156,7 +179,7 @@
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="55dp"
+            android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_gravity="center"
             android:layout_marginLeft="10dp"
@@ -172,60 +195,59 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginLeft="10dp"
+
+
                 android:background="#fff"
-
-
                 android:gravity="center"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:padding="5dp">
 
                 <RadioGroup
                     android:id="@+id/radioGroupNewUsed"
                     android:layout_width="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="left"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="left"
-                    android:layout_height="wrap_content">
-                <RadioButton
-                    android:id="@+id/newRadio"
-                    android:focusable="true"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="New"/>
-                <RadioButton
-                    android:id="@+id/usedRadio"
-                    android:checked="true"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Used"/>
+                    android:gravity="left"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/newRadio"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:focusable="true"
+                        android:text="New" />
+
+                    <RadioButton
+                        android:id="@+id/usedRadio"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:text="Used" />
                 </RadioGroup>
 
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
 
-
-
     </LinearLayout>
-
 
 
     <Button
         android:id="@+id/updateItemButton"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_gravity="center"
-        android:layout_marginBottom="40dp"
-        android:gravity="center"
-        android:layout_marginRight="20dp"
-        android:layout_marginLeft="20dp"
-        android:background="@xml/mybutton"
         style="?android:textAppearanceSmall"
-        android:textColor="@color/button_text_color_white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@xml/mybutton"
+        android:text="Update"
+        android:layout_marginTop="30dp"
         android:textSize="18sp"
         android:textStyle="bold"
-        android:text="Update"
-        />
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:textColor="@color/white"
+
+   />
+
 
 
 </LinearLayout>
