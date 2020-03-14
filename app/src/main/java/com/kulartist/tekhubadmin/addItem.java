@@ -1,11 +1,13 @@
 package com.kulartist.tekhubadmin;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.provider.MediaStore;
@@ -14,7 +16,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 import com.kulartist.tekhubandroid.R;
 import java.io.ByteArrayOutputStream;
@@ -31,7 +32,6 @@ import java.util.logging.Logger;
 public class addItem extends AppCompatActivity {
     EditText addName, addDesc, addCond;
     ImageView addImage;
-    TextView imagePath;
     private Uri filePath;
     private final int PICK_IMAGE_REQUEST = 71;
     String encodedImage;
@@ -46,7 +46,8 @@ public class addItem extends AppCompatActivity {
         addName = findViewById(R.id.add_item_name);
         addDesc = findViewById(R.id.add_item_desc);
         addCond = findViewById(R.id.add_item_cond);
-        imagePath = findViewById(R.id.add_item_path);
+
+        getSupportActionBar().hide();
     }
 
 
@@ -75,9 +76,18 @@ public class addItem extends AppCompatActivity {
     }
 
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public void getImageEncodedString() {
-        BitmapDrawable drawable = (BitmapDrawable) addImage.getDrawable();
-        Bitmap bitmap = drawable.getBitmap();
+        Bitmap bitmap;
+       try {
+           BitmapDrawable drawable = (BitmapDrawable) addImage.getDrawable();
+            bitmap = drawable.getBitmap();
+       }
+       catch (Exception e)
+       {
+           BitmapDrawable drawable = (BitmapDrawable) getDrawable(R.drawable.add_image);
+            bitmap = drawable.getBitmap();
+       }
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.PNG, 50, byteArrayOutputStream);
         byte[] byteArray = byteArrayOutputStream.toByteArray();
@@ -85,16 +95,25 @@ public class addItem extends AppCompatActivity {
     }
 
 
-
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public void submitAddItem(View view) {
-        if(encodedImage.length()>=10000)
+        getImageEncodedString();
+        if(encodedImage.toString().length()>=64530)
             Toast.makeText(this,"Image size is too large",Toast.LENGTH_LONG).show();
         else {
             if (addName.getText().toString().isEmpty() || addDesc.getText().toString().isEmpty() || addCond.getText().toString().isEmpty())
                 Toast.makeText(this, "Please Enter all fields", Toast.LENGTH_LONG).show();
             else {
-                getImageEncodedString();
-                AddItems();
+                    new Thread(new Runnable() {
+                        public void run() {
+                            AddItems();
+
+                        }
+                    }).start();
+                Intent intent = new Intent(addItem.this,AdminItems.class);
+                startActivity(intent);
+                finish();
+
             }
         }
     }
@@ -135,7 +154,14 @@ public class addItem extends AppCompatActivity {
                     stm.setDate(8, getCurrentDate());
                     stm.setString(9,encodedImage);
 
-                    stm.executeUpdate();
+                    int result=stm.executeUpdate();
+                    if(result>0)
+                        Toast.makeText(addItem.this,"Item Added Sucessfully",Toast.LENGTH_LONG).show();
+                    else
+                        Toast.makeText(addItem.this,"ERROR",Toast.LENGTH_LONG).show();
+
+
+
                 }
 
                 DatabaseConnection.closeConnection(conn, null, stm1);
@@ -143,13 +169,21 @@ public class addItem extends AppCompatActivity {
 
     }  catch (SQLException e) {
         e.printStackTrace();
-    }}
+    }
+    }
 
 
     static java.sql.Date getCurrentDate() {
 
         java.util.Date today = new java.util.Date();
         return new java.sql.Date(today.getTime());
+
+    }
+
+    public void backToAdminItems(View view) {
+        Intent intent = new Intent(addItem.this,AdminItems.class);
+        startActivity(intent);
+        finish();
 
     }
 
