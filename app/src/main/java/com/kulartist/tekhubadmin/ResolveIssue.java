@@ -1,7 +1,6 @@
 package com.kulartist.tekhubadmin;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
@@ -12,14 +11,11 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
-
 import com.kulartist.tekhubandroid.R;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import static com.kulartist.tekhubandroid.SplashScreen.currentIP;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -46,23 +42,21 @@ public class ResolveIssue extends AppCompatActivity {
         getSupportActionBar().hide();
         new getIssues().execute();
 
-
-
     }
+
 
     public void back_dash(View view) {
         Intent i=new Intent(ResolveIssue.this,Dashboard.class);
         startActivity(i);
     }
 
+
     private class getIssues extends AsyncTask<Void, Void, Void> {
 
         String userStatus;
 
-
         @Override
         protected void onPreExecute() {
-
 
             progressDialog.setMessage("Loading...");
             progressDialog.show();
@@ -70,27 +64,19 @@ public class ResolveIssue extends AppCompatActivity {
             super.onPreExecute();
         }
 
-
         @Override
         protected Void doInBackground(Void... params) {
 
             URL url = null;
 
             try {
-
-                url = new URL("http://" + currentIP + ":8080/TekHub-WebCalls/webcall/admin/listIssues");
-
+                url = new URL("http://" + currentIP + ":8080/TekHubWebCalls/webcall/admin/listIssues");
                 HttpURLConnection client = null;
-
                 client = (HttpURLConnection) url.openConnection();
-
                 client.setRequestMethod("GET");
 
                 int responseCode = client.getResponseCode();
-
-
                 System.out.println("\n Sending 'GET' request to URL : " + url);
-
                 System.out.println("Response Code : " + responseCode);
                 InputStreamReader myInput = new InputStreamReader(client.getInputStream());
 
@@ -144,13 +130,11 @@ public class ResolveIssue extends AppCompatActivity {
     }
 
 
-
     private void getRecyclerData(final JSONArray mainArray) throws JSONException {
         final ArrayList<String> feedID = new ArrayList<String>(mainArray.length());
         final ArrayList<String> itemID = new ArrayList<String>(mainArray.length());
         final ArrayList<String> itemName = new ArrayList<String>(mainArray.length());
         final ArrayList<String> message = new ArrayList<String>(mainArray.length());
-
 
         for(int j=0;j<mainArray.length();j++)
         {
@@ -207,7 +191,6 @@ public class ResolveIssue extends AppCompatActivity {
             super.onPreExecute();
         }
 
-
         @Override
         protected Void doInBackground(Void... params) {
 
@@ -215,20 +198,13 @@ public class ResolveIssue extends AppCompatActivity {
 
             try {
 
-
-                url = new URL("http://" + currentIP + ":8080/TekHub-WebCalls/webcall/admin/updateFeedback&"+toBeChanged);
-
+                url = new URL("http://" + currentIP + ":8080/TekHubWebCalls/webcall/admin/updateFeedback&"+toBeChanged);
                 HttpURLConnection client = null;
-
                 client = (HttpURLConnection) url.openConnection();
-
                 client.setRequestMethod("GET");
 
                 int responseCode = client.getResponseCode();
-
-
                 System.out.println("\n Sending 'GET' request to URL : " + url);
-
                 System.out.println("Response Code : " + responseCode);
                 InputStreamReader myInput = new InputStreamReader(client.getInputStream());
 

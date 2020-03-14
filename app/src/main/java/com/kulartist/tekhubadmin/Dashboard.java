@@ -13,27 +13,19 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Process;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.Toast;
-
 import com.kulartist.tekhubandroid.LoginActivity;
 import com.kulartist.tekhubandroid.R;
-
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.ArrayList;
-
 import static com.kulartist.tekhubandroid.SplashScreen.currentIP;
 
 
@@ -102,10 +94,10 @@ public class Dashboard extends AppCompatActivity {
 
     }
 
+
     @Override
     public void onBackPressed() {
         alertBoxDisplay();
-        //super.onBackPressed();
     }
 
 
@@ -145,14 +137,10 @@ public class Dashboard extends AppCompatActivity {
 
         String userStatus;
 
-
         @Override
         protected void onPreExecute() {
-
-
             progressDialog.setMessage("Loading...");
             progressDialog.show();
-
             super.onPreExecute();
         }
 
@@ -165,18 +153,12 @@ public class Dashboard extends AppCompatActivity {
             try {
 
                 url = new URL("http://" + currentIP + ":8080/TekHubWebCalls/webcall/admin/logout");
-
                 HttpURLConnection client = null;
-
                 client = (HttpURLConnection) url.openConnection();
-
                 client.setRequestMethod("GET");
 
                 int responseCode = client.getResponseCode();
-
-
                 System.out.println("\n Sending 'GET' request to URL : " + url);
-
                 System.out.println("Response Code : " + responseCode);
                 InputStreamReader myInput = new InputStreamReader(client.getInputStream());
 

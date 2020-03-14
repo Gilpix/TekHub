@@ -12,7 +12,6 @@ import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.DatePicker;
-import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -55,9 +54,7 @@ public class Order extends AppCompatActivity {
         Intent i=getIntent();
         itemID=i.getStringExtra("ItemId");
         borrowNum=i.getStringExtra("borrowNum");
-
         itmName.setText(i.getStringExtra("ItemName")+"");
-
 
         progressDialog=new ProgressDialog(this);
 
@@ -67,7 +64,6 @@ public class Order extends AppCompatActivity {
     public void setActionBarTitle(String title) {
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
         TextView textView = new TextView(this);
         textView.setText(title);
         textView.setTextSize(20);
@@ -181,10 +177,8 @@ public class Order extends AppCompatActivity {
 
     public void orderConfirmed(View view) throws JSONException {
         java.sql.Date picDate = Date.valueOf(pickDate.getText().toString()),  retDate=Date.valueOf(returnDate.getText().toString());
-
         DatabaseObjects.orderList=new JSONArray("[]");
         DatabaseObjects.itemList=new JSONArray("[]");
-
         PlaceOrder placeOrder=new PlaceOrder(LoginActivity.currentUser,itemID,picDate,retDate);
         placeOrder.execute();
     }
@@ -247,8 +241,6 @@ private class PlaceOrder extends AsyncTask<Void, Void, Void> {
         try {
             url = new URL("http://"+currentIP+":8080/TekHubWebCalls/webcall/borrow/placeOrder&"+userId+"&"+itemId+"&"+pickupDate+"&"+returnDate+"&"+borrowNum);
             HttpURLConnection client = null;
-            System.out.println(pickupDate+"%%%%%%%%%%%%%%%%%%%%%%%%%%%"+returnDate);
-
             client = (HttpURLConnection) url.openConnection();
             client.setRequestMethod("GET");
 

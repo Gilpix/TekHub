@@ -2,23 +2,18 @@ package com.kulartist.tekhubadmin;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.AlertDialog;
 import android.app.ProgressDialog;
-import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.Toast;
-
 import com.kulartist.tekhubandroid.R;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -33,39 +28,38 @@ public class AdminOrderDetails extends AppCompatActivity {
     private ListView orderListView;
     private ProgressDialog progressDialog;
     private JSONArray orderListArray;
-    //private String userStatus;
-    private SearchView simpleSearchView;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_order_details);
 
-        orderListView=(ListView)findViewById(R.id.adminOrderDertailsListView);
-        //simpleSearchView = (SearchView) findViewById(R.id.adminOrderSearchBar);
+        getSupportActionBar().hide();
 
+        orderListView=(ListView)findViewById(R.id.adminOrderDertailsListView);
 
         progressDialog = new ProgressDialog(this);
 
         new getOrderDetailsForAdmin().execute();
 
-
-
     }
+
+
+    public void backToDash(View view) {
+        Intent i=new Intent(AdminOrderDetails.this,Dashboard.class);
+        startActivity(i);
+        finish();
+    }
+
 
     private class getOrderDetailsForAdmin extends AsyncTask<Void, Void, Void> {
 
         String userStatus;
 
-
         @Override
         protected void onPreExecute() {
-
-
             progressDialog.setMessage("Loading...");
             progressDialog.show();
-
             super.onPreExecute();
         }
 
@@ -76,20 +70,13 @@ public class AdminOrderDetails extends AppCompatActivity {
             URL url = null;
 
             try {
-
-                url = new URL("http://" + currentIP + ":8080/TekHub-WebCalls/webcall/admin/listOrders");
-
+                url = new URL("http://" + currentIP + ":8080/TekHubWebCalls/webcall/admin/listOrders");
                 HttpURLConnection client = null;
-
                 client = (HttpURLConnection) url.openConnection();
-
                 client.setRequestMethod("GET");
 
                 int responseCode = client.getResponseCode();
-
-
                 System.out.println("\n Sending 'GET' request to URL : " + url);
-
                 System.out.println("Response Code : " + responseCode);
                 InputStreamReader myInput = new InputStreamReader(client.getInputStream());
 
@@ -109,7 +96,6 @@ public class AdminOrderDetails extends AppCompatActivity {
                 JSONObject obj = new JSONObject(response.toString());
                 userStatus = "" + obj.getString("Status");
                 orderListArray = obj.getJSONArray("orderList");
-
 
             } catch (MalformedURLException e) {
                 e.printStackTrace();
@@ -138,6 +124,7 @@ public class AdminOrderDetails extends AppCompatActivity {
         }
     }
 
+
     private void getRecyclerData(final JSONArray mainArray) throws JSONException {
         final ArrayList<String> orderId = new ArrayList<String>(mainArray.length());
         final ArrayList<String> itemId = new ArrayList<String>(mainArray.length());
@@ -160,7 +147,6 @@ public class AdminOrderDetails extends AppCompatActivity {
             orderDate.add(a.getString("orderDate"));
             pickupDate.add(a.getString("pickupDate"));
             returnDate.add(a.getString("returnDate"));
-
         }
 
         orderListView = (ListView)findViewById(R.id.adminOrderDertailsListView);

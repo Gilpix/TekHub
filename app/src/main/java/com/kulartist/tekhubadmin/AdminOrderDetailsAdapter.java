@@ -6,9 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
-
 import com.kulartist.tekhubandroid.R;
-
 import java.util.ArrayList;
 
 public class AdminOrderDetailsAdapter extends BaseAdapter {
@@ -20,9 +18,7 @@ public class AdminOrderDetailsAdapter extends BaseAdapter {
     private ArrayList<String> orderDate;
     private ArrayList<String> pickupDate;
     private ArrayList<String> returnDate;
-
     private LayoutInflater inflter;
-
 
     public AdminOrderDetailsAdapter(Context context,ArrayList<String> orderId, ArrayList<String> itemId, ArrayList<String> itemName,
                                     ArrayList<String> userId, ArrayList<String> name, ArrayList<String> orderDate,
@@ -67,11 +63,6 @@ public class AdminOrderDetailsAdapter extends BaseAdapter {
         TextView pickupdate = (TextView) view.findViewById(R.id.adminOrderPickupDate);
         TextView returndate = (TextView) view.findViewById(R.id.adminOrderRetrunDate);
 
-
-
-
-
-
         orderid.setText(orderId.get(i));
         itemid.setText(itemId.get(i));
         itemname.setText(itemName.get(i));
@@ -80,10 +71,6 @@ public class AdminOrderDetailsAdapter extends BaseAdapter {
         orderdate.setText(orderDate.get(i));
         pickupdate.setText(pickupDate.get(i));
         returndate.setText(returnDate.get(i));
-
-
-
-
 
         return view;
     }

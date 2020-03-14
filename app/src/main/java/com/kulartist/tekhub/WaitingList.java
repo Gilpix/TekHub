@@ -16,8 +16,6 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.kulartist.tekhubadmin.ResolveIssue;
 import com.kulartist.tekhubandroid.LoginActivity;
 import com.kulartist.tekhubandroid.R;
 import org.json.JSONArray;
@@ -53,7 +51,6 @@ public class WaitingList extends BottomMenu {
 
         progressDialog=new ProgressDialog(this);
 
-
         if(DatabaseObjects.waitingList.toString().equals("[]") || DatabaseObjects.waitingList.toString().equals("")|| DatabaseObjects.waitingList.toString().isEmpty() ){
             SharedPreferences sp = getSharedPreferences("saveUser" , Context.MODE_PRIVATE);
             LoginActivity.currentUser = sp.getString("userSavedId", "");
@@ -74,7 +71,6 @@ public class WaitingList extends BottomMenu {
     public void setActionBarTitle(String title) {
         getSupportActionBar().setHomeButtonEnabled(false);
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-
         TextView textView = new TextView(this);
         textView.setText(title);
         textView.setTextSize(20);
@@ -216,8 +212,6 @@ public class WaitingList extends BottomMenu {
     private class DeleteFromWaitingList extends AsyncTask<Void, Void, Void> {
 
         String userId,itemId,userStatus;
-        java.sql.Date pickupDate,  returnDate;
-
 
         public DeleteFromWaitingList(String userId, String itemId) {
             this.userId=userId;
@@ -227,11 +221,8 @@ public class WaitingList extends BottomMenu {
 
         @Override
         protected void onPreExecute() {
-
-
             progressDialog.setMessage("Loading...");
             progressDialog.show();
-
             super.onPreExecute();
         }
 
@@ -244,19 +235,12 @@ public class WaitingList extends BottomMenu {
             try {
 
                 url = new URL("http://"+currentIP+":8080/TekHubWebCalls/webcall/WaitingItem/deleteWaitingItem&"+userId+"&"+itemId);
-                // url = new URL("http://192.168.2.250:8080/OnlineQuiz/mad312group2/quizuser/registerUser&"+mailAdd+"&"+firstName+"&"+lastName+"&"+passwrd);
 
                 HttpURLConnection client = null;
-
                 client = (HttpURLConnection) url.openConnection();
-
                 client.setRequestMethod("GET");
-
                 int responseCode = client.getResponseCode();
-
-
                 System.out.println("\n Sending 'GET' request to URL : " + url);
-
                 System.out.println("Response Code : " + responseCode);
 
                 InputStreamReader myInput= new InputStreamReader(client.getInputStream());
@@ -271,8 +255,6 @@ public class WaitingList extends BottomMenu {
 
                 JSONObject obj =new JSONObject(response.toString());
                 userStatus=""+obj.getString("Status");
-
-
             }
             catch (MalformedURLException e) {
                 e.printStackTrace();
@@ -302,7 +284,6 @@ public class WaitingList extends BottomMenu {
 
         }
     }
-
 
 }
 

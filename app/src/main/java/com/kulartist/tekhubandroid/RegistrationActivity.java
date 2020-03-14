@@ -1,7 +1,6 @@
 package com.kulartist.tekhubandroid;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -11,12 +10,9 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Toast;
-
 import com.kulartist.tekhub.ItemList;
-
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -88,27 +84,22 @@ public class RegistrationActivity extends AppCompatActivity {
             if(id.length()!=7){
                 stdid.setError("enter valid id");
                 stdid.requestFocus();
-                //Toast.makeText(RegistrationActivity.this, "Please Enter Valid UserId", Toast.LENGTH_SHORT).show();
             }
             else if(!email.substring(email.length()-10).equals("@gmail.com")){
                 stdemail.setError("enter valid email");
                 stdemail.requestFocus();
-               // Toast.makeText(RegistrationActivity.this, "Please Enter Valid Email", Toast.LENGTH_SHORT).show();
             }
             else if(password.length()<5){
                 stdpassword.setError("enter valid password");
                 stdpassword.requestFocus();
-                // Toast.makeText(RegistrationActivity.this, "Please Enter Valid Password", Toast.LENGTH_SHORT).show();
             }
             else if(mobno.length()<9 ||mobno.length()>11){
                 stdmobno.setError("enter valid mobile no.");
                 stdmobno.requestFocus();
-               // Toast.makeText(RegistrationActivity.this, "Please Enter Valid Mobile No.", Toast.LENGTH_SHORT).show();
             }
             else if(Integer.parseInt(age)<20 ||Integer.parseInt(age)>35){
                 stdage.setError("enter valid age");
                 stdage.requestFocus();
-                //Toast.makeText(RegistrationActivity.this, "Please Enter Valid Age", Toast.LENGTH_SHORT).show();
             }
             else
             new SignUpUser(id,name, email, password, mobno,age,gender).execute();
@@ -155,9 +146,7 @@ public class RegistrationActivity extends AppCompatActivity {
             URL url = null;
 
             try {
-
                 url = new URL("http://"+currentIP+":8080/TekHubWebCalls/webcall/user/registerUser&"+id+"&"+name+"&"+email+"&"+password+"&"+mobno+"&"+age+"&"+gender);
-
                 HttpURLConnection client = null;
                 client = (HttpURLConnection) url.openConnection();
                 client.setRequestMethod("GET");
@@ -178,8 +167,6 @@ public class RegistrationActivity extends AppCompatActivity {
 
                 JSONObject obj =new JSONObject(response.toString());
                 userStatus=""+obj.getString("Status");
-
-
 
             }
             catch (MalformedURLException e) {

@@ -5,14 +5,15 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Handler;
 import android.os.Bundle;
-
 import com.kulartist.tekhub.ItemList;
-
 import androidx.appcompat.app.AppCompatActivity;
 
 public class SplashScreen extends AppCompatActivity {
     Handler handler;
     public static String currentIP="192.168.0.102";
+    //currentIP="192.168.1.182";
+    //currentIP="192.168.0.102";
+    // currentIP="172.20.10.5";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

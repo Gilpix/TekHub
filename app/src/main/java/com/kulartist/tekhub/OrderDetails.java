@@ -8,10 +8,8 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import com.kulartist.tekhubandroid.LoginActivity;
 import com.kulartist.tekhubandroid.R;
-import com.kulartist.tekhubandroid.SplashScreen;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -36,7 +34,6 @@ public class OrderDetails extends AppCompatActivity {
         returnDate=findViewById(R.id.return_date_text);
         usrId=findViewById(R.id.order_user_id_text);
 
-
         Intent i=getIntent();
         itemId=i.getStringExtra("itemId");
         itemJsonString=i.getStringExtra("OrderDetailsObject");
@@ -59,7 +56,6 @@ public class OrderDetails extends AppCompatActivity {
     public void setActionBarTitle(String title) {
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
         TextView textView = new TextView(this);
         textView.setText(title);
         textView.setTextSize(20);

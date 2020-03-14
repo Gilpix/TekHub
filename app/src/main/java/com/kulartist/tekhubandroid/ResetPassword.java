@@ -15,7 +15,6 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.gms.tasks.TaskExecutors;
@@ -26,11 +25,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthProvider;
-import com.kulartist.tekhub.Student;
-
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -57,7 +53,6 @@ public class ResetPassword extends AppCompatActivity {
 
         setActionBarTitle("Change Password");
 
-
         resetPass=findViewById(R.id.savePassword);
         editTextMobile = findViewById(R.id.phone_pass_reset);
         verifyCode=findViewById(R.id.code);
@@ -65,7 +60,6 @@ public class ResetPassword extends AppCompatActivity {
         confirmPassword=findViewById(R.id.confirmPassword);
         studentId=findViewById(R.id.studentID);
          mAuth=FirebaseAuth.getInstance();
-
 
         resetPass.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -124,6 +118,7 @@ public class ResetPassword extends AppCompatActivity {
         sendVerificationCode(mobile);
     }
 
+
     //the method is sending verification code
     //the country id is concatenated
     //you can take the country id as user input as well
@@ -166,7 +161,6 @@ public class ResetPassword extends AppCompatActivity {
     };
 
 
-
     private void verifyVerificationCode(String code) {
         //creating the credential
         PhoneAuthCredential credential = PhoneAuthProvider.getCredential(mVerificationId, code);
@@ -174,6 +168,7 @@ public class ResetPassword extends AppCompatActivity {
         //signing the user
         signInWithPhoneAuthCredential(credential);
     }
+
 
     private void signInWithPhoneAuthCredential(PhoneAuthCredential credential) {
         mAuth.signInWithCredential(credential)
@@ -186,8 +181,6 @@ public class ResetPassword extends AppCompatActivity {
                             new resetPassword().execute();
 
                         } else {
-
-                            //verification unsuccessful.. display an error message
 
                             String message = "Somthing is wrong, we will fix it soon...";
 
@@ -292,6 +285,7 @@ public class ResetPassword extends AppCompatActivity {
 
     }
 
+
     @Override
     public void onBackPressed() {
         Intent i=new Intent(ResetPassword.this,LoginActivity.class);
@@ -300,6 +294,7 @@ public class ResetPassword extends AppCompatActivity {
         finish();
         super.onBackPressed();
     }
+
 
     @Override
     public boolean onSupportNavigateUp(){

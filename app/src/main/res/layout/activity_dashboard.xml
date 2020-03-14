@@ -68,44 +68,57 @@
         android:src="@drawable/tehublogo" />
 
 
-
     <Button
         android:id="@+id/manageItems"
+        style="?android:textAppearanceSmall"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_gravity="center"
-        android:layout_marginTop="60dp"
-        android:layout_marginBottom="30dp"
-        android:gravity="center"
-        android:layout_marginRight="20dp"
         android:layout_marginLeft="20dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="25dp"
         android:background="@xml/mybutton"
-        style="?android:textAppearanceSmall"
+        android:gravity="center"
+        android:text="Manage Items"
         android:textColor="@color/button_text_color_white"
         android:textSize="18sp"
-        android:textStyle="bold"
-        android:text="Manage Items"
-        />
+        android:textStyle="bold" />
 
     <Button
         android:id="@+id/manageStudents"
+        style="?android:textAppearanceSmall"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_gravity="center"
-        android:layout_marginBottom="30dp"
-        android:gravity="center"
-        android:layout_marginRight="20dp"
         android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="25dp"
         android:background="@xml/mybutton"
-        style="?android:textAppearanceSmall"
+        android:gravity="center"
+        android:text="Manage Students"
         android:textColor="@color/button_text_color_white"
         android:textSize="18sp"
-        android:textStyle="bold"
-        android:text="Manage Students"
-        />
+        android:textStyle="bold" />
 
     <Button
         android:id="@+id/resolveIssue"
+        style="?android:textAppearanceSmall"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_gravity="center"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="25dp"
+        android:background="@xml/mybutton"
+        android:gravity="center"
+        android:text="Resolve Issue"
+        android:textColor="@color/button_text_color_white"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/orderDetails"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_gravity="center"
@@ -118,7 +131,7 @@
         android:textColor="@color/button_text_color_white"
         android:textSize="18sp"
         android:textStyle="bold"
-        android:text="Resolve Issue"
+        android:text="Order Details"
         />
 
 

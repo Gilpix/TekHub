@@ -29,12 +29,9 @@ public class DatabaseObjects {
     List<JSONObject> jsonList = new ArrayList<JSONObject>();
 
 
-
-
     public void parseArrayFromJson() throws JSONException {
 
     for(int i = 0; i<itemList.length();i++)
-
     {
         jsonList.add(itemList.getJSONObject(i));
     }
@@ -48,12 +45,10 @@ public class DatabaseObjects {
             public int compare(JSONObject a, JSONObject b) {
                 String valA = new String();
                 String valB = new String();
-
                 try {
                     valA = (String) a.get("borrowNum");
                     valB = (String) b.get("borrowNum");
                 } catch (JSONException e) {
-                    //do something
                 }
 
                 return valA.compareTo(valB);
@@ -69,21 +64,16 @@ public class DatabaseObjects {
             public int compare(JSONObject a, JSONObject b) {
                 Date date1 = null;
                 Date date2=null;
-
-
                 try {
                     date1= java.sql.Date.valueOf((String) a.get("availableDate"));
                     date2= java.sql.Date.valueOf((String) b.get("availableDate"));
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-
-
                 return date1.compareTo(date2);
             }
         });
     }
-
 
 
     public void storeSortedArrayInList(JSONArray array) {
@@ -91,7 +81,6 @@ public class DatabaseObjects {
             array.put(jsonList.get(i));
         }
     }
-
 
 
     public void sortArrayListByAvailability() throws JSONException {
@@ -102,10 +91,7 @@ public class DatabaseObjects {
             if(temp.getString("isAvailable").equals("1"))
                 sortedJsonArrayByAvailability.put(temp);
         }
-        System.out.println("################"+itemList.getString(4).equals("1"));
     }
-
-
 
 
     public JSONArray sortArrayListBySearch(String searchKey) throws JSONException {

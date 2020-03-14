@@ -196,13 +196,10 @@ public class ItemList extends BottomMenu {
                 e.printStackTrace();
             }
         }
-        //new GetItemListByPopularity().execute();
-
     }
 
     public void filterByNewestItemsAdded(View view) throws JSONException {
         Toast.makeText(getApplicationContext(), "filterByNewestItemsAdded", Toast.LENGTH_SHORT).show();
-        //new getItemListByNewestItem().execute();
         DatabaseObjects db=new DatabaseObjects();
         if(DatabaseObjects.sortedJsonArrayByDate.toString().equals("[]") || DatabaseObjects.sortedJsonArrayByDate.toString().equals("")) {
             db.parseArrayFromJson();
@@ -324,7 +321,6 @@ public class ItemList extends BottomMenu {
             progressDialog.show();
             super.onPreExecute();
         }
-
 
         @Override
         protected Void doInBackground(Void... params){

@@ -76,8 +76,6 @@ public class WaitingListAdapter extends BaseAdapter {
             c.add(Calendar.DATE, 2);  // number of days to add
             dt = sdf.format(c.getTime());  // dt is now the new date
 
-
-
             try {
                 if(date.before(getCurrentDate()))
                 {
@@ -87,14 +85,11 @@ public class WaitingListAdapter extends BaseAdapter {
                 else
                     avable.setText("Available On : "+dt);
 
-
             } catch (ParseException e) {
                 e.printStackTrace();
             }
 
             name.setText(""+itemNames.get(i));
-//            avable.setText("Available On : "+itemAvable.get(i));
-
             return view;
         }
 
@@ -104,4 +99,4 @@ public class WaitingListAdapter extends BaseAdapter {
         return formatter.parse(formatter.format(date));
     }
 
-    }
+}

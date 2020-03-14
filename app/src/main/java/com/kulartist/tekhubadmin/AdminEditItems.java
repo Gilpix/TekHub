@@ -10,12 +10,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Toast;
-
 import com.kulartist.tekhubandroid.R;
-
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -55,7 +52,6 @@ public class AdminEditItems extends AppCompatActivity {
 
         getSupportActionBar().hide();
 
-
         newName.setText(name);
         newDesc.setText(desc);
 
@@ -86,7 +82,6 @@ public class AdminEditItems extends AppCompatActivity {
                 else
                     return;
 
-
                 if(available.isChecked())
                     availibilityFlag="1";
                 else if(notAvailable.isChecked())
@@ -98,8 +93,6 @@ public class AdminEditItems extends AppCompatActivity {
                 new itemUpdate(id,name,desc,condition,availibilityFlag).execute();
             }
         });
-
-
 
     }
 
@@ -127,7 +120,6 @@ public class AdminEditItems extends AppCompatActivity {
             super.onPreExecute();
         }
 
-
         @Override
         protected Void doInBackground(Void... params) {
 
@@ -135,9 +127,7 @@ public class AdminEditItems extends AppCompatActivity {
 
             try {
 
-
-                url = new URL("http://" + currentIP + ":8080/TekHubWebCalls/webcall/admin/updateItem&"+ name+"&"+desc+"&"+condition+"&"+itemToBeUpdated);
-                url = new URL("http://" + currentIP + ":8080/TekHub-WebCalls/webcall/admin/updateItem&"+ name+"&"+
+                url = new URL("http://" + currentIP + ":8080/TekHubWebCalls/webcall/admin/updateItem&"+ name+"&"+
                         desc+"&"+condition+"&"+availability+"&"+itemToBeUpdated);
 
                 HttpURLConnection client = null;
@@ -145,12 +135,8 @@ public class AdminEditItems extends AppCompatActivity {
                 client = (HttpURLConnection) url.openConnection();
 
                 client.setRequestMethod("GET");
-
                 int responseCode = client.getResponseCode();
-
-
                 System.out.println("\n Sending 'GET' request to URL : " + url);
-
                 System.out.println("Response Code : " + responseCode);
                 InputStreamReader myInput = new InputStreamReader(client.getInputStream());
 

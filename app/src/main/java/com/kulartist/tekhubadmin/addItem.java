@@ -160,8 +160,6 @@ public class addItem extends AppCompatActivity {
                     else
                         Toast.makeText(addItem.this,"ERROR",Toast.LENGTH_LONG).show();
 
-
-
                 }
 
                 DatabaseConnection.closeConnection(conn, null, stm1);
@@ -177,8 +175,8 @@ public class addItem extends AppCompatActivity {
 
         java.util.Date today = new java.util.Date();
         return new java.sql.Date(today.getTime());
-
     }
+
 
     public void backToAdminItems(View view) {
         Intent intent = new Intent(addItem.this,AdminItems.class);
@@ -189,7 +187,6 @@ public class addItem extends AppCompatActivity {
 
 
     public static class DatabaseConnection {
-
 
         static String classs = "com.mysql.jdbc.Driver";
         static String url = "jdbc:mysql://tekhubinstance.co3rvmyoxbtb.ca-central-1.rds.amazonaws.com:3306/TEKHUB?autoReconnect=true&useSSL=false";
@@ -207,9 +204,7 @@ public class addItem extends AppCompatActivity {
             try {
 
                 Class.forName(classs);
-
                 conn = DriverManager.getConnection(url, un, password);
-
 
                 conn = DriverManager.getConnection(ConnURL);
             } catch (SQLException se) {

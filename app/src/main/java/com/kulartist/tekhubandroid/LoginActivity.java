@@ -19,10 +19,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 import com.kulartist.tekhub.ItemList;
 import com.kulartist.tekhubadmin.Dashboard;
-
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -38,15 +36,10 @@ public class LoginActivity extends AppCompatActivity {
     private String userID,userPass;
     public static String currentUser;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
-        //currentIP="192.168.1.182";
-       //currentIP="192.168.0.102";
-       // currentIP="172.20.10.5";
 
         usrID=findViewById(R.id.usrid);
         password=findViewById(R.id.password);
@@ -55,7 +48,6 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         alertBoxDisplay();
-        //super.onBackPressed();
     }
 
     public void alertBoxDisplay()
@@ -98,12 +90,14 @@ public class LoginActivity extends AppCompatActivity {
         finish();
     }
 
+
     public void resetPassword(View view) {
         Intent i =new Intent(LoginActivity.this, ResetPassword.class);
         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(i);
         finish();
     }
+
 
     public void signIn(View view) {
         hideKeyboardwithoutPopulate(LoginActivity.this);
@@ -159,11 +153,8 @@ public class LoginActivity extends AppCompatActivity {
         protected Void doInBackground(Void... params){
 
             URL url = null;
-
             try {
-
                 url = new URL("http://"+currentIP+":8080/TekHubWebCalls/webcall/user/userLogin&"+usrId+"&"+passwrd);
-
                 HttpURLConnection client = null;
                 client = (HttpURLConnection) url.openConnection();
                 client.setRequestMethod("GET");
@@ -206,7 +197,6 @@ public class LoginActivity extends AppCompatActivity {
 
                 if(usrId.equals("1234567")){
                     Toast.makeText(LoginActivity.this,"Login Successful - " +userStatus,Toast.LENGTH_SHORT).show();
-
                     Intent i = new Intent(LoginActivity.this, Dashboard.class);
                     currentUser=usrId;
                     startActivity(i);
@@ -225,10 +215,8 @@ public class LoginActivity extends AppCompatActivity {
                     }
                     else
                         Toast.makeText(LoginActivity.this,"User Already Logged in other device ",Toast.LENGTH_SHORT).show();
-
                 }
 
-//
             }
             else
                 Toast.makeText(LoginActivity.this,"Wrong Credentials - " +userStatus,Toast.LENGTH_SHORT).show();
@@ -251,9 +239,7 @@ public class LoginActivity extends AppCompatActivity {
 
             URL url = null;
             try {
-
                 url = new URL("http://"+currentIP+":8080/TekHubWebCalls/webcall/user/userIdAlreadyLoggedIn&"+usrId);
-
                 HttpURLConnection client = null;
                 client = (HttpURLConnection) url.openConnection();
                 client.setRequestMethod("GET");

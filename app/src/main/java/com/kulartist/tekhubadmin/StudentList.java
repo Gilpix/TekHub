@@ -1,7 +1,6 @@
 package com.kulartist.tekhubadmin;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
@@ -13,13 +12,10 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.Toast;
-
 import com.kulartist.tekhubandroid.R;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -45,7 +41,6 @@ public class StudentList extends AppCompatActivity {
 
         studentList=(ListView)findViewById(R.id.studentListListView);
         simpleSearchView = (SearchView) findViewById(R.id.studentListSearchBar);
-
 
         progressDialog = new ProgressDialog(this);
 
@@ -78,6 +73,7 @@ public class StudentList extends AppCompatActivity {
         });
     }
 
+
     public void backdashh(View view) {
         Intent i=new Intent(StudentList.this,Dashboard.class);
         startActivity(i);
@@ -89,17 +85,12 @@ public class StudentList extends AppCompatActivity {
 
         String userStatus;
 
-
         @Override
         protected void onPreExecute() {
-
-
             progressDialog.setMessage("Loading...");
             progressDialog.show();
-
             super.onPreExecute();
         }
-
 
         @Override
         protected Void doInBackground(Void... params) {
@@ -107,20 +98,13 @@ public class StudentList extends AppCompatActivity {
             URL url = null;
 
             try {
-
-                url = new URL("http://" + currentIP + ":8080/TekHub-WebCalls/webcall/admin/listStudents");
-
+                url = new URL("http://" + currentIP + ":8080/TekHubWebCalls/webcall/admin/listStudents");
                 HttpURLConnection client = null;
-
                 client = (HttpURLConnection) url.openConnection();
-
                 client.setRequestMethod("GET");
 
                 int responseCode = client.getResponseCode();
-
-
                 System.out.println("\n Sending 'GET' request to URL : " + url);
-
                 System.out.println("Response Code : " + responseCode);
                 InputStreamReader myInput = new InputStreamReader(client.getInputStream());
 
@@ -168,6 +152,7 @@ public class StudentList extends AppCompatActivity {
             super.onPostExecute(result);
         }
     }
+
 
     private void getRecyclerData(final JSONArray mainArray) throws JSONException {
         final ArrayList<String> studentId = new ArrayList<String>(mainArray.length());
@@ -227,35 +212,25 @@ public class StudentList extends AppCompatActivity {
             super.onPreExecute();
         }
 
-
         @Override
         protected Void doInBackground(Void... params) {
 
             URL url = null;
 
             try {
-
-
-                url = new URL("http://" + currentIP + ":8080/TekHub-WebCalls/webcall/admin/deleteStudent&"+studentIdToDelete);
-
+                url = new URL("http://" + currentIP + ":8080/TekHubWebCalls/webcall/admin/deleteStudent&"+studentIdToDelete);
                 HttpURLConnection client = null;
-
                 client = (HttpURLConnection) url.openConnection();
-
                 client.setRequestMethod("GET");
 
                 int responseCode = client.getResponseCode();
-
-
                 System.out.println("\n Sending 'GET' request to URL : " + url);
-
                 System.out.println("Response Code : " + responseCode);
                 InputStreamReader myInput = new InputStreamReader(client.getInputStream());
 
                 BufferedReader in = new BufferedReader(myInput);
                 String inputLine;
                 StringBuffer response = new StringBuffer();
-
 
                 while ((inputLine = in.readLine()) != null) {
                     response.append(inputLine);
@@ -267,7 +242,6 @@ public class StudentList extends AppCompatActivity {
 
                 JSONObject obj = new JSONObject(response.toString());
                 userStatus = "" + obj.getString("Status");
-
 
             } catch (MalformedURLException e) {
                 e.printStackTrace();
@@ -299,14 +273,10 @@ public class StudentList extends AppCompatActivity {
 
         @Override
         protected void onPreExecute() {
-
-
             progressDialog.setMessage("Loading...");
             progressDialog.show();
-
             super.onPreExecute();
         }
-
 
         @Override
         protected Void doInBackground(Void... params) {
@@ -314,27 +284,19 @@ public class StudentList extends AppCompatActivity {
             URL url = null;
 
             try {
-
-                url = new URL("http://" + currentIP + ":8080/TekHub-WebCalls/webcall/admin/searchStudent&"+searchKey);
-
+                url = new URL("http://" + currentIP + ":8080/TekHubWebCalls/webcall/admin/searchStudent&"+searchKey);
                 HttpURLConnection client = null;
-
                 client = (HttpURLConnection) url.openConnection();
-
                 client.setRequestMethod("GET");
 
                 int responseCode = client.getResponseCode();
-
-
                 System.out.println("\n Sending 'GET' request to URL : " + url);
-
                 System.out.println("Response Code : " + responseCode);
                 InputStreamReader myInput = new InputStreamReader(client.getInputStream());
 
                 BufferedReader in = new BufferedReader(myInput);
                 String inputLine;
                 StringBuffer response = new StringBuffer();
-
 
                 while ((inputLine = in.readLine()) != null) {
                     response.append(inputLine);
@@ -346,7 +308,6 @@ public class StudentList extends AppCompatActivity {
                 JSONObject obj = new JSONObject(response.toString());
                 userStatus = "" + obj.getString("Status");
                 studentListArray = obj.getJSONArray("studentList");
-
 
             } catch (MalformedURLException e) {
                 e.printStackTrace();
@@ -373,8 +334,6 @@ public class StudentList extends AppCompatActivity {
                 progressDialog.hide();
             Toast.makeText(StudentList.this,"Unable to fetch",Toast.LENGTH_LONG).show();
             }
-
-
             super.onPostExecute(result);
 
         }

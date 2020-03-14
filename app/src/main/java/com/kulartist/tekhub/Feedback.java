@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.Switch;
@@ -43,7 +42,6 @@ public class Feedback extends AppCompatActivity {
         issue=findViewById(R.id.is_issue_radio_button);
         ratingbar=(RatingBar)findViewById(R.id.ratingBar);
 
-
         Intent i=getIntent();
         itemId=i.getStringExtra("itemId");
         setActionBarTitle("Feedback");
@@ -53,7 +51,6 @@ public class Feedback extends AppCompatActivity {
     public void setActionBarTitle(String title) {
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
         TextView textView = new TextView(this);
         textView.setText(title);
         textView.setTextSize(20);
@@ -64,8 +61,6 @@ public class Feedback extends AppCompatActivity {
         getSupportActionBar().setDisplayOptions(androidx.appcompat.app.ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setCustomView(textView);
-
-
     }
 
 
@@ -110,9 +105,7 @@ public class Feedback extends AppCompatActivity {
 
 
     private class addFeedback extends AsyncTask<Void, Void, Void> {
-
         String userId,itemId,  rating,  message,  isIssue;
-
         public addFeedback(String userId, String itemId, String rating, String message,String isIssue) {
             this.userId=userId;
             this.itemId=itemId;
@@ -120,7 +113,6 @@ public class Feedback extends AppCompatActivity {
             this.message=message;
             this.isIssue=isIssue;
         }
-
         @Override
         protected Void doInBackground(Void... params){
 
@@ -129,13 +121,8 @@ public class Feedback extends AppCompatActivity {
                 url = new URL("http://"+currentIP+":8080/TekHubWebCalls/webcall/feedback/addFeedback&"+userId+"&"+itemId+"&"+rating+"&"+message+"&"+isIssue);
 
                 HttpURLConnection client = null;
-
                 client = (HttpURLConnection) url.openConnection();
                 client.setRequestMethod("GET");
-
-                int responseCode = client.getResponseCode();
-                System.out.println("\n Sending 'GET' request to URL : " + url);
-                System.out.println("Response Code : " + responseCode);
 
             }
             catch (MalformedURLException e) {
@@ -147,11 +134,9 @@ public class Feedback extends AppCompatActivity {
             return null;
 
         }
-
         @Override
         protected void onPostExecute(Void result){
             Toast.makeText(Feedback.this,"Thanks For feedback",Toast.LENGTH_SHORT).show();
-            EditText fname,lname,pass,email;
             Intent i = new Intent(Feedback.this, OrderList.class);
             startActivity(i);
             super.onPostExecute(result);

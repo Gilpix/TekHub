@@ -14,8 +14,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.kulartist.tekhubandroid.LoginActivity;
 import com.kulartist.tekhubandroid.R;
-import com.kulartist.tekhubandroid.RegistrationActivity;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -34,14 +32,12 @@ public class Student extends BottomMenu {
     EditText email, phone, gender, age;
     ProgressDialog progressDialog;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         getLayout(R.layout.activity_student);
         getMenuIcon(R.drawable.profile,R.id.my_profile);
-
 
         std_name = findViewById(R.id.student_name);
         std_id = findViewById(R.id.student_id);
@@ -225,12 +221,6 @@ public class Student extends BottomMenu {
 
 
     public void logOut(View view) throws JSONException {
-
-//        SharedPreferences sp = getSharedPreferences("saveUser" , Context.MODE_PRIVATE);
-//        SharedPreferences.Editor editor = sp.edit();
-//        editor.putString("userSavedId", "");
-//        editor.commit();
-
         hideKeyboardwithoutPopulate(Student.this);
         DatabaseObjects.studentProfile=new JSONObject("{}");
         DatabaseObjects.itemList = new JSONArray("[]");
@@ -379,7 +369,6 @@ public class Student extends BottomMenu {
                 phone.setText(pmobNo);
                 gender.setText(pgender);
                 age.setText(page);
-
             }
 
             progressDialog.hide();

@@ -46,8 +46,6 @@ public class OrderList extends BottomMenu {
         itmName=findViewById(R.id.item_name);
         progressDialog=new ProgressDialog(this);
 
-        System.out.println("#########################"+DatabaseObjects.orderList.toString());
-
         if(DatabaseObjects.orderList.toString().equals("[]") || DatabaseObjects.orderList.toString().equals("")|| DatabaseObjects.orderList.toString().isEmpty()) {
             SharedPreferences sp = getSharedPreferences("saveUser" , Context.MODE_PRIVATE);
             LoginActivity.currentUser = sp.getString("userSavedId", "");
@@ -68,7 +66,6 @@ public class OrderList extends BottomMenu {
     public void setActionBarTitle(String title) {
         getSupportActionBar().setHomeButtonEnabled(false);
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-
         TextView textView = new TextView(this);
         textView.setText(title);
         textView.setTextSize(20);
@@ -126,7 +123,6 @@ public class OrderList extends BottomMenu {
         itemListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
                 {
                     Intent in = new Intent(OrderList.this, OrderDetails.class);
                     try {

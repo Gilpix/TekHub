@@ -1,7 +1,6 @@
 package com.kulartist.tekhubadmin;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
@@ -14,14 +13,10 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.Toast;
-
-import com.kulartist.tekhubandroid.LoginActivity;
 import com.kulartist.tekhubandroid.R;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -90,6 +85,7 @@ public class AdminItems extends AppCompatActivity {
             }
         });
     }
+
 
     public void backItemDashboard(View view) {
         Intent i=new Intent(AdminItems.this,Dashboard.class);
@@ -180,6 +176,7 @@ public class AdminItems extends AppCompatActivity {
             super.onPostExecute(result);
         }
     }
+
 
     private void getRecyclerData(final JSONArray mainArray) throws JSONException {
         final ArrayList<String> itemId = new ArrayList<String>(mainArray.length());
@@ -275,21 +272,15 @@ public class AdminItems extends AppCompatActivity {
             URL url = null;
 
             try {
-
-
                 url = new URL("http://" + currentIP + ":8080/TekHubWebCalls/webcall/admin/deleteItem&"+ itemToBeDeleted);
 
                 HttpURLConnection client = null;
 
                 client = (HttpURLConnection) url.openConnection();
-
                 client.setRequestMethod("GET");
 
                 int responseCode = client.getResponseCode();
-
-
                 System.out.println("\n Sending 'GET' request to URL : " + url);
-
                 System.out.println("Response Code : " + responseCode);
                 InputStreamReader myInput = new InputStreamReader(client.getInputStream());
 
@@ -326,9 +317,7 @@ public class AdminItems extends AppCompatActivity {
 
             if(userStatus.equals("Ok")) {
                 Toast.makeText(AdminItems.this,"Item Removed from database",Toast.LENGTH_SHORT).show();
-                Intent i=new Intent(AdminItems.this,Dashboard.class);
-                startActivity(i);
-                finish();
+
                 Intent i = new Intent(AdminItems.this,AdminItems.class);
                 startActivity(i);
             }
@@ -340,6 +329,7 @@ public class AdminItems extends AppCompatActivity {
             super.onPostExecute(result);
         }
     }
+
 
     private class getItemListBySearch extends AsyncTask<Void, Void, Void> {
         String searchKey=simpleSearchView.getQuery().toString();
@@ -361,27 +351,20 @@ public class AdminItems extends AppCompatActivity {
             URL url = null;
 
             try {
-
                 url = new URL("http://" + currentIP + ":8080/TekHubWebCalls/webcall/admin/searchItem&"+searchKey);
-
                 HttpURLConnection client = null;
 
                 client = (HttpURLConnection) url.openConnection();
-
                 client.setRequestMethod("GET");
-
                 int responseCode = client.getResponseCode();
 
-
                 System.out.println("\n Sending 'GET' request to URL : " + url);
-
                 System.out.println("Response Code : " + responseCode);
                 InputStreamReader myInput = new InputStreamReader(client.getInputStream());
 
                 BufferedReader in = new BufferedReader(myInput);
                 String inputLine;
                 StringBuffer response = new StringBuffer();
-
 
                 while ((inputLine = in.readLine()) != null) {
                     response.append(inputLine);
@@ -420,8 +403,6 @@ public class AdminItems extends AppCompatActivity {
                 progressDialog.hide();
                 Toast.makeText(AdminItems.this,"Unable to fetch",Toast.LENGTH_LONG).show();
             }
-
-
             super.onPostExecute(result);
 
         }

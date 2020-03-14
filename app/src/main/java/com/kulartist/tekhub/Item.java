@@ -1,21 +1,14 @@
 package com.kulartist.tekhub;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.loader.content.CursorLoader;
-
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
-import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.util.Base64;
-import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,7 +35,6 @@ import java.net.URL;
 import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.util.Calendar;
 
 import static com.kulartist.tekhubandroid.SplashScreen.currentIP;
@@ -167,7 +159,6 @@ public class Item extends AppCompatActivity {
         c.setTime(sdf.parse(dt));
         c.add(Calendar.DATE, 1);  // number of days to add
         dt = sdf.format(c.getTime());  // dt is now the new date
-
         Toast.makeText(this,"Available On : "+dt,Toast.LENGTH_LONG).show();
     }
 
@@ -227,12 +218,10 @@ public class Item extends AppCompatActivity {
             super.onPreExecute();
         }
 
-
         @Override
         protected Void doInBackground(Void... params){
 
             URL url = null;
-
             try {
                 url = new URL("http://"+currentIP+":8080/TekHubWebCalls/webcall/feedback/getFeedbackList&"+itemId);
                 HttpURLConnection client = null;
@@ -242,12 +231,10 @@ public class Item extends AppCompatActivity {
                 int responseCode = client.getResponseCode();
                 System.out.println("\n Sending 'GET' request to URL : " + url);
                 System.out.println("Response Code : " + responseCode);
-
                 InputStreamReader myInput= new InputStreamReader(client.getInputStream());
                 BufferedReader in = new BufferedReader(myInput);
                 String inputLine;
                 StringBuffer response = new StringBuffer();
-
 
                 while ((inputLine = in.readLine()) != null) {
                     response.append(inputLine);
@@ -309,7 +296,6 @@ public class Item extends AppCompatActivity {
     private class AddToWaitingList extends AsyncTask<Void, Void, Void> {
 
         String userId,itemId,userStatus;
-
         public AddToWaitingList(String userId, String itemId) {
             this.userId=userId;
             this.itemId=itemId;
