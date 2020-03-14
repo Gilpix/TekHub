@@ -40,7 +40,7 @@ import static com.kulartist.tekhubandroid.SplashScreen.currentIP;
 public class Dashboard extends AppCompatActivity {
 
 
-    private Button item,students,issue;
+    private Button item,students,issue,adminOrderDetails;
     private ImageView logout;
     private ProgressDialog progressDialog;
 
@@ -53,6 +53,7 @@ public class Dashboard extends AppCompatActivity {
         students=(Button)findViewById(R.id.manageStudents);
         issue=(Button)findViewById(R.id.resolveIssue);
         logout=(ImageView)findViewById(R.id.adminLogout);
+        adminOrderDetails=(Button) findViewById(R.id.orderDetails);
         progressDialog = new ProgressDialog(this);
 
         getSupportActionBar().hide();
@@ -90,7 +91,15 @@ public class Dashboard extends AppCompatActivity {
 
             }
         });
-        
+
+        adminOrderDetails.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(Dashboard.this,AdminOrderDetails.class);
+                startActivity(i);
+            }
+        });
+
     }
 
     @Override

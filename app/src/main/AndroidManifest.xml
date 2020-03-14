@@ -3,9 +3,9 @@
     package="com.kulartist.tekhubandroid">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_MEDIA_LOCATION"></uses-permission>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"></uses-permission>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"></uses-permission>
+    <uses-permission android:name="android.permission.ACCESS_MEDIA_LOCATION" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -16,6 +16,7 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity android:name="com.kulartist.tekhubadmin.addItem" />
+        <activity android:name="com.kulartist.tekhubadmin.AdminOrderDetails"></activity>
         <activity android:name="com.kulartist.tekhub.WaitingListAdapter" />
         <activity android:name="com.kulartist.tekhubadmin.AdminEditItems"  />
         <activity android:name="com.kulartist.tekhubadmin.AdminItems" />

@@ -30,9 +30,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 
+
 import static com.kulartist.tekhubandroid.SplashScreen.currentIP;
-
-
 public class AdminItems extends AppCompatActivity {
 
     private ImageView add;
@@ -248,6 +247,7 @@ public class AdminItems extends AppCompatActivity {
                 i.putExtra("name",itemName.get(which_position));
                 i.putExtra("desc",itemDesc.get(which_position));
                 i.putExtra("condition",itemCondi.get(which_position));
+                i.putExtra("availability",isAvailable.get(which_position));
                 startActivity(i);
             }
         });
@@ -329,9 +329,13 @@ public class AdminItems extends AppCompatActivity {
                 Intent i=new Intent(AdminItems.this,Dashboard.class);
                 startActivity(i);
                 finish();
+                Intent i = new Intent(AdminItems.this,AdminItems.class);
+                startActivity(i);
             }
             else
                 Toast.makeText(AdminItems.this,"Removel failed",Toast.LENGTH_SHORT).show();
+            Intent i = new Intent(AdminItems.this,AdminItems.class);
+            startActivity(i);
 
             super.onPostExecute(result);
         }

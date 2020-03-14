@@ -108,7 +108,7 @@ public class StudentList extends AppCompatActivity {
 
             try {
 
-                url = new URL("http://" + currentIP + ":8080/TekHubWebCalls/webcall/admin/listStudents");
+                url = new URL("http://" + currentIP + ":8080/TekHub-WebCalls/webcall/admin/listStudents");
 
                 HttpURLConnection client = null;
 
@@ -236,7 +236,7 @@ public class StudentList extends AppCompatActivity {
             try {
 
 
-                url = new URL("http://" + currentIP + ":8080/TekHubWebCalls/webcall/admin/deleteStudent&"+studentIdToDelete);
+                url = new URL("http://" + currentIP + ":8080/TekHub-WebCalls/webcall/admin/deleteStudent&"+studentIdToDelete);
 
                 HttpURLConnection client = null;
 
@@ -315,7 +315,7 @@ public class StudentList extends AppCompatActivity {
 
             try {
 
-                url = new URL("http://" + currentIP + ":8080/TekHubWebCalls/webcall/admin/searchStudent&"+searchKey);
+                url = new URL("http://" + currentIP + ":8080/TekHub-WebCalls/webcall/admin/searchStudent&"+searchKey);
 
                 HttpURLConnection client = null;
 

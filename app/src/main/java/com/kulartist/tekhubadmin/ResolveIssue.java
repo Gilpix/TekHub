@@ -78,7 +78,7 @@ public class ResolveIssue extends AppCompatActivity {
 
             try {
 
-                url = new URL("http://" + currentIP + ":8080/TekHubWebCalls/webcall/admin/listIssues");
+                url = new URL("http://" + currentIP + ":8080/TekHub-WebCalls/webcall/admin/listIssues");
 
                 HttpURLConnection client = null;
 
@@ -216,7 +216,7 @@ public class ResolveIssue extends AppCompatActivity {
             try {
 
 
-                url = new URL("http://" + currentIP + ":8080/TekHubWebCalls/webcall/admin/updateFeedback&"+toBeChanged);
+                url = new URL("http://" + currentIP + ":8080/TekHub-WebCalls/webcall/admin/updateFeedback&"+toBeChanged);
 
                 HttpURLConnection client = null;
 
