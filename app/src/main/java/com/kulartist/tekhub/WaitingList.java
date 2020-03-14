@@ -101,6 +101,7 @@ public class WaitingList extends BottomMenu {
         final ArrayList<String> itemID=new ArrayList<String>(mainArray.length());
         final ArrayList<String> itemName=new ArrayList<String>(mainArray.length());
         final ArrayList<String> availableDate=new ArrayList<String>(mainArray.length());
+        final ArrayList<String> itmImage=new ArrayList<String>(mainArray.length());
 
         for(int j=0;j<mainArray.length();j++)
         {
@@ -109,11 +110,12 @@ public class WaitingList extends BottomMenu {
             itemID.add(a.getString("itemId"));
             itemName.add(a.getString("itemname"));
             availableDate.add(a.getString("availableDate"));
+            itmImage.add(a.getString("itemPic"));
         }
 
 
         itemListView = (ListView)findViewById(R.id.simpleListView);
-        final WaitingListAdapter customAdapter = new WaitingListAdapter(WaitingList.this, itemName,availableDate);
+        final WaitingListAdapter customAdapter = new WaitingListAdapter(WaitingList.this, itemName,availableDate,itmImage);
         itemListView.setAdapter(customAdapter);
 
         itemListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {

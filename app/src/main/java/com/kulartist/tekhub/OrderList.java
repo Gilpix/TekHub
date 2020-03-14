@@ -101,6 +101,7 @@ public class OrderList extends BottomMenu {
         final String[] orderDate=new String[mainArray.length()];
         final String[] pickupDate=new String[mainArray.length()];
         final String[] returnDate=new String[mainArray.length()];
+        final String[] itmImage=new String[mainArray.length()];
 
 
         for(int j=0;j<mainArray.length();j++)
@@ -115,10 +116,11 @@ public class OrderList extends BottomMenu {
             orderDate[j]=a.getString("orderDate");
             pickupDate[j]=a.getString("pickupDate");
             returnDate[j]=a.getString("returnDate");
+            itmImage[j]=a.getString("itemPic");
         }
 
         itemListView = (ListView)findViewById(R.id.simpleListView);
-        OrderListAdapter customAdapter = new OrderListAdapter(getApplicationContext(), itemName,returnDate);
+        OrderListAdapter customAdapter = new OrderListAdapter(getApplicationContext(), itemName,returnDate,itmImage);
         itemListView.setAdapter(customAdapter);
 
         itemListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

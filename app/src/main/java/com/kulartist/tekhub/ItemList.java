@@ -264,6 +264,7 @@ public class ItemList extends BottomMenu {
         final String[] borrowNum=new String[mainArray.length()];
         final String[] addedDate=new String[mainArray.length()];
         final String[] avgRating=new String[mainArray.length()];
+        final String[] itmImage=new String[mainArray.length()];
 
 
         for(int j=0;j<mainArray.length();j++)
@@ -280,13 +281,14 @@ public class ItemList extends BottomMenu {
             borrowNum[j]=a.getString("borrowNum");
             addedDate[j]=a.getString("addedDate");
             avgRating[j]=a.getString("avgRating");
+            itmImage[j]=a.getString("itemPic");
             if(avgRating[j]==null)
                 avgRating[j]="0";
         }
 
 
         itemListView = (ListView)findViewById(R.id.simpleListView);
-        ItemListAdapter customAdapter = new ItemListAdapter(getApplicationContext(), itemName,itemAvailable);
+        ItemListAdapter customAdapter = new ItemListAdapter(getApplicationContext(), itemName,itemAvailable,itmImage);
         itemListView.setAdapter(customAdapter);
 
         itemListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
