@@ -30,7 +30,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 
-import static com.kulartist.tekhubandroid.LoginActivity.currentIP;
+import static com.kulartist.tekhubandroid.SplashScreen.currentIP;
+
 
 public class AdminItems extends AppCompatActivity {
 
@@ -52,6 +53,8 @@ public class AdminItems extends AppCompatActivity {
         itemListView=(ListView)findViewById(R.id.adminItemListVIew);
         simpleSearchView = (SearchView) findViewById(R.id.itemSearchView);
         progressDialog = new ProgressDialog(this);
+
+        getSupportActionBar().hide();
 
         new getItemListForAdmin().execute();
 
@@ -89,6 +92,11 @@ public class AdminItems extends AppCompatActivity {
         });
     }
 
+    public void backItemDashboard(View view) {
+        Intent i=new Intent(AdminItems.this,Dashboard.class);
+        startActivity(i);
+    }
+
 
     private class getItemListForAdmin extends AsyncTask<Void, Void, Void> {
 
@@ -113,7 +121,7 @@ public class AdminItems extends AppCompatActivity {
 
             try {
 
-                url = new URL("http://" + currentIP + ":8080/TekHub-WebCalls/webcall/admin/getItems");
+                url = new URL("http://" + currentIP + ":8080/TekHubWebCalls/webcall/admin/getItems");
 
                 HttpURLConnection client = null;
 
@@ -269,7 +277,7 @@ public class AdminItems extends AppCompatActivity {
             try {
 
 
-                url = new URL("http://" + currentIP + ":8080/TekHub-WebCalls/webcall/admin/deleteItem&"+ itemToBeDeleted);
+                url = new URL("http://" + currentIP + ":8080/TekHubWebCalls/webcall/admin/deleteItem&"+ itemToBeDeleted);
 
                 HttpURLConnection client = null;
 
@@ -318,6 +326,9 @@ public class AdminItems extends AppCompatActivity {
 
             if(userStatus.equals("Ok")) {
                 Toast.makeText(AdminItems.this,"Item Removed from database",Toast.LENGTH_SHORT).show();
+                Intent i=new Intent(AdminItems.this,Dashboard.class);
+                startActivity(i);
+                finish();
             }
             else
                 Toast.makeText(AdminItems.this,"Removel failed",Toast.LENGTH_SHORT).show();
@@ -347,7 +358,7 @@ public class AdminItems extends AppCompatActivity {
 
             try {
 
-                url = new URL("http://" + currentIP + ":8080/TekHub-WebCalls/webcall/admin/searchItem&"+searchKey);
+                url = new URL("http://" + currentIP + ":8080/TekHubWebCalls/webcall/admin/searchItem&"+searchKey);
 
                 HttpURLConnection client = null;
 

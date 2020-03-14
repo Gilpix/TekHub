@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
@@ -48,6 +49,8 @@ public class StudentList extends AppCompatActivity {
 
         progressDialog = new ProgressDialog(this);
 
+        getSupportActionBar().hide();
+
         new getStudentList().execute();
 
 
@@ -73,6 +76,12 @@ public class StudentList extends AppCompatActivity {
             }
 
         });
+    }
+
+    public void backdashh(View view) {
+        Intent i=new Intent(StudentList.this,Dashboard.class);
+        startActivity(i);
+        finish();
     }
 
 

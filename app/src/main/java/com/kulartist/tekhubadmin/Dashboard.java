@@ -6,8 +6,12 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.Typeface;
+import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Process;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -30,7 +34,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 
-import static com.kulartist.tekhubandroid.LoginActivity.currentIP;
+import static com.kulartist.tekhubandroid.SplashScreen.currentIP;
+
 
 public class Dashboard extends AppCompatActivity {
 
@@ -49,6 +54,8 @@ public class Dashboard extends AppCompatActivity {
         issue=(Button)findViewById(R.id.resolveIssue);
         logout=(ImageView)findViewById(R.id.adminLogout);
         progressDialog = new ProgressDialog(this);
+
+        getSupportActionBar().hide();
 
         item.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,6 +92,46 @@ public class Dashboard extends AppCompatActivity {
         });
         
     }
+
+    @Override
+    public void onBackPressed() {
+        alertBoxDisplay();
+        //super.onBackPressed();
+    }
+
+
+    public void alertBoxDisplay()
+    {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Do you really want to exit ?")
+                .setCancelable(false)
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+
+                        moveTaskToBack(true);
+                        Process.killProcess(Process.myPid());
+                        System.exit(1);
+                        Dashboard.super.onBackPressed();
+                    }
+                })
+                .setNegativeButton("No", null);
+        //Creating dialog box
+        AlertDialog alert = builder.create();
+        //Setting the title manually
+        alert.setTitle("TekHub");
+        //alert.setCustomTitle(textView);
+        alert.getWindow().setBackgroundDrawable(new ColorDrawable(Color.DKGRAY));
+        alert.setIcon(R.drawable.tehublogo);
+        alert.show();
+        // alert.getButton(AlertDialog.BUTTON_POSITIVE).setBackgroundResource(R.color.white);
+        alert.getButton(AlertDialog.BUTTON_POSITIVE).setTypeface(null, Typeface.BOLD);
+        alert.getButton(AlertDialog.BUTTON_POSITIVE).setPadding(20,20,20,20);
+        alert.getButton(AlertDialog.BUTTON_NEGATIVE).setTypeface(Typeface.DEFAULT, Typeface.BOLD);
+        //alert.getButton(AlertDialog.BUTTON_NEGATIVE).setBackgroundResource((R.drawable.circular_button_white));
+
+    }
+
+
     private class adminLogout extends AsyncTask<Void, Void, Void> {
 
         String userStatus;
@@ -108,7 +155,7 @@ public class Dashboard extends AppCompatActivity {
 
             try {
 
-                url = new URL("http://" + currentIP + ":8080/TekHub-WebCalls/webcall/admin/logout");
+                url = new URL("http://" + currentIP + ":8080/TekHubWebCalls/webcall/admin/logout");
 
                 HttpURLConnection client = null;
 

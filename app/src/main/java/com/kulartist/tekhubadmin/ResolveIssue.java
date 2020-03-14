@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
@@ -41,10 +42,17 @@ public class ResolveIssue extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_resolve_issue);
         progressDialog = new ProgressDialog(this);
+
+        getSupportActionBar().hide();
         new getIssues().execute();
 
 
 
+    }
+
+    public void back_dash(View view) {
+        Intent i=new Intent(ResolveIssue.this,Dashboard.class);
+        startActivity(i);
     }
 
     private class getIssues extends AsyncTask<Void, Void, Void> {

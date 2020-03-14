@@ -24,7 +24,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-import static com.kulartist.tekhubandroid.LoginActivity.currentIP;
+import static com.kulartist.tekhubandroid.SplashScreen.currentIP;
 
 public class AdminEditItems extends AppCompatActivity {
 
@@ -49,6 +49,8 @@ public class AdminEditItems extends AppCompatActivity {
         submitButton=(Button)findViewById(R.id.updateItemButton);
         fresh=(RadioButton)findViewById(R.id.newRadio);
         used=(RadioButton)findViewById(R.id.usedRadio);
+
+        getSupportActionBar().hide();
 
 
         newName.setText(name);
@@ -80,6 +82,12 @@ public class AdminEditItems extends AppCompatActivity {
 
     }
 
+    public void backToAdminItem(View view) {
+        Intent i=new Intent(AdminEditItems.this,AdminItems.class);
+        startActivity(i);
+        finish();
+    }
+
     private class itemUpdate extends AsyncTask<Void, Void, Void> {
 
         String itemToBeUpdated,name,desc,condition;
@@ -106,7 +114,7 @@ public class AdminEditItems extends AppCompatActivity {
             try {
 
 
-                url = new URL("http://" + currentIP + ":8080/TekHub-WebCalls/webcall/admin/updateItem&"+ name+"&"+desc+"&"+condition+"&"+itemToBeUpdated);
+                url = new URL("http://" + currentIP + ":8080/TekHubWebCalls/webcall/admin/updateItem&"+ name+"&"+desc+"&"+condition+"&"+itemToBeUpdated);
 
                 HttpURLConnection client = null;
 
