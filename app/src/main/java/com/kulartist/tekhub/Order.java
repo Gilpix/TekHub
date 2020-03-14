@@ -33,7 +33,7 @@ import static com.kulartist.tekhubandroid.SplashScreen.currentIP;
 
 public class Order extends AppCompatActivity {
     Calendar startCalendar,endCalender;
-    TextView pickDate,returnDate;
+    TextView pickDate,returnDate,itmName;
     DatePickerDialog.OnDateSetListener startDate,endDate;
     ProgressDialog progressDialog;
     String itemID,borrowNum;
@@ -50,10 +50,14 @@ public class Order extends AppCompatActivity {
 
         pickDate= (TextView) findViewById(R.id.pickup_date);
         returnDate= (TextView) findViewById(R.id.return_date);
+        itmName=findViewById(R.id.buy_item_name);
 
         Intent i=getIntent();
         itemID=i.getStringExtra("ItemId");
         borrowNum=i.getStringExtra("borrowNum");
+
+        itmName.setText(i.getStringExtra("ItemName")+"");
+
 
         progressDialog=new ProgressDialog(this);
 
@@ -243,6 +247,7 @@ private class PlaceOrder extends AsyncTask<Void, Void, Void> {
         try {
             url = new URL("http://"+currentIP+":8080/TekHubWebCalls/webcall/borrow/placeOrder&"+userId+"&"+itemId+"&"+pickupDate+"&"+returnDate+"&"+borrowNum);
             HttpURLConnection client = null;
+            System.out.println(pickupDate+"%%%%%%%%%%%%%%%%%%%%%%%%%%%"+returnDate);
 
             client = (HttpURLConnection) url.openConnection();
             client.setRequestMethod("GET");

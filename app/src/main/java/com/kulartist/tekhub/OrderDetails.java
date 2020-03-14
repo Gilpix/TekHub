@@ -8,13 +8,17 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.kulartist.tekhubandroid.LoginActivity;
 import com.kulartist.tekhubandroid.R;
+import com.kulartist.tekhubandroid.SplashScreen;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
 public class OrderDetails extends AppCompatActivity {
 
-    TextView itmCond,orderDate,itmName,pickupDate,returnDate;
+    TextView itmCond,orderDate,itmName,pickupDate,returnDate,usrId;
     JSONObject orderObject;
     String itemJsonString,itemId;
 
@@ -30,6 +34,7 @@ public class OrderDetails extends AppCompatActivity {
         orderDate=findViewById(R.id.order_date_text);
         pickupDate=findViewById(R.id.pickup_date_text);
         returnDate=findViewById(R.id.return_date_text);
+        usrId=findViewById(R.id.order_user_id_text);
 
 
         Intent i=getIntent();
@@ -43,6 +48,7 @@ public class OrderDetails extends AppCompatActivity {
             orderDate.setText(orderObject.getString("orderDate"));
             pickupDate.setText(orderObject.getString("pickupDate"));
             returnDate.setText(orderObject.getString("returnDate"));
+            usrId.setText(LoginActivity.currentUser);
         } catch (JSONException e) {
             e.printStackTrace();
         }
